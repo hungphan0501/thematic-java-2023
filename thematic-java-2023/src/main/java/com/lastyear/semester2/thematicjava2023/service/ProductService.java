@@ -16,5 +16,18 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public List<Product> finByBrand(int idBrand) {
+        return productRepository.findByBrand(idBrand);
+    }
+
+    public List<Product> finByCategory(int idCategory) {
+        return productRepository.findByCategory(idCategory);
+    }
+
+
+    public List<Product> finByPrices(int belowPrice, int abovePrice) {
+        return productRepository.findByPrices(belowPrice, abovePrice);
+    }
+
 
 }
