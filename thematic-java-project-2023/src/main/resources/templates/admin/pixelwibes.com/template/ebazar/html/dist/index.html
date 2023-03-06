@@ -1,0 +1,918 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin | Dragon Sport </title>
+    <link rel="shortcut icon" href="/user/image/logo.png" />
+
+    <!-- Favicon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css    ">
+
+    <!-- plugin css file  -->
+    <link rel="stylesheet" href="assets/plugin/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="assets/plugin/datatables/dataTables.bootstrap5.min.css">
+
+    <!-- project css file  -->
+    <link rel="stylesheet" href="assets/css/ebazar.style.min.css">
+</head>
+
+<body>
+    <div id="ebazar-layout" class="theme-blue">
+
+     <!-- sidebar -->
+     <div class="sidebar px-4 py-4 py-md-4 me-0">
+        <div class="d-flex flex-column h-100">
+            <a href="index.html" class="mb-0 brand-icon">
+                <span class="logo-icon">
+                </span>
+                <span class="logo-text">Dragon Sport</span>
+            </a>
+            <!-- Menu: main ul -->
+            <ul class="menu-list flex-grow-1 mt-3">
+                <li><a class="m-link  active" href="index.html"><i class="fas fa-home" style="margin: 0 10px;"></i> <span>Trang chủ</span></a></li>
+                <li class="collapsed">
+                    <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-product" href="#">
+                        <i class="fas fa-shopping-cart" style="margin: 0 10px;"></i> <span>Sản phẩm</span> </a>
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse" id="menu-product">
+        
+                        <li><a class="ms-link" href="product-edit.html">Chỉnh sửa sản phẩm</a></li>
+                        <li><a class="ms-link" href="product-add.html">Thêm sản phẩm</a></li>
+                     
+                    </ul>
+                </li>
+        
+                <li class="collapsed">
+                    <a class="m-link"  href="order-invoices.html">
+                        <i class="fab fa-intercom" style="margin: 0 10px;"></i> <span>Danh sách sản phẩm</span> </a>
+                        
+        
+                </li>
+                <li class="collapsed">
+                    <a class="m-link"  href="customers.html">
+                        <i class="fas fa-user-alt" style="margin: 0 10px;"></i> <span>Khách hàng</span> </a>
+                    
+                </li>
+       
+            
+         
+            
+            </ul>
+            <!-- Menu: menu collepce btn -->
+            <button type="button" class="btn btn-link sidebar-mini-btn text-light">
+                <span class="ms-2"><i class="fas fa-dot-circle"></i></span>
+            </button>
+        </div>
+    </div>
+
+
+
+        <!-- main body area -->
+        <div class="main px-lg-4 px-md-4">
+
+            <!-- Body: Header -->
+    
+
+            <!-- Body: Body -->
+            <div class="body d-flex py-3">
+                <div class="container-xxl">
+
+                    <div class="row g-3 mb-3 row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 row-cols-xl-4">
+                        <div class="col">
+                            <div class="alert-success alert mb-0">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar rounded no-thumbnail bg-success text-light"><i class="fa fa-dollar fa-lg"></i></div>
+                                    <div class="flex-fill ms-3 text-truncate">
+                                        <div class="h6 mb-0">Doanh thu</div>
+                                        <span class="small">$18,925</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="alert-danger alert mb-0">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar rounded no-thumbnail bg-danger text-light"><i class="fa fa-credit-card fa-lg"></i></div>
+                                    <div class="flex-fill ms-3 text-truncate">
+                                        <div class="h6 mb-0">Chi tiêu</div>
+                                        <span class="small">$11,024</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="alert-warning alert mb-0">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar rounded no-thumbnail bg-warning text-light"><i class="fa fa-smile-o fa-lg"></i></div>
+                                    <div class="flex-fill ms-3 text-truncate">
+                                        <div class="h6 mb-0">Khách hàng yêu thích</div>
+                                        <span class="small">8,925</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="alert-info alert mb-0">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar rounded no-thumbnail bg-info text-light"><i class="fa fa-shopping-bag" aria-hidden="true"></i></div>
+                                    <div class="flex-fill ms-3 text-truncate">
+                                        <div class="h6 mb-0">Tổng số cửa hàng</div>
+                                        <span class="small">8,925</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row end  -->
+
+                    <div class="row g-3">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="tab-filter d-flex align-items-center justify-content-between mb-3 flex-wrap">
+                                <ul class="nav nav-tabs tab-card tab-body-header rounded  d-inline-flex w-sm-100">
+                                    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#summery-today">Hôm nay</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#summery-week">Tuần này</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#summery-month">Tháng này</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#summery-year">Năm nay</a></li>
+                                </ul>
+                                <div class="date-filter d-flex align-items-center mt-2 mt-sm-0 w-sm-100">
+                                    <div class="input-group">
+                                        <input type="date" class="form-control">
+                                        <button class="btn btn-primary" type="button"><i class="fas fa-filter"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content mt-1">
+                                <div class="tab-pane fade show active" id="summery-today">
+                                    <div class="row g-1 g-sm-3 mb-3 row-deck">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Khách hàng</span>
+                                                        <div><span class="fs-6 fw-bold me-2">14,208</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-users"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Đơn hàng</span>
+                                                        <div><span class="fs-6 fw-bold me-2">2314</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-shopping-cart"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Doanh thu trung bình</span>
+                                                        <div><span class="fs-6 fw-bold me-2">$1770</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-percent"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2">185</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-calculator"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Tổng sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2">$35000</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-square-root-alt"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Khách hàng</span>
+                                                        <div><span class="fs-6 fw-bold me-2">11452</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-user-friends"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Tổng sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2">184511</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-shopping-bag"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Sản phẩm giảm giá</span>
+                                                        <div><span class="fs-6 fw-bold me-2">122</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-star"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Shipper</span>
+                                                        <div><span class="fs-6 fw-bold me-2">32</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fab fa-delicious"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- row end -->
+                                </div>
+                                <div class="tab-pane fade" id="summery-week">
+                                    <div class="row g-1 g-sm-3 mb-3 row-deck">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Khách hàng</span>
+                                                        <div><span class="fs-6 fw-bold me-2">14,208</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-users"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Đơn hàng</span>
+                                                        <div><span class="fs-6 fw-bold me-2">2314</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-shopping-cart"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Doanh thu trung bình</span>
+                                                        <div><span class="fs-6 fw-bold me-2">$1770</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-percent"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2">185</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-calculator"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Tổng sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2">$35000</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-square-root-alt"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Khách hàng</span>
+                                                        <div><span class="fs-6 fw-bold me-2">11452</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-user-friends"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Tổng sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2">184511</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-shopping-bag"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Sản phẩm giảm giá</span>
+                                                        <div><span class="fs-6 fw-bold me-2">122</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-star"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Shipper</span>
+                                                        <div><span class="fs-6 fw-bold me-2">32</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fab fa-delicious"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- row end -->
+                                </div>
+                                <div class="tab-pane fade" id="summery-month">
+                                    <div class="row g-1 g-sm-3 mb-3 row-deck">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Khách hàng</span>
+                                                        <div><span class="fs-6 fw-bold me-2">14,208</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-users"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Đơn hàng</span>
+                                                        <div><span class="fs-6 fw-bold me-2">2314</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-shopping-cart"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Doanh thu trung bình</span>
+                                                        <div><span class="fs-6 fw-bold me-2">$1770</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-percent"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2">185</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-calculator"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Tổng sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2">$35000</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-square-root-alt"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Khách hàng</span>
+                                                        <div><span class="fs-6 fw-bold me-2">11452</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-user-friends"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Tổng sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2">184511</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-shopping-bag"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Sản phẩm giảm giá</span>
+                                                        <div><span class="fs-6 fw-bold me-2">122</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-star"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Shipper</span>
+                                                        <div><span class="fs-6 fw-bold me-2">32</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fab fa-delicious"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- row end -->
+                                </div>
+                                <div class="tab-pane fade" id="summery-year">
+                                    <div class="row g-1 g-sm-3 mb-3 row-deck">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Khách hàng</span>
+                                                        <div><span class="fs-6 fw-bold me-2">14,208</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-users"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Đơn hàng</span>
+                                                        <div><span class="fs-6 fw-bold me-2">2314</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-shopping-cart"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Doanh thu trung bình</span>
+                                                        <div><span class="fs-6 fw-bold me-2">$1770</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-percent"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2">185</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-calculator"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Tổng sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2">$35000</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-square-root-alt"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Khách hàng</span>
+                                                        <div><span class="fs-6 fw-bold me-2">11452</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-user-friends"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Tổng sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2">184511</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-shopping-bag"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Sản phẩm giảm giá</span>
+                                                        <div><span class="fs-6 fw-bold me-2">122</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fas fa-star"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                                            <div class="card">
+                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
+                                                    <div class="left-info">
+                                                        <span class="text-muted">Shipper</span>
+                                                        <div><span class="fs-6 fw-bold me-2">32</span></div>
+                                                    </div>
+                                                    <div class="right-icon">
+                                                        <i class="fab fa-delicious"></i>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- row end -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row end  -->
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0">
+                                    <h6 class="m-0 fw-bold">Tình trạng sale</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="apex-GenderOverview"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row end  -->
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-xxl-8 col-xl-8">
+                            <div class="card mb-3">
+                                <div class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0">
+                                    <h6 class="m-0 fw-bold">Trạng thái mua hàng</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="ac-line-transparent" id="apex-shoppingstatus"></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0">
+                                    <h6 class="m-0 fw-bold">Top sản phẩm đang bán</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="topselling"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-4 col-xl-4">
+                            <div class="card">
+                                <div class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0">
+                                    <h6 class="m-0 fw-bold">Địa điểm và doanh thu</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="googleMap" style="width:100%;height:397px;"></div>
+                                    <div class="location-revenue mt-5">
+                                        <label class="fw-bold">India</label>
+                                        <div class="progress mb-4" style="height: 8px;">
+                                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <label class="fw-bold">Mauritius</label>
+                                        <div class="progress mb-4" style="height: 8px;">
+                                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <label class="fw-bold">Colombia</label>
+                                        <div class="progress mb-4" style="height: 8px;">
+                                            <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <label class="fw-bold">Russia</label>
+                                        <div class="progress mb-4" style="height: 8px;">
+                                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <label class="fw-bold">France</label>
+                                        <div class="progress mb-3" style="height: 8px;">
+                                            <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 98%" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row end  -->
+
+                    <div class="row g-3 mb-3 row-deck">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="card">
+                                <div class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0">
+                                    <h6 class="m-0 fw-bold">Trạng thái người dùng hoạt động</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="p-4 active-user bg-lightblue rounded-2 mb-2">
+                                        <span class="fw-bold d-flex justify-content-center fs-3">1345</span>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Trang hoạt động</th>
+                                                    <th scope="col">Người dùng</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><a href="#">/dist/product.html</a></td>
+                                                    <td>245</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="#">/dist/product-cart.html</a></td>
+                                                    <td>455</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="#">/dist/admin-profile.html</a></td>
+                                                    <td>45</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="#">/dist/order-history.html</a></td>
+                                                    <td>545</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="#">/dist/product-detail.html</a></td>
+                                                    <td>55</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-12">
+                            <div class="card">
+                                <div class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0">
+                                    <h6 class="m-0 fw-bold">Doanh số tiêu thụ trung bình</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="h2 mb-0">$1105.5</div>
+                                    <span class="text-muted small">Doanh số tiêu thụ trung bình tất cả tháng</span>
+                                    <div id="apex-expense"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row end  -->
+
+                 
+                    <!-- Row end  -->
+
+                </div>
+            </div>
+
+            <!-- Modal Custom Settings-->
+            <div class="modal fade right" id="Settingmodal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog  modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Custom Settings</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body custom_setting">
+                            <!-- Settings: Color -->
+                            <div class="setting-theme pb-3">
+                                <h6 class="card-title mb-2 fs-6 d-flex align-items-center"><i class="icofont-color-bucket fs-4 me-2 text-primary"></i>Template Color Settings</h6>
+                                <ul class="list-unstyled row row-cols-3 g-2 choose-skin mb-2 mt-2">
+                                    <li data-theme="indigo">
+                                        <div class="indigo"></div>
+                                    </li>
+                                    <li data-theme="tradewind">
+                                        <div class="tradewind"></div>
+                                    </li>
+                                    <li data-theme="monalisa">
+                                        <div class="monalisa"></div>
+                                    </li>
+                                    <li data-theme="blue" class="active">
+                                        <div class="blue"></div>
+                                    </li>
+                                    <li data-theme="cyan">
+                                        <div class="cyan"></div>
+                                    </li>
+                                    <li data-theme="green">
+                                        <div class="green"></div>
+                                    </li>
+                                    <li data-theme="orange">
+                                        <div class="orange"></div>
+                                    </li>
+                                    <li data-theme="blush">
+                                        <div class="blush"></div>
+                                    </li>
+                                    <li data-theme="red">
+                                        <div class="red"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="sidebar-gradient py-3">
+                                <h6 class="card-title mb-2 fs-6 d-flex align-items-center"><i class="icofont-paint fs-4 me-2 text-primary"></i>Sidebar Gradient</h6>
+                                <div class="form-check form-switch gradient-switch pt-2 mb-2">
+                                    <input class="form-check-input" type="checkbox" id="CheckGradient">
+                                    <label class="form-check-label" for="CheckGradient">Enable Gradient! ( Sidebar )</label>
+                                </div>
+                            </div>
+                            <!-- Settings: Template dynamics -->
+                            <div class="dynamic-block py-3">
+                                <ul class="list-unstyled choose-skin mb-2 mt-1">
+                                    <li data-theme="dynamic">
+                                        <div class="dynamic"><i class="icofont-paint me-2"></i> Click to Dyanmic Setting</div>
+                                    </li>
+                                </ul>
+                                <div class="dt-setting">
+                                    <ul class="list-group list-unstyled mt-1">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
+                                            <label>Primary Color</label>
+                                            <button id="primaryColorPicker" class="btn bg-primary avatar xs border-0 rounded-0"></button>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
+                                            <label>Secondary Color</label>
+                                            <button id="secondaryColorPicker" class="btn bg-secondary avatar xs border-0 rounded-0"></button>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
+                                            <label class="text-muted">Chart Color 1</label>
+                                            <button id="chartColorPicker1" class="btn chart-color1 avatar xs border-0 rounded-0"></button>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
+                                            <label class="text-muted">Chart Color 2</label>
+                                            <button id="chartColorPicker2" class="btn chart-color2 avatar xs border-0 rounded-0"></button>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
+                                            <label class="text-muted">Chart Color 3</label>
+                                            <button id="chartColorPicker3" class="btn chart-color3 avatar xs border-0 rounded-0"></button>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
+                                            <label class="text-muted">Chart Color 4</label>
+                                            <button id="chartColorPicker4" class="btn chart-color4 avatar xs border-0 rounded-0"></button>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
+                                            <label class="text-muted">Chart Color 5</label>
+                                            <button id="chartColorPicker5" class="btn chart-color5 avatar xs border-0 rounded-0"></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Settings: Font -->
+                            <div class="setting-font py-3">
+                                <h6 class="card-title mb-2 fs-6 d-flex align-items-center"><i class="icofont-font fs-4 me-2 text-primary"></i> Font Settings</h6>
+                                <ul class="list-group font_setting mt-1">
+                                    <li class="list-group-item py-1 px-2">
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="radio" name="font" id="font-poppins" value="font-poppins">
+                                            <label class="form-check-label" for="font-poppins">
+                                                Poppins Google Font
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item py-1 px-2">
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="radio" name="font" id="font-opensans" value="font-opensans" checked="">
+                                            <label class="form-check-label" for="font-opensans">
+                                                Open Sans Google Font
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item py-1 px-2">
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="radio" name="font" id="font-montserrat" value="font-montserrat">
+                                            <label class="form-check-label" for="font-montserrat">
+                                                Montserrat Google Font
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item py-1 px-2">
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="radio" name="font" id="font-mukta" value="font-mukta">
+                                            <label class="form-check-label" for="font-mukta">
+                                                Mukta Google Font
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Settings: Light/dark -->
+                            <div class="setting-mode py-3">
+                                <h6 class="card-title mb-2 fs-6 d-flex align-items-center"><i class="icofont-layout fs-4 me-2 text-primary"></i>Contrast Layout</h6>
+                                <ul class="list-group list-unstyled mb-0 mt-1">
+                                    <li class="list-group-item d-flex align-items-center py-1 px-2">
+                                        <div class="form-check form-switch theme-switch mb-0">
+                                            <input class="form-check-input" type="checkbox" id="theme-switch">
+                                            <label class="form-check-label" for="theme-switch">Enable Dark Mode!</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center py-1 px-2">
+                                        <div class="form-check form-switch theme-high-contrast mb-0">
+                                            <input class="form-check-input" type="checkbox" id="theme-high-contrast">
+                                            <label class="form-check-label" for="theme-high-contrast">Enable High Contrast</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center py-1 px-2">
+                                        <div class="form-check form-switch theme-rtl mb-0">
+                                            <input class="form-check-input" type="checkbox" id="theme-rtl">
+                                            <label class="form-check-label" for="theme-rtl">Enable RTL Mode!</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-start">
+                            <button type="button" class="btn btn-white border lift" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary lift">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Jquery Core Js -->
+    <script src="assets/bundles/libscripts.bundle.js"></script>
+
+    <!-- Plugin Js -->
+    <script src="assets/bundles/apexcharts.bundle.js"></script>
+    <script src="assets/bundles/dataTables.bundle.js"></script>
+
+    <!-- Jquery Page Js -->
+    <script src="../js/page/index.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1Jr7axGGkwvHRnNfoOzoVRFV3yOPHJEU&callback=myMap"></script>
+    
+    <script src="../js/template.js"></script>
+    </script>
+</body>
+
+</html>
