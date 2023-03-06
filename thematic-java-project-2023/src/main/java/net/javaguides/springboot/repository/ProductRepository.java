@@ -18,4 +18,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SELECT p FROM Product p WHERE p.price BETWEEN ?1 AND ?2 ORDER BY p.price ASC")
     public List<Product> findByPrices(int belowPrice, int abovePrice);
+
 }

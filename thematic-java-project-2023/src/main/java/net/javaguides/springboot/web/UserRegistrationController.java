@@ -1,5 +1,8 @@
 package net.javaguides.springboot.web;
 
+import net.javaguides.springboot.model.User;
+import net.javaguides.springboot.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,8 @@ import net.javaguides.springboot.web.dto.UserRegistrationDto;
 public class UserRegistrationController {
 
 	private UserService userService;
+	@Autowired
+	UserRepository userRepository;
 
 	public UserRegistrationController(UserService userService) {
 		super();
@@ -33,7 +38,12 @@ public class UserRegistrationController {
 	
 	@PostMapping
 	public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {
-		userService.save(registrationDto);
+		User user =userRepository.findByEmail(registrationDto.getEmail());
+		if(user!=null) {
+			return "redirect:/registration";
+		}else {
+			userService.save(registrationDto);
+		}
 		return "redirect:/login";
 	}
 }
