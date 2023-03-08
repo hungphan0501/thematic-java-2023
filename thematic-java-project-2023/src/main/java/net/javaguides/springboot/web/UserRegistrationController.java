@@ -43,7 +43,7 @@ public class UserRegistrationController {
 			return "redirect:/registration";
 		}else {
 			userService.save(registrationDto);
-		}
+		} //cái này nó login theo authentiaction gì á tơs tìm mà cũng méo thấy
 		return "redirect:/login";
 	}
 }

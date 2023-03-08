@@ -1,7 +1,9 @@
 package net.javaguides.springboot.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +45,18 @@ public class UserServiceImpl implements UserService{
 	
 		User user = userRepository.findByEmail(username);
 		if(user == null) {
-			throw new UsernameNotFoundException("Invalid username or password.");
+			throw new UsernameNotFoundException("Invalid username or password." +username);
 		}
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));		
 	}
 	
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
-		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+//		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		for (Role role : roles) {
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+		}//chết rồi - thế thì tớ phải tìm hiểu thêm rồi - cái này chắc tì.oke để tớ add cậu vào git. .khỏi mcaaoir cần nha. cho tớ link nhueeeeeeokeokeokeokeoekeo
+		return authorities;
 	}
 	
 }

@@ -99,4 +99,19 @@ public class ProductDetail {
     public void setColor(String color) {
         this.color = color;
     }
+
+    @Override
+    public String toString() {
+        return "ProductDetail{" +
+                "id=" + id +
+                ", idProduct=" + idProduct +
+                ", size=" + size +
+                ", totalValue=" + totalValue +
+                ", soleValue=" + soleValue +
+                ", createAt='" + createAt + '\'' +
+                ", updateAt='" + updateAt + '\'' +
+                ", active=" + active +
+                ", color='" + color + '\'' +
+                '}'+"\n";
+    }
 }

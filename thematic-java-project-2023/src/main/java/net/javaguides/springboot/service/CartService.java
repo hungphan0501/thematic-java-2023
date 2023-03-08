@@ -3,6 +3,7 @@ package net.javaguides.springboot.service;
 import net.javaguides.springboot.model.Cart;
 import net.javaguides.springboot.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,5 +24,9 @@ public class CartService {
 
     public Optional<Cart> findByUserIdAndProductDetailId(int idUser, int idProductDetail) {
         return cartRepository.findByUserIdAndProductDetailId(idUser,idProductDetail);
+    }
+
+    public Optional<Cart> getCartById(int id) {
+        return cartRepository.findById(id);
     }
 }

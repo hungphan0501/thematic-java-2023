@@ -34,6 +34,10 @@ public class CartController {
     @Autowired
     UserRepository userRepository;
 
+    @GetMapping("/cartById/{id}")
+    public Cart getCartById(@PathVariable int id){
+        return cartService.getCartById(id).get();
+    }
     @GetMapping("/allProductInCart/{idCustomer}")
     public ResponseEntity<List<Cart>> allProductInCart(@PathVariable("idCustomer") int idCustomer) {
         try {
@@ -48,7 +52,7 @@ public class CartController {
         }
     }
 
-    @GetMapping("/addCart1/{idCustomer}/{idProductDetail}/{quantity}")
+    @PostMapping("/addCart1")
     public ResponseEntity<Cart> addToCart2(@RequestBody Cart cart) {
         System.out.println("Vào rồi!");
         try {
@@ -85,7 +89,6 @@ public class CartController {
                     ProductDetail productDetail = optionalProductDetail.get();
                     Optional<Product> optionalProduct = productRepository.findById(productDetail.getIdProduct());
                     Product product = optionalProduct.get();
-//            ProductDetail productDetail = optionalProductDetail.get();
                     double totalPrice = product.getPrice() * quantity;
                     Cart cart;
                     if (optionalCart.isPresent()) {
@@ -99,9 +102,9 @@ public class CartController {
                         cart.setQuantity(quantity);
                         cart.setTotalPrice(totalPrice);
                     }
-
+                    String idUser = String.valueOf(user.getId());
                     cartService.addCart(cart);
-                    return cart.toString();
+                    return "redirect:/cart/allProductInCart/"+idUser;
                 } else {
                     return "Add Product to Cart failed!";
                 }
