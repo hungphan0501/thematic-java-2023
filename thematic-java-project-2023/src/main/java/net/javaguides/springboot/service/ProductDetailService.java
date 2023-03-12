@@ -15,4 +15,8 @@ public class ProductDetailService {
     public List<ProductDetail> getAllProductDetailByIdProduct(int idProduct) {
         return productDetailRepository.getAllProductDetailByIdProduct(idProduct);
     }
+
+    public List<ProductDetail> getAllProductDetailByColor(String color) {
+        return productDetailRepository.getAllProductDetailByColor(color);
+    }
 }
