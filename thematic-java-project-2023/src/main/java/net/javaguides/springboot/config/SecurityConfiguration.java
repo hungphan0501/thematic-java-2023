@@ -19,7 +19,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserService userService;
-
+//	@Autowired
+//	private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 	@Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -42,8 +43,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(
 				 "/registration**",
-					"/productDetail",
-					"/products",
+					"/productDetail/**",
+					"/products/**",
 	                "/js/**",
 	                "/css/**",
 	                "/img/**").permitAll()
@@ -51,6 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.and()
 		.formLogin()
 		.loginPage("/login")
+//		.successHandler(customAuthenticationSuccessHandler) // Sử dụng custom authentication success handler
 		.permitAll()
 		.and()
 		.logout()

@@ -29,5 +29,30 @@ public class ProductService {
         return productRepository.findByPrices(belowPrice, abovePrice);
     }
 
+    public List<Product> filterProducts(List<Integer> sizes, List<Integer> brands, int minPrice,int maxPrice) {
+        return productRepository.findBySizeInAndBrandAndPriceBetween(sizes, brands,minPrice, maxPrice);
+    }
+
+    public List<Product> filterProductsByBrandAndPrice( List<Integer> brands, int minPrice,int maxPrice) {
+        return productRepository.findByBrandAndPriceBetween(brands,minPrice, maxPrice);
+    }
+    public List<Product> filterProductsExceptBrand( List<Integer> sizes, int minPrice,int maxPrice) {
+        return productRepository.findBySizeInAndPriceBetween(sizes,minPrice, maxPrice);
+    }
+    public List<Product> filterProductsBySizesAndBrand( List<Integer> sizes, List<Integer> brands) {
+        return productRepository.findBySizeInAndBrand(sizes,brands);
+    }
+
+    public List<Product> filterProductsBYPrice( int minPrice,int maxPrice) {
+        return productRepository.findByPrice(minPrice, maxPrice);
+    }
+
+    public List<Product> filterProductsByBrand( List<Integer> brands) {
+        return productRepository.findByBrand(brands);
+    }
+
+    public List<Product> filterProductsBySizes( List<Integer> sizes) {
+        return productRepository.findBySizes(sizes);
+    }
 
 }

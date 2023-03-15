@@ -35,9 +35,10 @@ public class CartController {
     UserRepository userRepository;
 
     @GetMapping("/cartById/{id}")
-    public Cart getCartById(@PathVariable int id){
+    public Cart getCartById(@PathVariable int id) {
         return cartService.getCartById(id).get();
     }
+
     @GetMapping("/allProductInCart/{idCustomer}")
     public ResponseEntity<List<Cart>> allProductInCart(@PathVariable("idCustomer") int idCustomer) {
         try {
@@ -70,7 +71,7 @@ public class CartController {
     }
 
     @GetMapping("/addCart/{idProductDetail}/{quantity}")
-    public String addToCart( @PathVariable("idProductDetail") int idProductDetail, @PathVariable("quantity") int quantity, Principal principal) {
+    public String addToCart(@PathVariable("idProductDetail") int idProductDetail, @PathVariable("quantity") int quantity, Principal principal) {
         System.out.println("Vào rồi!");
         try {
 //            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -104,7 +105,7 @@ public class CartController {
                     }
                     String idUser = String.valueOf(user.getId());
                     cartService.addCart(cart);
-                    return "redirect:/cart/allProductInCart/"+idUser;
+                    return "redirect:/cart/allProductInCart/" + idUser;
                 } else {
                     return "Add Product to Cart failed!";
                 }
@@ -146,6 +147,33 @@ public class CartController {
         } else {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    // Xóa một cart dựa trên ID
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<?> deleteCart(@PathVariable("id") int id) {
+        cartService.deleteCartById(id);
+        return ResponseEntity.ok().build();
+    }
+
+    //update số lượng cart
+    @GetMapping("/update/{id}/{quantity}")
+    public ResponseEntity<Cart> updateCart(@PathVariable int id, @PathVariable int quantity) {
+        try {
+            Optional<Cart> cart = cartService.findById(id);
+            if (cart.isPresent()) {
+                Cart cart1 = cart.get();
+                double price = cart1.getTotalPrice() / cart1.getQuantity();
+                cart1.setQuantity(quantity);
+                cart1.setTotalPrice(quantity * price);
+                cartService.updateCart(quantity,price,id);
+                return new ResponseEntity<Cart>(cart1, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return null;
     }
 
 
