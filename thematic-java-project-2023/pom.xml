@@ -93,6 +93,29 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.paypal.sdk</groupId>
+			<artifactId>rest-api-sdk</artifactId>
+			<version>1.4.2</version>
+		</dependency>
+
+		<!-- send mail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
