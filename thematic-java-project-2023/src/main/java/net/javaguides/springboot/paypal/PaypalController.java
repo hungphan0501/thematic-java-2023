@@ -33,8 +33,7 @@ public class PaypalController {
 
     @GetMapping("/pay")
     public String home() {
-        System.out.println("hung");
-        return "home";
+        return "pay/home";
     }
 
     public boolean checkPrice(double orderPrice) {

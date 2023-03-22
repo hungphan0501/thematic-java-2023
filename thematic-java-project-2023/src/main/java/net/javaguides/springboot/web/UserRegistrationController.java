@@ -45,4 +45,6 @@ public class UserRegistrationController {
 		} //cái này nó login theo authentiaction gì á tơs tìm mà cũng méo thấy
 		return "redirect:/login";
 	}
+
+
 }
