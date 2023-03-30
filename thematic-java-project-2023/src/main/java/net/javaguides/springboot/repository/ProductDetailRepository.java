@@ -1,5 +1,6 @@
 package net.javaguides.springboot.repository;
 
+import net.javaguides.springboot.model.Product;
 import net.javaguides.springboot.model.ProductDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,5 +15,6 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetail,Int
     public List<ProductDetail> getAllProductDetailByIdProduct(int idProduct);
     @Query("SELECT p FROM ProductDetail p WHERE p.color=?1")
     public List<ProductDetail> getAllProductDetailByColor(String color);
+
 
 }

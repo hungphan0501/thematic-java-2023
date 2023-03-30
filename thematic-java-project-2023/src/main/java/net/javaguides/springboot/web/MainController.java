@@ -19,4 +19,9 @@ public class MainController {
 	public String forgotPassword() {
 		return "user/forgotPassword";
 	}
+
+	@GetMapping("/avatar")
+	public String showUploadForm() {
+		return "user/avatar";
+	}
 }

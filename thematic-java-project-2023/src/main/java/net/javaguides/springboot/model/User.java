@@ -22,8 +22,8 @@ public class User {
 	private String name;
 	@Column(name = "phone")
 	private String phone;
-	@Column(name = "dob")
-	private String dob;
+	@Column(name = "date_of_birth")
+	private String dateOfBirth;
 	@Column(name = "gender")
 	private String gender;
 	@Column(name = "id_address")
@@ -98,12 +98,12 @@ public class User {
 		this.phone = phone;
 	}
 
-	public String getDob() {
-		return dob;
+	public String getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setDob(String dob) {
-		this.dob = dob;
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public String getGender() {
