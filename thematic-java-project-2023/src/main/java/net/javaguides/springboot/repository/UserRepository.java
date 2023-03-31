@@ -8,6 +8,5 @@ import net.javaguides.springboot.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 	User findByEmail(String email);
-
-
+	User getUserById(int id);
 }

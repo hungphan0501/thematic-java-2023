@@ -10,4 +10,6 @@ import java.util.List;
 public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     List<Orders> getAllById(int id);
 
+    List<Orders> getAllByIdUser(int idUser);
+
 }

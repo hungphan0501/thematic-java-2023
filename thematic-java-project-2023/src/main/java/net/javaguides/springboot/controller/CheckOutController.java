@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,7 @@ public class CheckOutController {
     ProductDetailRepository productDetailRepository;
 
     @PostMapping("/paypal")
-    public ResponseEntity<String> checkoutByPayPal (@RequestBody List<Cart> cartList,@RequestParam("phone") String phone, @RequestParam("address") String address) {
+    public ResponseEntity<String> checkoutByPayPal (@RequestBody List<Cart> cartList, @RequestParam("address") String address) {
         // Lấy danh sách sản phẩm từ giỏ hàng
         List<Item> payPalItems = new ArrayList<>();
 
@@ -99,7 +101,7 @@ public class CheckOutController {
                 totalPrice += cart.getTotalPrice();
             }
 
-            Orders orders = new Orders(idUser,totalPrice,"",address,phone,"Đã đặt hàng","Paypal","Đã thanh toán");
+            Orders orders = new Orders(idUser,totalPrice,"",1,"Đã đặt hàng","Paypal","Đã thanh toán");
             ordersRepository.save(orders);
             for( Cart cart: cartList) {
                 OrderDetail orderDetail = new OrderDetail(orders.getId(),cart.getQuantity(),cart.getIdProductDetail());
@@ -135,15 +137,19 @@ public class CheckOutController {
 
     //thanh toan khi nhan hang
     @PostMapping("/onDelivery")
-    public ResponseEntity<String> paymentOnDelivery(@RequestBody List<Cart> cartList,@RequestParam("phone") String phone, @RequestParam("address") String address){
+    public ResponseEntity<String> paymentOnDelivery(@RequestBody List<Cart> cartList, @RequestParam("idAddress") int idAddress){
         int idUser = userService.getIdUserByUserName();
 
         double totalPrice = 0;
         for( Cart cart: cartList) {
             totalPrice += cart.getTotalPrice();
         }
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy: HH:mm:ss");
+        String createAt = now.format(formatter);
+        System.out.println("createAt : "+createAt);
 
-        Orders orders = new Orders(idUser,totalPrice,"",address,phone,"Đã đặt hàng","Thanh toán khi nhận hàng","Chưa thanh toán");
+        Orders orders = new Orders(idUser,totalPrice,createAt,idAddress,"Đã đặt hàng","Thanh toán khi nhận hàng","Chưa thanh toán");
         ordersRepository.save(orders);
         for( Cart cart: cartList) {
             OrderDetail orderDetail = new OrderDetail(orders.getId(),cart.getQuantity(),cart.getIdProductDetail());
@@ -154,7 +160,7 @@ public class CheckOutController {
 
 //    //thanh toan khi nhan hang
 //    @GetMapping("/onDelivery1")
-//    public ResponseEntity<String> paymentOnDelivery1(@RequestParam("phone") String phone, @RequestParam("address") String address){
+//    public ResponseEntity<String> paymentOnDelivery1( @RequestParam("idAddress") int idAddress){
 //        int idUser = userService.getIdUserByUserName();
 //        System.out.println("IdUser: " +idUser);
 //
@@ -170,8 +176,12 @@ public class CheckOutController {
 //        for( Cart cart: cartList) {
 //            totalPrice += cart.getTotalPrice();
 //        }
+//        LocalDateTime now = LocalDateTime.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy: HH:mm:ss");
+//        String createAt = now.format(formatter);
+//        System.out.println("createAt : "+createAt);
 //
-//        Orders orders = new Orders(idUser,totalPrice,"",address,phone,"Đã đặt hàng","Thanh toán khi nhận hàng","Chưa thanh toán");
+//        Orders orders = new Orders(idUser,totalPrice,createAt,idAddress,"Đã đặt hàng","Thanh toán khi nhận hàng","Chưa thanh toán");
 //        ordersRepository.save(orders);
 //        for( Cart cart: cartList) {
 //            OrderDetail orderDetail = new OrderDetail(orders.getId(),cart.getQuantity(),cart.getIdProductDetail());
@@ -181,7 +191,7 @@ public class CheckOutController {
 //    }
 
     @GetMapping("/paypal1")
-    public ResponseEntity<String> checkoutByPayPal1 (@RequestParam("phone") String phone, @RequestParam("address") String address) {
+    public ResponseEntity<String> checkoutByPayPal1 ( @RequestParam("address") String address) {
         // Lấy danh sách sản phẩm từ giỏ hàng
         int idUser = userService.getIdUserByUserName();
 
@@ -240,7 +250,7 @@ public class CheckOutController {
 
             // Lưu Order vào CSDL
 
-            Orders orders = new Orders(idUser,total,"",address,phone,"Đã đặt hàng","Paypal","Đã thanh toán");
+            Orders orders = new Orders(idUser,total,"",1,"Đã đặt hàng","Paypal","Đã thanh toán");
             ordersRepository.save(orders);
             for( Cart cart: cartList) {
                 OrderDetail orderDetail = new OrderDetail(orders.getId(),cart.getQuantity(),cart.getIdProductDetail());

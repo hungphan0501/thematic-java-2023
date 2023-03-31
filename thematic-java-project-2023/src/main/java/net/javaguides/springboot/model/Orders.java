@@ -19,11 +19,8 @@ public class Orders {
     @Column(name = "create_at")
     private String createAt;
 
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "id_address")
+    private int idAddress;
 
     @Column(name = "status")
     private String status;
@@ -34,12 +31,11 @@ public class Orders {
     @Column(name = "status_payment")
     private String statusPayment;
 
-    public Orders(int idUser, double totalPrice, String createAt, String address, String phone, String status, String paymentType, String statusPayment) {
+    public Orders(int idUser, double totalPrice, String createAt, int idAddress, String status, String paymentType, String statusPayment) {
         this.idUser = idUser;
         this.totalPrice = totalPrice;
         this.createAt = createAt;
-        this.address = address;
-        this.phone = phone;
+        this.idAddress = idAddress;
         this.status = status;
         this.paymentType = paymentType;
         this.statusPayment = statusPayment;
@@ -81,20 +77,12 @@ public class Orders {
         this.createAt = createAt;
     }
 
-    public String getAddress() {
-        return address;
+    public int getIdAddress() {
+        return idAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setIdAddress(String address) {
+        this.idAddress = idAddress;
     }
 
     public String getStatus() {

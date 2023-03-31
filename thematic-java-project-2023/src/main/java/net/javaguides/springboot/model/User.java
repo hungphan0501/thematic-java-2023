@@ -27,7 +27,7 @@ public class User {
 	@Column(name = "gender")
 	private String gender;
 	@Column(name = "id_address")
-	private String idAddress;
+	private int idAddress;
 	@Column(name = "is_admin")
 	private int isAdmin;
 	@Column(name = "id_cart")
@@ -114,11 +114,11 @@ public class User {
 		this.gender = gender;
 	}
 
-	public String getIdAddress() {
+	public int getIdAddress() {
 		return idAddress;
 	}
 
-	public void setIdAddress(String idAddress) {
+	public void setIdAddress(int idAddress) {
 		this.idAddress = idAddress;
 	}
 
