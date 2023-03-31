@@ -1,97 +1,151 @@
-//package net.javaguides.springboot.paypal;
-//
-//import com.paypal.api.payments.Links;
-//import com.paypal.api.payments.Payment;
-//import com.paypal.base.rest.PayPalRESTException;
-//import net.javaguides.springboot.model.Cart;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.ModelAttribute;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//
-//import java.util.List;
-//
-//@Controller
-//@RequestMapping("/checkout")
-//public class PaypalController {
-//
-//    List<Cart> listCartCheckOut;
-//
-//    @Autowired
-//    PaypalService service;
-////	@Autowired
-////	UserProductService userProductService;
-//
-//
-//    //	public static final String SUCCESS_URL = "pay/success";
-//// 	public static final String SUCCESS_URL1 = "order1/{id_user}/{id_product}";
-//    public static final String SUCCESS_URL = "/checkout/order";
-//
-//    public static final String CANCEL_URL = "/checkout/pay/cancel";
-//
+package net.javaguides.springboot.paypal;
+
+import com.paypal.api.payments.*;
+import com.paypal.base.rest.PayPalRESTException;
+import net.javaguides.springboot.model.Cart;
+import net.javaguides.springboot.model.OrderDetail;
+import net.javaguides.springboot.model.Orders;
+import net.javaguides.springboot.model.User;
+import net.javaguides.springboot.repository.OrderDetailRepository;
+import net.javaguides.springboot.repository.OrdersRepository;
+import net.javaguides.springboot.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+@RequestMapping("/paypal")
+public class PaypalController {
+
+    @Autowired
+    private PaypalService paypalService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    OrdersRepository ordersRepository;
+
+    @Autowired
+    OrderDetailRepository orderDetailRepository;
+
+    @GetMapping("/pay")
+    public RedirectView pay(@RequestBody List<Cart> cartList,@RequestParam("idAddress") int idAddress,HttpServletRequest request) {
+        RedirectView redirectView = new RedirectView();
+        try {
+            String cancelUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+                    + request.getContextPath() + "/paypal/cancel";
+            String successUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+                    + request.getContextPath() + "/paypal/success";
+
+            // create payment
+            Payment payment = paypalService.createPayment(cartList,idAddress, "USD", cancelUrl, successUrl);
+            for (Links link : payment.getLinks()) {
+                if (link.getRel().equals("approval_url")) {
+                    redirectView.setUrl(link.getHref());
+                    return redirectView;
+                }
+            }
+        } catch (PayPalRESTException e) {
+            // handle exception
+        }
+        redirectView.setUrl("/paypal/cancel");
+        return redirectView;
+    }
 //    @GetMapping("/pay")
-//    public String home() {
-//        return "pay/home";
-//    }
-//
-//    public boolean checkPrice(double orderPrice) {
-//        int standardPrice = 0;
-//        for (Cart cart : listCartCheckOut) {
-//            standardPrice += cart.getTotalPrice();
-//        }
-//        if (standardPrice != orderPrice) {
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    //@ModelAttribute("order")
-//    @PostMapping("/pay")
-//    public String payment(@ModelAttribute("order") OrderNew order) {
-//        System.out.println(order.toString());
+//    public RedirectView payTest(HttpServletRequest request,@RequestParam("idAddress") int idAddress) {
+//        RedirectView redirectView = new RedirectView();
 //        try {
-//			if(!checkPrice( order.getPrice())){
-//				return " price not correct";
-//			}
-//            Payment payment = service.createPayment(order.getPrice(), order.getCurrency(), order.getMethod(),
-//                    order.getIntent(), order.getDescription(), "http://localhost:8080/" + CANCEL_URL,
-//                    "http://localhost:8080/" + SUCCESS_URL + "/" + order.getIdUser() + "/" + order.getIdProduct());
+//            Cart c1 = new Cart(28, 3, 3, 180.0);
+//            Cart c2 = new Cart(28, 10, 12, 720.0);
+//            Cart c3 = new Cart(28, 20, 2, 180.0);
+//            List<Cart> cartList = new ArrayList<>();
+//            cartList.add(c1);
+//            cartList.add(c2);
+//            cartList.add(c3);
+//            String cancelUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+//                    + request.getContextPath() + "/paypal/cancel";
+//            String successUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+//                    + request.getContextPath() + "/paypal/success";
+//
+//            // create payment
+//            Payment payment = paypalService.createPayment(cartList, idAddress,"USD", cancelUrl, successUrl);
 //            for (Links link : payment.getLinks()) {
 //                if (link.getRel().equals("approval_url")) {
-//                    return "redirect:" + link.getHref();
+//                    redirectView.setUrl(link.getHref());
+//                    return redirectView;
 //                }
 //            }
-//
 //        } catch (PayPalRESTException e) {
-//
-//            e.printStackTrace();
+//            // handle exception
 //        }
-//        return "redirect:/";
+//        redirectView.setUrl("/paypal/error");
+//        return redirectView;
 //    }
-//
-//    @GetMapping(value = CANCEL_URL)
-//    public String cancelPay() {
-//        return "cancel";
-//    }
-//    //@ModelAttribute("order") OrderNew order,
-////		@GetMapping(value = SUCCESS_URL1)
-////	    public String successPay(@PathVariable("id_user")String idUser,@PathVariable("id_product")String idProduct,@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
-////	        try {
-////	            Payment payment = service.executePayment(paymentId, payerId);
-////	            System.out.println(payment.toJSON());
-////					System.out.println("ID USER: "+idUser);
-////				System.out.println();
-////				System.out.println();
-////	            if (payment.getState().equals("approved")) {
-////	                return "order1/"+idUser+"/"+idProduct;
-//////					return "success";
-////	            }
-////	        } catch (PayPalRESTException e) {
-////	         System.out.println(e.getMessage());
-////	        }
-////	        return "redirect:/";
-////	    }
-//
-//}
+
+    @GetMapping("/success")
+    public ResponseEntity<String> success(@RequestParam("paymentId") String paymentId,
+                                          @RequestParam("PayerID") String payerId) {
+        try {
+            Payment payment = paypalService.executePayment(paymentId, payerId);
+            if (payment.getState().equals("approved")) {
+                // payment success, do something here
+                List<Cart> cartList =getCartItems();
+                System.out.println("Cart List: "+cartList.toString());
+                int idUser = 0;
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                if (authentication != null && authentication.isAuthenticated()) {
+                    String username = authentication.getName();
+                    User user = userRepository.findByEmail(username);
+                    idUser = user.getId();
+                }
+                double totalPrice = 0;
+                for (Cart cart : cartList) {
+                    totalPrice += cart.getTotalPrice();
+                }
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy: HH:mm:ss");
+                String createAt = now.format(formatter);
+                System.out.println("createAt : " + createAt);
+
+                Orders orders = new Orders(idUser, totalPrice, createAt, getIdAddress(), "Đã đặt hàng", "Paypal", "Da thanh toan");
+                ordersRepository.save(orders);
+                for (Cart cart : cartList) {
+                    OrderDetail orderDetail = new OrderDetail(orders.getId(), cart.getQuantity(), cart.getIdProductDetail());
+                    orderDetailRepository.save(orderDetail);
+                }
+                return ResponseEntity.status(HttpStatus.OK).body("Payment successful");
+            }
+        } catch (PayPalRESTException e) {
+            // handle exception
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Paypal payment failed");
+    }
+
+    @GetMapping("/cancel")
+    public ResponseEntity<String> cancel() {
+        // handle cancel payment
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Payment cancelled");
+    }
+
+    public List<Cart> getCartItems() {
+        // Gọi phương thức getCartItems() của PaypalService để lấy danh sách Cart
+        return paypalService.getCartItems();
+    }
+
+    public int getIdAddress() {
+        return paypalService.getIdAddress();
+    }
+}
+

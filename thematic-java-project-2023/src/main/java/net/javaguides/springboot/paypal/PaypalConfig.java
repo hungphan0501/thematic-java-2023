@@ -25,6 +25,7 @@ public class PaypalConfig {
 		Map<String, String> configMap = new HashMap<>();
 		configMap.put("mode", mode);
 		return configMap;
+
 	}
 
 	@Bean
