@@ -1,6 +1,7 @@
 package net.javaguides.springboot.controller;
 
 import net.javaguides.springboot.model.User;
+import net.javaguides.springboot.repository.UserRepository;
 import net.javaguides.springboot.service.UserOtpService;
 import net.javaguides.springboot.service.UserOtpServiceImpl;
 import net.javaguides.springboot.service.UserServiceImpl;
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -20,6 +24,12 @@ public class ForgotPasswordController {
 
     @Autowired
     private UserOtpServiceImpl userService;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping
     public ResponseEntity<?> processForgotPassword(@RequestParam("email") String email) throws MessagingException {
@@ -52,6 +62,7 @@ public class ForgotPasswordController {
 
         javaMailSender.send(mailMessage);
     }
+
     // helper method to generate OTP code
     private String generateOtpCode() {
         int otpCode = (int) (Math.random() * 900000 + 100000);
@@ -60,19 +71,52 @@ public class ForgotPasswordController {
     }
 
     @GetMapping("/confirmOtp")
-    public String confirmOtp(@RequestParam("email") String email,@RequestParam("otp") String otp) {
-        boolean isValidOtpCode = userService.isValidOtpCode(email,otp);
-        if(isValidOtpCode) {
+    public String confirmOtp(@RequestParam("email") String email, @RequestParam("otp") String otp) {
+        boolean isValidOtpCode = userService.isValidOtpCode(email, otp);
+        if (isValidOtpCode) {
             return "forgotPassword";
-        }
-        else
+        } else
             return "error";
     }
+
     @GetMapping("/changNewPass")
-    public ResponseEntity<?> changNewPass(@RequestParam("email") String email,@RequestParam("newPass") String newPass){
-        userService.updatePassword(email,newPass);
+    public ResponseEntity<?> changNewPass(@RequestParam("email") String email, @RequestParam("newPass") String newPass) {
+        userService.updatePassword(email, newPass);
         return ResponseEntity.ok().body("successfully");
     }
 
+    @GetMapping("/checkPass")
+    public boolean check(@RequestParam("pass") String pass) {
+        String email = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            email = authentication.getName();
+        }
+        String oldPass = userRepository.getPass(email);
+        boolean isMatch = passwordEncoder.matches(pass, oldPass);
+        return ((isMatch) ? true : false);
+    }
+
+
+    @GetMapping("/changePass")
+    public String changPassModal(@RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass,@RequestParam("otp") String otp) throws MessagingException {
+        boolean checkPass = check(oldPass);
+        if (checkPass) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication != null && authentication.isAuthenticated()) {
+                String email = authentication.getName();
+                User user = userRepository.findByEmail(email);
+                String otpCode = generateOtpCode();
+                userService.saveOtpCode(email, otpCode);
+                sendOtpCodeByEmail(email, otpCode);
+                if (confirmOtp(email, otp).equals("forgotPassword")) {
+                    user.setPassword(passwordEncoder.encode(newPass));
+                    userRepository.save(user);
+                    return "Change pass successfully";
+                }
+            }
+        }
+        return "Change pass failed";
+    }
 }
 
