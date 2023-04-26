@@ -13,4 +13,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 
 	@Query("SELECT u.password FROM User u WHERE u.email=?1")
 	String getPass(String email);
+
+	@Query("SELECT COUNT(u) FROM User u JOIN u.roles r WHERE r.name = 'ROLE_USER'")
+	int countUserWithRoleUser();
 }

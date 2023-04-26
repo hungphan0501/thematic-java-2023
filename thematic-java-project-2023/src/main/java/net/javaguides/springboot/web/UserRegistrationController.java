@@ -32,7 +32,7 @@ public class UserRegistrationController {
 	
 	@GetMapping
 	public String showRegistrationForm() {
-		return "registration";
+		return "user/registration";
 	}
 	
 	@PostMapping
