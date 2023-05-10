@@ -81,11 +81,11 @@ public class UserController {
         String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
         System.out.println("file format: " + extension);
         String[] fileFormats = {"jpg", "png", "svg", "jpeg", "gif"};
-        for (String format : fileFormats) {
-            if (!extension.equals(format)) {
-                return "file invalid format";
-            }
-        }
+//        for (String format : fileFormats) {
+//            if (!extension.equals(format)) {
+//                return "file invalid format";
+//            }
+//        }
 
         try {
             //lấy id user hiện tại

@@ -72,7 +72,7 @@ public class CartController {
 
     @GetMapping("/addCart/{idProductDetail}/{quantity}")
     public String addToCart(@PathVariable("idProductDetail") int idProductDetail, @PathVariable("quantity") int quantity, Principal principal) {
-        System.out.println("Vào rồi!");
+        System.out.println("Vào rồi!"); 
         try {
 //            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //            if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {

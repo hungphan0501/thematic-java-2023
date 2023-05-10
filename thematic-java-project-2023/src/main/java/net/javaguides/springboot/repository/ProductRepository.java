@@ -26,7 +26,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     //price and brands
     @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE p.brand IN :brands AND p.price BETWEEN :minPrice AND :maxPrice")
-    List<Product> findByBrandAndPriceBetween( @Param("brands") List<Integer> brands, @Param("minPrice") int minPrice, @Param("maxPrice") int maxPrice);
+    List<Product> findByBrandAndPriceBetween(@Param("brands") List<Integer> brands, @Param("minPrice") int minPrice, @Param("maxPrice") int maxPrice);
 
     //sizes and price
     @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE pd.size IN :sizes  AND p.price BETWEEN :minPrice AND :maxPrice")
@@ -38,14 +38,23 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     //price
     @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE p.price BETWEEN :minPrice AND :maxPrice")
-    List<Product> findByPrice( @Param("minPrice") int minPrice, @Param("maxPrice") int maxPrice);
+    List<Product> findByPrice(@Param("minPrice") int minPrice, @Param("maxPrice") int maxPrice);
 
     //brand
     @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE p.brand IN :brands")
-    List<Product> findByBrand( @Param("brands") List<Integer> brands);
+    List<Product> findByBrand(@Param("brands") List<Integer> brands);
 
 
     //sizes
     @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE pd.size IN :sizes")
-    List<Product> findBySizes( @Param("sizes") List<Integer> sizes);
+    List<Product> findBySizes(@Param("sizes") List<Integer> sizes);
+
+    @Query("SELECT COUNT(p) FROM Product p ")
+    int countAllProduct();
+
+    @Query("SELECT SUM(p.price*p.saleRate/100) FROM Product p WHERE p.saleRate> 0")
+    double getRevenueBySale();
+
+    @Query("SELECT SUM(p.price*(100 - p.saleRate)/100) FROM Product p WHERE p.saleRate> 0")
+    double getSpending();
 }

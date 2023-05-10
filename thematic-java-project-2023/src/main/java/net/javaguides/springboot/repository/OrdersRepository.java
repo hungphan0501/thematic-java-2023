@@ -13,7 +13,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 
     List<Orders> getAllByIdUser(int idUser);
 
-    @Query("SELECT COUNT(o) FROM Orders o  WHERE o.status = 'Hoàn tất'")
+    @Query("SELECT COUNT(o) FROM Orders o  WHERE o.status = 'Hoan tat'")
     int countOrdersCompleted();
 
     @Query("SELECT COUNT(o) FROM Orders o  WHERE o.status = 'Chờ xác nhận'")
@@ -21,6 +21,9 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 
     @Query("SELECT SUM(o.totalPrice) FROM Orders o")
     double getRevenue();
+
+    @Query("SELECT SUM(o.quantity) FROM OrderDetail o")
+    int countProductSold();
 
 
 }

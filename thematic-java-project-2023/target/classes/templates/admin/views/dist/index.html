@@ -90,7 +90,7 @@
                                     <div class="avatar rounded no-thumbnail bg-success text-light"><i class="fa fa-dollar fa-lg"></i></div>
                                     <div class="flex-fill ms-3 text-truncate">
                                         <div class="h6 mb-0">Doanh thu</div>
-                                        <span class="small">$18,925</span>
+                                        <span class="small price-tour-format" th:text="${revenue}">$18,925</span>
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                                     <div class="avatar rounded no-thumbnail bg-danger text-light"><i class="fa fa-credit-card fa-lg"></i></div>
                                     <div class="flex-fill ms-3 text-truncate">
                                         <div class="h6 mb-0">Chi tiêu</div>
-                                        <span class="small">$11,024</span>
+                                        <span class="small price-tour-format" th:text="${spending}">$11,024</span>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                     <div class="avatar rounded no-thumbnail bg-warning text-light"><i class="fa fa-smile-o fa-lg"></i></div>
                                     <div class="flex-fill ms-3 text-truncate">
                                         <div class="h6 mb-0">Khách hàng yêu thích</div>
-                                        <span class="small">8,925</span>
+                                        <span class="small">3</span>
                                     </div>
                                 </div>
                             </div>
@@ -122,8 +122,8 @@
                                 <div class="d-flex align-items-center">
                                     <div class="avatar rounded no-thumbnail bg-info text-light"><i class="fa fa-shopping-bag" aria-hidden="true"></i></div>
                                     <div class="flex-fill ms-3 text-truncate">
-                                        <div class="h6 mb-0">Tổng số cửa hàng</div>
-                                        <span class="small">8,925</span>
+                                        <div class="h6 mb-0">Số hóa đơn chờ xác nhận</div>
+                                        <span class="small" th:text="${ordersWaiting}">8,925</span>
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +155,7 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted">Khách hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2">14,208</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${countCustomer}">14,208</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-users"></i>                                                    </div>
@@ -167,7 +167,7 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted">Đơn hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2">2314</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${countOrder}">2314</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-shopping-cart"></i>                                                    </div>
@@ -179,7 +179,7 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted">Doanh thu trung bình</span>
-                                                        <div><span class="fs-6 fw-bold me-2">$1770</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2 price-tour-format" th:text="${revenue}">$1770</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-percent"></i>                                                    </div>
@@ -190,44 +190,22 @@
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Sản phẩm</span>
-                                                        <div><span class="fs-6 fw-bold me-2">185</span></div>
+                                                        <span class="text-muted">Tổng sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${countProduct}">185</span>
+                                                        </div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-calculator"></i>                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Tổng sản phẩm</span>
-                                                        <div><span class="fs-6 fw-bold me-2">$35000</span></div>
-                                                    </div>
-                                                    <div class="right-icon">
-                                                        <i class="fas fa-square-root-alt"></i>                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
-                                                    <div class="left-info">
-                                                        <span class="text-muted">Khách hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2">11452</span></div>
-                                                    </div>
-                                                    <div class="right-icon">
-                                                        <i class="fas fa-user-friends"></i>                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
-                                                    <div class="left-info">
-                                                        <span class="text-muted">Tổng sản phẩm</span>
-                                                        <div><span class="fs-6 fw-bold me-2">184511</span></div>
+                                                        <span class="text-muted" >Tổng sản phẩm đã bán</span>
+                                                        <div><span class="fs-6 fw-bold me-2 price-tour-format"  th:text="${productSold}">184511</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-shopping-bag"></i>                                                    </div>
@@ -239,25 +217,14 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted">Sản phẩm giảm giá</span>
-                                                        <div><span class="fs-6 fw-bold me-2">122</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2 price-tour-format" th:text="${revenueBySale}">122</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-star"></i>                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
-                                                    <div class="left-info">
-                                                        <span class="text-muted">Shipper</span>
-                                                        <div><span class="fs-6 fw-bold me-2">32</span></div>
-                                                    </div>
-                                                    <div class="right-icon">
-                                                        <i class="fab fa-delicious"></i>                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <!-- row end -->
                                 </div>
@@ -1264,6 +1231,14 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1Jr7axGGkwvHRnNfoOzoVRFV3yOPHJEU&callback=myMap"></script>
     
     <script type="text/javascript" >
+        var priceElements = document.querySelectorAll('.price-tour-format');
+        priceElements.forEach(function (element) {
+            var priceValue = parseFloat(element.textContent);
+            if (!isNaN(priceValue)) {
+                var formattedPrice = priceValue.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+                element.textContent = formattedPrice;
+            }
+        });
 
         if (typeof jQuery === "undefined") {
             throw new Error("jQuery plugins need to be before this file");
