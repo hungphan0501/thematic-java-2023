@@ -12,10 +12,8 @@ public class ProductDetail {
     private int idProduct;
     @Column(name = "size")
     private int size;
-    @Column(name = "total_value")
-    private int totalValue;
-    @Column(name = "sole_value")
-    private int soleValue;
+    @Column(name = "quantity")
+    private int quantity;
     @Column(name = "create_at")
     private String createAt;
     @Column(name = "update_at")
@@ -24,6 +22,16 @@ public class ProductDetail {
     private int active;
     @Column(name = "color")
     private String color;
+
+    public ProductDetail(int idProduct, int size, int quantity, String createAt, String updateAt, int active, String color) {
+        this.idProduct = idProduct;
+        this.size = size;
+        this.quantity = quantity;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+        this.active = active;
+        this.color = color;
+    }
 
     public ProductDetail() {
     }
@@ -52,20 +60,12 @@ public class ProductDetail {
         this.size = size;
     }
 
-    public int getTotalValue() {
-        return totalValue;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setTotalValue(int totalValue) {
-        this.totalValue = totalValue;
-    }
-
-    public int getSoleValue() {
-        return soleValue;
-    }
-
-    public void setSoleValue(int soleValue) {
-        this.soleValue = soleValue;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getCreateAt() {
@@ -106,8 +106,7 @@ public class ProductDetail {
                 "id=" + id +
                 ", idProduct=" + idProduct +
                 ", size=" + size +
-                ", totalValue=" + totalValue +
-                ", soleValue=" + soleValue +
+                ", quantity=" + quantity +
                 ", createAt='" + createAt + '\'' +
                 ", updateAt='" + updateAt + '\'' +
                 ", active=" + active +

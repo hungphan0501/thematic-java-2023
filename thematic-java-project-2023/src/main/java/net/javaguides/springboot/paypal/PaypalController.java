@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -102,7 +103,6 @@ public class PaypalController {
             if (payment.getState().equals("approved")) {
                 // payment success, do something here
                 List<Cart> cartList =getCartItems();
-                System.out.println("Cart List: "+cartList.toString());
                 int idUser = 0;
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
                 if (authentication != null && authentication.isAuthenticated()) {
@@ -115,11 +115,12 @@ public class PaypalController {
                     totalPrice += cart.getTotalPrice();
                 }
                 LocalDateTime now = LocalDateTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy: HH:mm:ss");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 String createAt = now.format(formatter);
-                System.out.println("createAt : " + createAt);
+                Date date = Date.valueOf(createAt);
+                System.out.println("createAt : " + createAt + "\tdate: " +date);
 
-                Orders orders = new Orders(idUser, totalPrice, createAt, getIdAddress(), "Đã đặt hàng", "Paypal", "Da thanh toan");
+                Orders orders = new Orders(idUser, totalPrice, date, getIdAddress(), "Đã đặt hàng", "Paypal", "Da thanh toan");
                 ordersRepository.save(orders);
                 for (Cart cart : cartList) {
                     OrderDetail orderDetail = new OrderDetail(orders.getId(), cart.getQuantity(), cart.getIdProductDetail());

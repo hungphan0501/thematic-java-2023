@@ -5,10 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin | Dragon Sport </title>
+    <title>Admin | Home </title>
 
     <base href="/">
-    <link rel="shortcut icon" href="/user/image/logo.png" />
+    <link rel="shortcut icon" th:href="@{/assets/images/logo.png}" />
+
 
     <!-- Favicon-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -43,7 +44,7 @@
                     <ul class="sub-menu collapse" id="menu-product">
         
                         <li><a class="ms-link" href="product-edit.html">Chỉnh sửa sản phẩm</a></li>
-                        <li><a class="ms-link" href="product-add.html">Thêm sản phẩm</a></li>
+                        <li><a class="ms-link" th:href="@{/admin/product/add}">Thêm sản phẩm</a></li>
                      
                     </ul>
                 </li>
@@ -155,7 +156,7 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted">Khách hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2" th:text="${countCustomer}">14,208</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${@homeController.countUser(0)}">14,208</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-users"></i>                                                    </div>
@@ -167,7 +168,7 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted">Đơn hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2" th:text="${countOrder}">2314</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${@homeController.countOrders(0)}">2314</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-shopping-cart"></i>                                                    </div>
@@ -178,8 +179,8 @@
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Doanh thu trung bình</span>
-                                                        <div><span class="fs-6 fw-bold me-2 price-tour-format" th:text="${revenue}">$1770</span></div>
+                                                        <span class="text-muted">Doanh thu</span>
+                                                        <div><span class="fs-6 fw-bold me-2 price-tour-format" th:text="${@homeController.getRevenue(0)}">$1770</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-percent"></i>                                                    </div>
@@ -205,7 +206,7 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted" >Tổng sản phẩm đã bán</span>
-                                                        <div><span class="fs-6 fw-bold me-2 price-tour-format"  th:text="${productSold}">184511</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2 "  th:text="${@homeController.countProductSold(0)}">184511</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-shopping-bag"></i>                                                    </div>
@@ -216,8 +217,11 @@
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Sản phẩm giảm giá</span>
-                                                        <div><span class="fs-6 fw-bold me-2 price-tour-format" th:text="${revenueBySale}">122</span></div>
+                                                        <span class="text-muted">Trạng thái bán hàng</span>
+                                                        <div th:if="${@homeController.countProductSold(0)> 50}"><span class="fs-6 fw-bold me-2 " style="color:#08ff00;">Rất tốt</span></div>
+                                                        <div th:if="${@homeController.countProductSold(0)> 30 && @homeController.countProductSold(0) <50}"><span class="fs-6 fw-bold me-2 " style="color:rgba(6,168,0,0.82);">Tốt</span></div>
+                                                        <div th:if="${@homeController.countProductSold(0)> 10 && @homeController.countProductSold(0) <30}"><span class="fs-6 fw-bold me-2 " style="color:#ffa700;">Bình thường</span></div>
+                                                        <div th:if="${@homeController.countProductSold(0)< 10 }"><span class="fs-6 fw-bold me-2 " style="color:red;">Chậm</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-star"></i>                                                    </div>
@@ -235,7 +239,7 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted">Khách hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2">14,208</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${@homeController.countUser(7)}">14,208</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-users"></i>                                                    </div>
@@ -247,7 +251,7 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted">Đơn hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2">2314</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${@homeController.countOrders(7)}">2314</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-shopping-cart"></i>                                                    </div>
@@ -258,8 +262,8 @@
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Doanh thu trung bình</span>
-                                                        <div><span class="fs-6 fw-bold me-2">$1770</span></div>
+                                                        <span class="text-muted">Doanh thu </span>
+                                                        <div><span class="fs-6 fw-bold me-2 price-tour-format" th:text="${@homeController.getRevenue(7)}">$1770</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-percent"></i>                                                    </div>
@@ -270,44 +274,22 @@
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Sản phẩm</span>
-                                                        <div><span class="fs-6 fw-bold me-2">185</span></div>
+                                                        <span class="text-muted">Tổng sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${countProduct}">185</span>
+                                                        </div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-calculator"></i>                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Tổng sản phẩm</span>
-                                                        <div><span class="fs-6 fw-bold me-2">$35000</span></div>
-                                                    </div>
-                                                    <div class="right-icon">
-                                                        <i class="fas fa-square-root-alt"></i>                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
-                                                    <div class="left-info">
-                                                        <span class="text-muted">Khách hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2">11452</span></div>
-                                                    </div>
-                                                    <div class="right-icon">
-                                                        <i class="fas fa-user-friends"></i>                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
-                                                    <div class="left-info">
-                                                        <span class="text-muted">Tổng sản phẩm</span>
-                                                        <div><span class="fs-6 fw-bold me-2">184511</span></div>
+                                                        <span class="text-muted" >Tổng sản phẩm đã bán</span>
+                                                        <div><span class="fs-6 fw-bold me-2 "  th:text="${@homeController.countProductSold(7)}">184511</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-shopping-bag"></i>                                                    </div>
@@ -318,26 +300,18 @@
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Sản phẩm giảm giá</span>
-                                                        <div><span class="fs-6 fw-bold me-2">122</span></div>
+                                                        <span class="text-muted">Trạng thái bán hàng</span>
+                                                        <div th:if="${@homeController.countProductSold(7)> 350}"><span class="fs-6 fw-bold me-2 " style="color:#08ff00;">Rất tốt</span></div>
+                                                        <div th:if="${@homeController.countProductSold(7)> 250 && @homeController.countProductSold(7) <350}"><span class="fs-6 fw-bold me-2 " style="color:rgba(6,168,0,0.82);">Tốt</span></div>
+                                                        <div th:if="${@homeController.countProductSold(7)> 150 && @homeController.countProductSold(7) <250}"><span class="fs-6 fw-bold me-2 " style="color:#ffa700;">Bình thường</span></div>
+                                                        <div th:if="${@homeController.countProductSold(7)< 150 }"><span class="fs-6 fw-bold me-2 " style="color:red;">Chậm</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-star"></i>                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
-                                                    <div class="left-info">
-                                                        <span class="text-muted">Shipper</span>
-                                                        <div><span class="fs-6 fw-bold me-2">32</span></div>
-                                                    </div>
-                                                    <div class="right-icon">
-                                                        <i class="fab fa-delicious"></i>                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <!-- row end -->
                                 </div>
@@ -348,7 +322,7 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted">Khách hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2">14,208</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${@homeController.countUser(30)}">14,208</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-users"></i>                                                    </div>
@@ -360,7 +334,7 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted">Đơn hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2">2314</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${@homeController.countOrders(30)}">2314</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-shopping-cart"></i>                                                    </div>
@@ -371,8 +345,8 @@
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Doanh thu trung bình</span>
-                                                        <div><span class="fs-6 fw-bold me-2">$1770</span></div>
+                                                        <span class="text-muted">Doanh thu</span>
+                                                        <div><span class="fs-6 fw-bold me-2 price-tour-format" th:text="${@homeController.getRevenue(30)}">$1770</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-percent"></i>                                                    </div>
@@ -383,44 +357,22 @@
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Sản phẩm</span>
-                                                        <div><span class="fs-6 fw-bold me-2">185</span></div>
+                                                        <span class="text-muted">Tổng sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${countProduct}">185</span>
+                                                        </div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-calculator"></i>                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Tổng sản phẩm</span>
-                                                        <div><span class="fs-6 fw-bold me-2">$35000</span></div>
-                                                    </div>
-                                                    <div class="right-icon">
-                                                        <i class="fas fa-square-root-alt"></i>                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
-                                                    <div class="left-info">
-                                                        <span class="text-muted">Khách hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2">11452</span></div>
-                                                    </div>
-                                                    <div class="right-icon">
-                                                        <i class="fas fa-user-friends"></i>                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
-                                                    <div class="left-info">
-                                                        <span class="text-muted">Tổng sản phẩm</span>
-                                                        <div><span class="fs-6 fw-bold me-2">184511</span></div>
+                                                        <span class="text-muted" >Tổng sản phẩm đã bán</span>
+                                                        <div><span class="fs-6 fw-bold me-2 "  th:text="${@homeController.countProductSold(30)}">184511</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-shopping-bag"></i>                                                    </div>
@@ -431,26 +383,18 @@
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Sản phẩm giảm giá</span>
-                                                        <div><span class="fs-6 fw-bold me-2">122</span></div>
+                                                        <span class="text-muted">Trạng thái bán hàng</span>
+                                                        <div th:if="${@homeController.countProductSold(30)> 850}"><span class="fs-6 fw-bold me-2 " style="color:#08ff00;">Rất tốt</span></div>
+                                                        <div th:if="${@homeController.countProductSold(30)> 700 && @homeController.countProductSold(30) <850}"><span class="fs-6 fw-bold me-2 " style="color:rgba(6,168,0,0.82);">Tốt</span></div>
+                                                        <div th:if="${@homeController.countProductSold(30)> 600 && @homeController.countProductSold(30) <700}"><span class="fs-6 fw-bold me-2 " style="color:#ffa700;">Bình thường</span></div>
+                                                        <div th:if="${@homeController.countProductSold(30)< 600 }"><span class="fs-6 fw-bold me-2 " style="color:red;">Chậm</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-star"></i>                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
-                                                    <div class="left-info">
-                                                        <span class="text-muted">Shipper</span>
-                                                        <div><span class="fs-6 fw-bold me-2">32</span></div>
-                                                    </div>
-                                                    <div class="right-icon">
-                                                        <i class="fab fa-delicious"></i>                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <!-- row end -->
                                 </div>
@@ -461,7 +405,7 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted">Khách hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2">14,208</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${@homeController.countUser(365)}">14,208</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-users"></i>                                                    </div>
@@ -473,7 +417,7 @@
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
                                                         <span class="text-muted">Đơn hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2">2314</span></div>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${@homeController.countOrders(365)}">2314</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-shopping-cart"></i>                                                    </div>
@@ -484,8 +428,8 @@
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Doanh thu trung bình</span>
-                                                        <div><span class="fs-6 fw-bold me-2">$1770</span></div>
+                                                        <span class="text-muted">Doanh thu</span>
+                                                        <div><span class="fs-6 fw-bold me-2 price-tour-format" th:text="${@homeController.getRevenue(365)}">$1770</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-percent"></i>                                                    </div>
@@ -496,44 +440,22 @@
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Sản phẩm</span>
-                                                        <div><span class="fs-6 fw-bold me-2">185</span></div>
+                                                        <span class="text-muted">Tổng sản phẩm</span>
+                                                        <div><span class="fs-6 fw-bold me-2" th:text="${countProduct}">185</span>
+                                                        </div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-calculator"></i>                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Tổng sản phẩm</span>
-                                                        <div><span class="fs-6 fw-bold me-2">$35000</span></div>
-                                                    </div>
-                                                    <div class="right-icon">
-                                                        <i class="fas fa-square-root-alt"></i>                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
-                                                    <div class="left-info">
-                                                        <span class="text-muted">Khách hàng</span>
-                                                        <div><span class="fs-6 fw-bold me-2">11452</span></div>
-                                                    </div>
-                                                    <div class="right-icon">
-                                                        <i class="fas fa-user-friends"></i>                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
-                                                    <div class="left-info">
-                                                        <span class="text-muted">Tổng sản phẩm</span>
-                                                        <div><span class="fs-6 fw-bold me-2">184511</span></div>
+                                                        <span class="text-muted" >Tổng sản phẩm đã bán</span>
+                                                        <div><span class="fs-6 fw-bold me-2 "  th:text="${@homeController.countProductSold(365)}">184511</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-shopping-bag"></i>                                                    </div>
@@ -544,26 +466,18 @@
                                             <div class="card">
                                                 <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
                                                     <div class="left-info">
-                                                        <span class="text-muted">Sản phẩm giảm giá</span>
-                                                        <div><span class="fs-6 fw-bold me-2">122</span></div>
+                                                        <span class="text-muted">Trạng thái bán hàng</span>
+                                                        <div th:if="${@homeController.countProductSold(365)> 7700}"><span class="fs-6 fw-bold me-2 " style="color:#08ff00;">Rất tốt</span></div>
+                                                        <div th:if="${@homeController.countProductSold(365)> 7400 && @homeController.countProductSold(365) <7700}"><span class="fs-6 fw-bold me-2 " style="color:rgba(6,168,0,0.82);">Tốt</span></div>
+                                                        <div th:if="${@homeController.countProductSold(365)> 7200 && @homeController.countProductSold(365) <7400}"><span class="fs-6 fw-bold me-2 " style="color:#ffa700;">Bình thường</span></div>
+                                                        <div th:if="${@homeController.countProductSold(365)< 7200 }"><span class="fs-6 fw-bold me-2 " style="color:red;">Chậm</span></div>
                                                     </div>
                                                     <div class="right-icon">
                                                         <i class="fas fa-star"></i>                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body py-xl-4 py-3 d-flex flex-wrap align-items-center justify-content-between">
-                                                    <div class="left-info">
-                                                        <span class="text-muted">Shipper</span>
-                                                        <div><span class="fs-6 fw-bold me-2">32</span></div>
-                                                    </div>
-                                                    <div class="right-icon">
-                                                        <i class="fab fa-delicious"></i>                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <!-- row end -->
                                 </div>

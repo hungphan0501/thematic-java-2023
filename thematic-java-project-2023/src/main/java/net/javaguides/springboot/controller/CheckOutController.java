@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -54,11 +56,12 @@ public class CheckOutController {
             totalPrice += cart.getTotalPrice();
         }
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy: HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String createAt = now.format(formatter);
-        System.out.println("createAt : "+createAt);
+        Date date = Date.valueOf(createAt);
+        System.out.println("createAt : " + createAt + "\tdate: " +date);
 
-        Orders orders = new Orders(idUser,totalPrice,createAt,idAddress,"Đã đặt hàng","Thanh toán khi nhận hàng","Chưa thanh toán");
+        Orders orders = new Orders(idUser,totalPrice,date,idAddress,"Đã đặt hàng","Thanh toán khi nhận hàng","Chưa thanh toán");
         ordersRepository.save(orders);
         for( Cart cart: cartList) {
             OrderDetail orderDetail = new OrderDetail(orders.getId(),cart.getQuantity(),cart.getIdProductDetail());

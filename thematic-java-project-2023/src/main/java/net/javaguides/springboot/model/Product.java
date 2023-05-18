@@ -18,8 +18,7 @@ public class Product {
     private int price;
     @Column(name = "sale_rate")
     private int saleRate;
-    @Column(name = "star_rate")
-    private int starRate;
+
     @Column(name = "total_value")
     private int totalValue;
     @Column(name = "sole_value")
@@ -30,13 +29,21 @@ public class Product {
     private String update_at;
     @Column(name = "description")
     private String description;
-    @Column(name = "idvoucher")
-    private String idVoucher;
-    @Column(name = "active")
-    private String active;
-
 
     public Product() {
+    }
+
+    public Product(int brand, String name, int category, int price, int saleRate, int totalValue, int soleValue, String create_at, String update_at, String description) {
+        this.brand = brand;
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.saleRate = saleRate;
+        this.totalValue = totalValue;
+        this.soleValue = soleValue;
+        this.create_at = create_at;
+        this.update_at = update_at;
+        this.description = description;
     }
 
     public int getId() {
@@ -87,14 +94,6 @@ public class Product {
         this.saleRate = saleRate;
     }
 
-    public int getStarRate() {
-        return starRate;
-    }
-
-    public void setStarRate(int starRate) {
-        this.starRate = starRate;
-    }
-
     public int getTotalValue() {
         return totalValue;
     }
@@ -135,21 +134,6 @@ public class Product {
         this.description = description;
     }
 
-    public String getIdVoucher() {
-        return idVoucher;
-    }
-
-    public void setIsVoucher(String isVoucher) {
-        this.idVoucher = isVoucher;
-    }
-
-    public String getActive() {
-        return active;
-    }
-
-    public void setActive(String active) {
-        this.active = active;
-    }
 
     @Override
     public String toString() {
@@ -160,14 +144,11 @@ public class Product {
                 ", category=" + category +
                 ", price=" + price +
                 ", saleRate=" + saleRate +
-                ", starRate=" + starRate +
                 ", totalValue=" + totalValue +
                 ", soleValue=" + soleValue +
                 ", create_at='" + create_at + '\'' +
                 ", update_at='" + update_at + '\'' +
                 ", description='" + description + '\'' +
-                ", idVoucher='" + idVoucher + '\'' +
-                ", active=" + active +
                 '}';
     }
 }

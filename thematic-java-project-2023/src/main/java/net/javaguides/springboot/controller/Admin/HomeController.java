@@ -3,6 +3,7 @@ package net.javaguides.springboot.controller.Admin;
 import net.javaguides.springboot.repository.OrdersRepository;
 import net.javaguides.springboot.repository.ProductRepository;
 import net.javaguides.springboot.repository.UserRepository;
+import net.javaguides.springboot.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,30 +33,34 @@ public class HomeController {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    OrdersService ordersService;
+
     @GetMapping("/dashboard")
     public ModelAndView home() {
         ModelAndView mav = new ModelAndView("admin/views/dist/index");
-        int countCustomer = countUserWithRoleUser();
-        int countOrder = countOrdersCompleted();
         int countProduct = countProduct();
-        int productSold = countProductSold();
         int ordersWaiting = countOrdersWaitingCompleted();
         double revenue = getRevenue();
         double spending = getSpending();
         double revenueBySale = getRevenueBySale();
-        System.out.println("countCustomer : " +countCustomer +"\tcountOrder: "+countOrder +"\tcountProduct: " +countProduct +"\tproductSold: "+ productSold+"\trevenue: " +revenue+"\trevenueBySale: "+revenueBySale);
+        double weekRevenue = ordersService.getWeekRevenue();
 
         Map<String, Object> model = new HashMap<>();
-        model.put("countCustomer", countCustomer);
-        model.put("countOrder", countOrder);
         model.put("countProduct", countProduct);
         model.put("revenue", revenue);
         model.put("spending", spending);
         model.put("revenueBySale", revenueBySale);
-        model.put("productSold", productSold);
         model.put("ordersWaiting", ordersWaiting);
+        model.put("weekRevenue", weekRevenue);
 
         mav.addAllObjects(model);
+        return mav;
+    }
+
+    @GetMapping("/product/add")
+    public ModelAndView addProductPage() {
+        ModelAndView mav = new ModelAndView("admin/views/dist/product-add");
         return mav;
     }
 
@@ -64,25 +72,22 @@ public class HomeController {
         return 0;
     }
 
-    //Số lượng khách hàng
-    @GetMapping("/customer")
-    public int countUserWithRoleUser() {
-        int result = userRepository.countUserWithRoleUser();
-        if (result > 0) {
-            return result;
-        }
-        return 0;
+    public int countUser(int date) {
+        return ordersService.countUserWithRoleUser(date);
     }
 
-    //Số lượng đơn hàng đã hoàn tất
-    @GetMapping("/ordersCompleted")
-    public int countOrdersCompleted() {
-        int result = ordersRepository.countOrdersCompleted();
-        if (result > 0) {
-            return result;
-        }
-        return 0;
+    public int countOrders(int date) {
+        return ordersService.countOrders(date);
     }
+
+    public double getRevenue(int date) {
+        return ordersService.getRevenue(date);
+    }
+
+    public int countProductSold(int date) {
+        return ordersService.countProductSold(date);
+    }
+
 
 
     //Danh thu
@@ -119,11 +124,5 @@ public class HomeController {
         return 0.0;
     }
 
-    public int countProductSold() {
-        int result = ordersRepository.countProductSold();
-        if (result > 0) {
-            return result;
-        }
-        return 0;
-    }
+
 }

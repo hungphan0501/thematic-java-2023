@@ -36,7 +36,7 @@ public class ProductDetailController {
         List<ProductDetail> list = productDetailService.getAllProductDetailByIdProduct(idProduct);
         if (!list.isEmpty()) {
             for (ProductDetail productDetail : list) {
-                result.put(productDetail.getId(),productDetail.getTotalValue() - productDetail.getSoleValue());
+                result.put(productDetail.getId(),productDetail.getQuantity());
             }
         }
         return result;
@@ -49,7 +49,7 @@ public class ProductDetailController {
         if (!list.isEmpty()) {
             for (ProductDetail productDetail : list) {
                 if(productDetail.getColor().equals(color)) {
-                    result.put(productDetail.getId(),productDetail.getTotalValue() - productDetail.getSoleValue());
+                    result.put(productDetail.getId(),productDetail.getQuantity());
                 }
             }
         }

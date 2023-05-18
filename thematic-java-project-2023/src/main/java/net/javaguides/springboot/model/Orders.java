@@ -1,6 +1,7 @@
 package net.javaguides.springboot.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "orders")
@@ -17,7 +18,7 @@ public class Orders {
     private double totalPrice;
 
     @Column(name = "create_at")
-    private String createAt;
+    private Date createAt;
 
     @Column(name = "id_address")
     private int idAddress;
@@ -31,7 +32,7 @@ public class Orders {
     @Column(name = "status_payment")
     private String statusPayment;
 
-    public Orders(int idUser, double totalPrice, String createAt, int idAddress, String status, String paymentType, String statusPayment) {
+    public Orders(int idUser, double totalPrice, Date createAt, int idAddress, String status, String paymentType, String statusPayment) {
         this.idUser = idUser;
         this.totalPrice = totalPrice;
         this.createAt = createAt;
@@ -69,11 +70,11 @@ public class Orders {
         this.totalPrice = totalPrice;
     }
 
-    public String getCreateAt() {
+    public Date getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(String createAt) {
+    public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }
 

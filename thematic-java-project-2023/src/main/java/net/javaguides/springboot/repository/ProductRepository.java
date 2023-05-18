@@ -57,4 +57,12 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SELECT SUM(p.price*(100 - p.saleRate)/100) FROM Product p WHERE p.saleRate> 0")
     double getSpending();
+
+    @Query("SELECT p FROM Product p JOIN Brand b ON p.brand = b.id WHERE b.name=?1")
+    List<Product> getAllByNameBrand(String nameBrand);
+
+    List<Product> getAllByPrice(int price);
+
+    @Query("SELECT p FROM Product p WHERE p.name LIKE CONCAT('%', :name, '%')")
+    List<Product> getAllByName(String name);
 }
