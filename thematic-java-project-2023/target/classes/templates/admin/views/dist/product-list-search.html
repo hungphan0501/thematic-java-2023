@@ -99,9 +99,9 @@
                                 <option value="name">Tên sản phẩm</option>
                                 <option value="price">Giá</option>
                             </select>
-                            <input type="radio" name="sort" id="up-radio" style="margin: 0 10px;cursor: pointer;" value="0" checked>
+                            <input type="radio" name="sort" id="up-radio" style="margin: 0 10px;cursor: pointer;" value="1" checked>
                             <label for="up-radio" style="cursor: pointer;">Tăng</label>
-                            <input type="radio" name="sort" id="down-radio" style="margin: 0 10px;cursor: pointer;" value="1">
+                            <input type="radio" name="sort" id="down-radio" style="margin: 0 10px;cursor: pointer;" value="0">
                             <label for="down-radio" style="cursor: pointer;">Giảm</label>
                             <input type="text" style="margin: 0 10px" name="value" id="value">
                             <button type="submit"
@@ -133,10 +133,10 @@
 
                                     <tr th:each="product : ${products}">
                                         <td><strong th:text="${product.id}"></strong></td>
-                                        <td><img th:src="@{/assets/images/product/{img}(img=${product.img})}"
-                                                 class="avatar lg rounded me-2" alt="profile-image"></td>
-<!--                                            <td><img th:src="@{/assets/images/product/default.jpg}"-->
-<!--                                                 class="avatar lg rounded me-2" alt="profile-image"></td>-->
+                                        <td><img th:src="@{/assets/images/product/{mainImg} (mainImg = ${@linkImgController.getMainColor(product.id)})}"
+                                                 class="avatar lg rounded me-2" ></td>
+                                        <!--                                        <td><img th:src="@{/assets/images/product/default.jpg}"-->
+                                        <!--                                                 class="avatar lg rounded me-2" alt="profile-image"></td>-->
                                         <td th:text="${@productAddController.getNameBrandById(product.brand)}">Nike</td>
                                         <td style="max-width: 250px" th:text="${product.name}">Air Force 1</td>
                                         <td th:text="${product.create_at}">May 16, 2021</td>
@@ -144,7 +144,7 @@
                                         <td th:text="'-'+ ${product.saleRate} + '%'">-12%</td>
                                         <td>
                                             <a onclick="return confirm('Bạn có chắc chắn muốn xóa sản phầm này không?')" th:href="@{/products-manage/remove/{idProduct} (idProduct=${product.id})}" class="edit-remove-admin"><i class="fas fa-trash-alt"></i></a>
-                                            <a th:href="@{/products-manage/add/productDetail/{idProduct}(idProduct=${product.id})}" class="edit-remove-admin"><i class="fas fa-edit"></i></a>
+                                            <a th:href="@{/products-manage/edit/id/{idProduct}(idProduct=${product.id})}" class="edit-remove-admin"><i class="fas fa-edit"></i></a>
                                         </td>
                                     </tr>
 

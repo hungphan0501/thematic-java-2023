@@ -1,13 +1,7 @@
 package net.javaguides.springboot.controller.Admin;
 
-import net.javaguides.springboot.model.Brand;
-import net.javaguides.springboot.model.Category;
-import net.javaguides.springboot.model.Product;
-import net.javaguides.springboot.model.ProductDetail;
-import net.javaguides.springboot.repository.BrandRepository;
-import net.javaguides.springboot.repository.CategoryRepository;
-import net.javaguides.springboot.repository.ProductDetailRepository;
-import net.javaguides.springboot.repository.ProductRepository;
+import net.javaguides.springboot.model.*;
+import net.javaguides.springboot.repository.*;
 import net.javaguides.springboot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

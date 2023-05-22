@@ -34,11 +34,12 @@ public class LinkImgController {
     }
 
     public String getMainColor( int idProduct) {
-            LinkImg linkImg = linkImgRepository.getLinkImgByIdProductAndLevel(idProduct,0);
+            List<LinkImg> linkImg = linkImgRepository.getLinkImgByIdProductAndLevel(idProduct);
             if (linkImg == null) {
                 return "default.jpg";
+            }else {
+                return linkImg.get(0).getImg();
             }
-            return linkImg.getImg();
     }
 
 }
