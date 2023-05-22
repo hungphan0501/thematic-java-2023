@@ -45,7 +45,7 @@
                     <ul class="sub-menu collapse" id="menu-product">
 
                         <li><a class="ms-link" th:href="@{/admin/product/edit}">Chỉnh sửa sản phẩm</a></li>
-                        <li><a class="ms-link active" href="#">Thêm sản phẩm</a></li>
+                        <li><a class="ms-link active" th:href="@{/admin/product/add}">Thêm sản phẩm</a></li>
 
                     </ul>
                 </li>
@@ -82,6 +82,9 @@
                     <div class="border-0 mb-4">
                         <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                             <h3 class="fw-bold mb-0">Danh sách sản phẩm</h3>
+                        </div>
+                        <div th:if="${message}" class="alert alert-success">
+                            <p th:text="${message}"></p>
                         </div>
                     </div>
                 </div>
@@ -130,7 +133,9 @@
 
                                     <tr th:each="product : ${products}">
                                         <td><strong th:text="${product.id}"></strong></td>
-                                        <td><img th:src="@{/assets/images/product/product-02.jpg}"
+<!--                                        <td><img th:src="@{/assets/images/product/{mainImg} (mainImg = ${@linkImgController.getMainColor(product.id)})}"-->
+<!--                                                 class="avatar lg rounded me-2" alt="profile-image"></td>-->
+                                        <td><img th:src="@{/assets/images/product/default.jpg}"
                                                  class="avatar lg rounded me-2" alt="profile-image"></td>
                                         <td th:text="${@productAddController.getNameBrandById(product.brand)}">Nike</td>
                                         <td style="max-width: 250px" th:text="${product.name}">Air Force 1</td>
@@ -138,7 +143,7 @@
                                         <td th:text="${product.price}">$612</td>
                                         <td th:text="'-'+ ${product.saleRate} + '%'">-12%</td>
                                         <td>
-                                            <a href="#" class="edit-remove-admin"><i class="fas fa-trash-alt"></i></a>
+                                            <a onclick="return confirm('Bạn có chắc chắn muốn xóa sản phầm này không?')" th:href="@{/products-manage/remove/{idProduct} (idProduct=${product.id})}" class="edit-remove-admin"><i class="fas fa-trash-alt"></i></a>
                                             <a href="#" class="edit-remove-admin"><i class="fas fa-edit"></i></a>
                                         </td>
                                     </tr>

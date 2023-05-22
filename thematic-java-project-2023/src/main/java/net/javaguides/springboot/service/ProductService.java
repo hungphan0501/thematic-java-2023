@@ -55,4 +55,17 @@ public class ProductService {
         return productRepository.findBySizes(sizes);
     }
 
+
+    public void removeProduct(int idProduct) {
+        // Kiểm tra xem sản phẩm có tồn tại trong cơ sở dữ liệu hay không
+        Product product = productRepository.findById(idProduct).orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm"));
+
+        // Xóa sản phẩm
+        productRepository.delete(product);
+    }
+
+    public List<Product> getManage() {
+        return productRepository.getManage();
+    }
+
 }

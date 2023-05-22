@@ -33,18 +33,12 @@ public class LinkImgController {
        }
     }
 
-    @GetMapping("/mainColor")
-    public ResponseEntity<LinkImg> getMainColor(@RequestParam("idProduct") int idProduct) {
-        try {
+    public String getMainColor( int idProduct) {
             LinkImg linkImg = linkImgRepository.getLinkImgByIdProductAndLevel(idProduct,0);
-            if(linkImg == null) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            if (linkImg == null) {
+                return "default.jpg";
             }
-            return new ResponseEntity<LinkImg>(linkImg,HttpStatus.OK);
-        }catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+            return linkImg.getImg();
     }
 
 }

@@ -8,6 +8,7 @@ import net.javaguides.springboot.repository.BrandRepository;
 import net.javaguides.springboot.repository.CategoryRepository;
 import net.javaguides.springboot.repository.ProductDetailRepository;
 import net.javaguides.springboot.repository.ProductRepository;
+import net.javaguides.springboot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,9 @@ public class ProductAddController {
 
     @Autowired
     ProductDetailRepository productDetailRepository;
+
+    @Autowired
+    ProductService productService;
 
     @PostMapping("/product/addProduct")
     public String addProduct(Product product, Model model) {
@@ -93,6 +97,14 @@ public class ProductAddController {
             e.printStackTrace();
             return "redirect:/products-manage";
         }
+    }
+
+    @GetMapping("/products-manage")
+    public String getProductsManage(Model model) {
+        List<Product> listManage= productService.getManage();
+        model.addAttribute("products", listManage);
+
+        return "admin/views/dist/products-list";
     }
 
     @PostMapping("/products-manage")
@@ -226,5 +238,15 @@ public class ProductAddController {
         }
         return productList;
     }
+
+    @RequestMapping(value = "/products-manage/remove/{idProduct}", method = {RequestMethod.GET, RequestMethod.DELETE})
+    public String removeProduct(@PathVariable("idProduct") int idProduct, Model model) {
+        productService.removeProduct(idProduct);
+        model.addAttribute("message", "Sản phẩm đã được xóa");
+
+        return "admin/views/dist/products-list";
+    }
+
+
 
 }

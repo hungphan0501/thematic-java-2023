@@ -65,4 +65,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SELECT p FROM Product p WHERE p.name LIKE CONCAT('%', :name, '%')")
     List<Product> getAllByName(String name);
+
+    @Query(value = "SELECT * FROM Product ORDER BY id ASC LIMIT 20", nativeQuery = true)
+    List<Product> getManage();
 }
