@@ -33,6 +33,12 @@ public class ProductDetail {
         this.color = color;
     }
 
+    public ProductDetail(int size, int quantity, String color) {
+        this.size = size;
+        this.quantity = quantity;
+        this.color = color;
+    }
+
     public ProductDetail() {
     }
 

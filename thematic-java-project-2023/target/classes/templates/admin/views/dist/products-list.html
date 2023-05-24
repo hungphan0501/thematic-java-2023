@@ -45,7 +45,7 @@
                     <ul class="sub-menu collapse" id="menu-product">
 
                         <li><a class="ms-link" th:href="@{/products-manage}">Chỉnh sửa sản phẩm</a></li>
-                        <li><a class="ms-link active" th:href="@{/admin/product/add}">Thêm sản phẩm</a></li>
+                        <li><a class="ms-link active" th:href="@{/products-manage/product/add}">Thêm sản phẩm</a></li>
 
                     </ul>
                 </li>
@@ -57,11 +57,15 @@
 
                 </li>
                 <li class="collapsed">
-                    <a class="m-link" href="customers.html">
+                    <a class="m-link" th:href="@{/users-manage}">
                         <i class="fas fa-user-alt" style="margin: 0 10px;"></i> <span>Khách hàng</span> </a>
 
                 </li>
+                <li class="collapsed ">
+                    <a class="m-link " th:href="@{/logout}">
+                        <i class="fa-solid fa-right-from-bracket" style="margin: 0 10px;"></i> <span>Đăng xuất</span> </a>
 
+                </li>
 
             </ul>
             <!-- Menu: menu collepce btn -->
@@ -135,8 +139,6 @@
                                         <td><strong th:text="${product.id}"></strong></td>
                                         <td><img th:src="@{/assets/images/product/{img}(img=${product.img})}"
                                                  class="avatar lg rounded me-2" alt="profile-image"></td>
-<!--                                            <td><img th:src="@{/assets/images/product/default.jpg}"-->
-<!--                                                 class="avatar lg rounded me-2" alt="profile-image"></td>-->
                                         <td th:text="${@productAddController.getNameBrandById(product.brand)}">Nike</td>
                                         <td style="max-width: 250px" th:text="${product.name}">Air Force 1</td>
                                         <td th:text="${product.create_at}">May 16, 2021</td>

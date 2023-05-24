@@ -1,6 +1,7 @@
 package net.javaguides.springboot.service;
 
 import net.javaguides.springboot.model.Orders;
+import net.javaguides.springboot.model.Product;
 import net.javaguides.springboot.repository.OrdersRepository;
 import net.javaguides.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,4 +117,11 @@ public class OrdersService {
         return 0;
     }
 
+    public void removeOrder(int orderId) {
+        // Kiểm tra xem sản phẩm có tồn tại trong cơ sở dữ liệu hay không
+        Orders order = ordersRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Không tìm thấy hóa đơn"));
+
+        // Xóa sản phẩm
+        ordersRepository.delete(order);
+    }
 }

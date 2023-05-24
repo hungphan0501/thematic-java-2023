@@ -1,407 +1,420 @@
 <!doctype html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="en" dir="ltr">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Thêm sản phẩm mới | Dragon Spor </title>
-    <link rel="shortcut icon" th:href="@{/assets/images/logo.png}" />
+    <title>Thêm sản phẩm | Dragon Sport </title>
+    <link rel="shortcut icon" th:href="@{/assets/images/logo.png}"/>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/assets/plugin/datatables/responsive.dataTables.min.css}" href="assets/plugin/datatables/responsive.dataTables.min.css">
-    <link rel="stylesheet"  type="text/css"th:href="@{/assets/plugin/datatables/dataTables.bootstrap5.min.css}" href="assets/plugin/datatables/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/ebazar.style.min.css}" href="assets/css/ebazar.style.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/plugin/datatables/responsive.dataTables.min.css}"
+          href="assets/plugin/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/plugin/datatables/dataTables.bootstrap5.min.css}"
+          href="assets/plugin/datatables/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/ebazar.style.min.css}"
+          href="assets/css/ebazar.style.min.css">
 
-    <link rel="stylesheet" type="text/css"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css    ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css    ">
 
+    <style>
+        .input-quantity {
+            width: 80px;
+            margin-left: 45px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            padding: 0 10px;
+        }
+
+        .input-color {
+            width: 80px;
+            float: right;
+            margin-right: 40px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            padding: 0 10px;
+        }
+
+        #result {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        .thumbnail {
+            height: 150px;
+        }
+
+        .btn-hover:hover {
+            background: #5b27ff;
+        }
+
+        .add-new {
+            padding: 8px 16px;
+            background: #7258db;
+            color: white;
+            width: 102.5px;
+            border-radius: 10px;
+            margin: 20px auto 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .add-new:hover{
+            background: #866aff;
+            color: white;
+        }
+    </style>
 </head>
 
+<body>
+<div id="ebazar-layout" class="theme-blue">
 
-<body style="background: #ededed">
-    <div id="ebazar-layout" class="theme-blue">
+    <!-- sidebar -->
+    <div class="sidebar px-4 py-4 py-md-4 me-0">
+        <div class="d-flex flex-column h-100">
+            <a href="index.html" class="mb-0 brand-icon">
 
-        <!-- sidebar -->
-        <div class="sidebar px-4 py-4 py-md-4 me-0">
-            <div class="d-flex flex-column h-100">
-                <a href="index.html" class="mb-0 brand-icon">
+                <span class="logo-text">Dragon Sport</span>
+            </a>
+            <!-- Menu: main ul -->
+            <ul class="menu-list flex-grow-1 mt-3">
+                <li><a class="m-link  " th:href="@{/admin/dashboard}"><i class="fas fa-home" style="margin: 0 10px;"></i> <span>Trang chủ</span></a>
+                </li>
+                <li class="collapsed active">
+                    <a class="m-link active" data-bs-toggle="collapse" data-bs-target="#menu-product" href="#">
+                        <i class="fas fa-shopping-cart active" style="margin: 0 10px;"></i> <span>Sản phẩm</span> </a>
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse" id="menu-product">
+                        <li><a class="ms-link " th:href="@{/products-manage}">Chỉnh sửa sản phẩm</a></li>
+                        <li><a class="ms-link active" th:href="@{/products-manage/product/add}">Thêm sản phẩm</a></li>
+                    </ul>
+                </li>
 
-                    <span class="logo-text">Dragon Sport</span>
-                </a>
-                <!-- Menu: main ul -->
-                <ul class="menu-list flex-grow-1 mt-3">
-                    <li><a class="m-link" th:href="@{/admin/dashboard}"><i class="fas fa-home" style="margin: 0 10px;"></i> <span>Trang chủ</span></a></li>
-                    <li class="collapsed">
-                        <a class="m-link active" data-bs-toggle="collapse" data-bs-target="#menu-product" href="#">
-                            <i class="fas fa-shopping-cart" style="margin: 0 10px;"></i> <span>Sản phẩm</span> </a>
-                        <!-- Menu: Sub menu ul -->
-                        <ul class="sub-menu collapse" id="menu-product">
+                <li class="collapsed">
+                    <a class="m-link" th:href="@{/products-manage}">
+                        <i class="fab fa-intercom" style="margin: 0 10px;"></i> <span>Danh sách sản phẩm</span> </a>
+                </li>
+                <li class="collapsed">
+                    <a class="m-link" th:href="@{/users-manage}">
+                        <i class="fas fa-user-alt" style="margin: 0 10px;"></i> <span>Khách hàng</span> </a>
+                </li>
+                <li class="collapsed ">
+                    <a class="m-link " th:href="@{/logout}">
+                        <i class="fa-solid fa-right-from-bracket" style="margin: 0 10px;"></i> <span>Đăng xuất</span> </a>
 
-                            <li><a class="ms-link" th:href="@{/products-manage}">Chỉnh sửa sản phẩm</a></li>
-                            <li><a class="ms-link active" href="#">Thêm sản phẩm</a></li>
-
-                        </ul>
-                    </li>
-
-                    <li class="collapsed">
-                        <a class="m-link"  th:href="@{/products-manage}">
-                            <i class="fab fa-intercom" style="margin: 0 10px;"></i> <span>Danh sách sản phẩm</span> </a>
-
-
-                    </li>
-                    <li class="collapsed">
-                        <a class="m-link"  href="customers.html">
-                            <i class="fas fa-user-alt" style="margin: 0 10px;"></i> <span>Khách hàng</span> </a>
-
-                    </li>
-
-
-
-
-                </ul>
-                <!-- Menu: menu collepce btn -->
-                <button type="button" class="btn btn-link sidebar-mini-btn text-light">
-                    <span class="ms-2"><i class="fas fa-dot-circle"></i></span>
-                </button>
-            </div>
+                </li>
+            </ul>
+            <!-- Menu: menu collepce btn -->
+            <button type="button" class="btn btn-link sidebar-mini-btn text-light">
+                <span class="ms-2"><i class="fas fa-dot-circle"></i></span>
+            </button>
         </div>
+    </div>
 
 
-        <!-- main body area -->
-        <div class="main px-lg-4 px-md-4">
+    <!-- main body area -->
+    <div class="main px-lg-4 px-md-4">
 
-            <!-- Body: Header -->
+        <!-- Body: Header -->
 
 
-            <!-- Body: Body -->
-            <div class="body d-flex py-3" style="margin-top: 25px; background: white; padding: 0 20px;border-radius: 18px">
+        <!-- Body: Body -->
+        <div class="body d-flex py-3">
+            <div class="container-xxl">
 
-                <div class="container-xxl">
-                    <h3 class="fw-bold mb-0" >Thêm sản phẩm</h3>
-                    <form th:action="@{/product/addProduct}" method="POST" >
-                        <div class="row g-3 mb-3" style="margin-top: 30px">
-                            <div class="col-xl-4 col-lg-4">
-                                <div class="sticky-lg-top">
-                                    <div class="card mb-3">
-                                        <div class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0">
-                                            <h6 class="m-0 fw-bold">Thông tin sản phẩm</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row g-3 align-items-center">
-                                                <div class="col-md-12" style="margin-bottom: 15px;">
-                                                    <label class="form-label">Giá sản phẩm</label>
-                                                    <input type="text" class="form-control"  id="price" name="price">
-                                                </div>
-                                                <div class="col-md-12" style="margin-bottom: 15px;">
-                                                    <label class="form-label">Giảm giá %</label>
-                                                    <input type="number" class="form-control" id="saleRate" name="saleRate" min="1" max="99">
-                                                </div>
-                                                <div class="col-md-12" style="margin-bottom: 59px;">
-                                                    <label class="form-label">Thể loại</label>
-                                                    <select class="form-control" name="category" id="category" required>
-                                                        <option th:each="category : ${@productAddController.getAllCategory()}" th:text="${category.id} + ' | '+${category.name} " th:value="${category.id}">Lựa chọn 1</option>
-
-                                                    </select>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                <div class="row align-items-center border-0">
+                    <div class=" mb-4">
+                        <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap"
+                             style="border: none!important;">
+                            <h3 class="fw-bold mb-0">Thêm sản phẩm sản phẩm</h3>
+                            <div th:if="${success}" class="alert alert-success"
+                                 style=" margin-right:50%;padding:5px 10px;margin-top: 15px; ">
+                                <p style="padding: 0;margin: 0" th:text="${success}">Thêm sản phẩm thành công</p>
                             </div>
-                            <div class="col-xl-8 col-lg-8">
+                        </div>
+
+                    </div>
+
+                </div>
+                <form th:action="@{/products-manage/product/add}"
+                      method="POST" th:object="${productEditDTo}">
+                    <button type="submit" style="margin-top: -170px;margin-left: 88.8%; font-weight: bold"
+                            class="btn btn-primary btn-set-task w-sm-100 py-2 px-5 text-uppercase">LƯU
+                    </button>
+                    <div class="row g-3 mb-3">
+                        <div class="col-xl-4 col-lg-4">
+                            <div class="sticky-lg-top">
                                 <div class="card mb-3">
+                                    <div class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0">
+                                        <h6 class="m-0 fw-bold">Thông tin sản phẩm</h6>
+                                    </div>
+                                    <input type="hidden" name="product.id" th:value="${productEditDTo.product.id}">
                                     <div class="card-body">
                                         <div class="row g-3 align-items-center">
-                                            <div class="col-md-6">
-                                                <label class="form-label">Tên</label>
-                                                <input type="text" class="form-control"  id="name" name="name">
+                                            <div class="col-md-12">
+                                                <label class="form-label">Giá sản phẩm</label>
+                                                <input type="text" class="form-control" id="price" name="product.price"
+                                                       th:value="${productEditDTo.product.price}">
+
                                             </div>
-                                            <div class="col-md-6">
-                                                <label class="form-label">Thương hiệu</label>
-                                                <select class="form-control" name="brand" id="brand" required>
-                                                    <option th:each="brand : ${@productAddController.getAllBrand()}" th:text="${brand.id} + ' | '+${brand.name} " th:value="${brand.id}">Lựa chọn 1</option>
+                                            <div class="col-md-12">
+                                                <label class="form-label">Giảm giá %</label>
+                                                <input type="number" class="form-control" id="saleRate"
+                                                       name="product.saleRate"
+                                                       th:value="${productEditDTo.product.saleRate}"
+                                                       min="1" max="99">
+                                            </div>
+                                            <div class="col-md-12" style="margin-bottom: 0px;">
+                                                <label class="form-label">Thể loại</label>
+                                                <select class="form-control" name="product.category" id="category"
+                                                        required th:value="${productEditDTo.product.category}">
+                                                    <option th:each="category : ${@productAddController.getAllCategory()}"
+                                                            th:if="${category.id} == ${productEditDTo.product.category}"
+                                                            th:text="${category.id} + ' | '+${category.name} "
+                                                            th:value="${productEditDTo.product.category}"></option>
+                                                    <option th:each="category : ${@productAddController.getAllCategory()}"
+                                                            th:text="${category.id} + ' | '+${category.name} "
+                                                            th:value="${category.id}">Lựa chọn 1
+                                                    </option>
 
                                                 </select>
                                             </div>
-                                            <div class="col-md-6" style="margin-top: 30px;">
-                                                <label class="form-label">Số lượng</label>
-                                                <input type="number" class="form-control"  id="totalValue" name="totalValue" min="1">
-                                            </div>
-                                            <div class="col-md-6"  style="margin-top: 30px;">
-                                                <label class="form-label">Số lượng sale</label>
-                                                <input type="number" class="form-control"  id="soleValue" name="soleValue" min="1">
-                                            </div>
-
-                                            <div class="col-md-12" style="margin-top: 30px;">
-                                                <label class="form-label" for="description">Mô tả</label>
-                                                <textarea type="text" style="display: block; width: 100%; height: 150px; padding: 10px" id="description"  name="description"></textarea>
-                                            </div>
 
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="card-header py-3 d-flex justify-content-between align-items-center bg-transparent border-bottom-0">
+                                        <h6 class="m-0 fw-bold" style="width:  100px;">Size</h6>
+                                        <h6 class="m-0 fw-bold" style="width:  100px;">Số lượng</h6>
+                                        <h6 class="m-0 fw-bold" style="width:  100px;">Màu sắc</h6>
+                                    </div>
 
-                            </div>
-                        </div>
-                        <div class="row align-items-center">
-                            <div class="border-0 mb-4">
-                                <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap" style="margin-bottom: 64px;">
+                                    <div style="margin-left: 20px;"
+                                         th:each="productDetail, detailIndex : ${productEditDTo.productDetails}">
+                                        <div class="form-check" style="margin-bottom: 10px">
+                                            <input class="form-check-input" type="checkbox"
+                                                   th:value="${productDetail.id}"
+                                                   th:field="*{productDetails[__${detailIndex.index}__].id}">
+                                            <label class="form-check-label"
+                                                   th:text="${'Size '} + ${productDetail.size}"></label>
+                                            <input type="hidden" th:value="${productDetail.size}"
+                                                   th:field="*{productDetails[__${detailIndex.index}__].size}">
+                                            <input type="number" class="input-quantity"
+                                                   th:field="*{productDetails[__${detailIndex.index}__].quantity}">
+                                            <input type="text" class="input-color"
+                                                   th:field="*{productDetails[__${detailIndex.index}__].color}">
+                                        </div>
+                                        <!--                                        <div class="form-check" style="margin-bottom: 10px" th:if="${productDetail.size} == 37">-->
+                                        <!--                                            <input class="form-check-input" type="checkbox" id="sizechek2" th:value="${productDetail.id}" th:field="*{productDetails[__${detailIndex.index}__].id}">-->
+                                        <!--                                            <label class="form-check-label" for="sizechek2" th:text="${'Size 37'}"></label>-->
+                                        <!--                                            <input type="number" class="input-quantity" th:field="*{productDetails[__${detailIndex.index}__].quantity}">-->
+                                        <!--                                            <input type="text" class="input-color" th:field="*{productDetails[__${detailIndex.index}__].color}">-->
+                                        <!--                                        </div>-->
+                                        <!--                                        <div class="form-check" style="margin-bottom: 10px" th:if="${productDetail.size} == 38">-->
+                                        <!--                                            <input class="form-check-input" type="checkbox" id="sizechek3" th:value="${productDetail.id}" th:field="*{productDetails[__${detailIndex.index}__].id}">-->
+                                        <!--                                            <label class="form-check-label" for="sizechek3" th:text="${'Size 38'}"></label>-->
+                                        <!--                                            <input type="number" class="input-quantity" th:field="*{productDetails[__${detailIndex.index}__].quantity}">-->
+                                        <!--                                            <input type="text" class="input-color" th:field="*{productDetails[__${detailIndex.index}__].color}">-->
+                                        <!--                                        </div>-->
+                                        <!--                                        <div class="form-check" style="margin-bottom: 10px" th:if="${productDetail.size} == 39">-->
+                                        <!--                                            <input class="form-check-input" type="checkbox" id="sizechek4" th:value="${productDetail.id}" th:field="*{productDetails[__${detailIndex.index}__].id}">-->
+                                        <!--                                            <label class="form-check-label" for="sizechek4" th:text="${'Size 39'}"></label>-->
+                                        <!--                                            <input type="number" class="input-quantity" th:field="*{productDetails[__${detailIndex.index}__].quantity}">-->
+                                        <!--                                            <input type="text" class="input-color" th:field="*{productDetails[__${detailIndex.index}__].color}">-->
+                                        <!--                                        </div>-->
+                                        <!--                                        <div class="form-check" style="margin-bottom: 10px" th:if="${productDetail.size} == 40">-->
+                                        <!--                                            <input class="form-check-input" type="checkbox" id="sizechek5" th:value="${productDetail.id}" th:field="*{productDetails[__${detailIndex.index}__].id}">-->
+                                        <!--                                            <label class="form-check-label" for="sizechek5" th:text="${'Size 40'}"></label>-->
+                                        <!--                                            <input type="number" class="input-quantity" th:field="*{productDetails[__${detailIndex.index}__].quantity}">-->
+                                        <!--                                            <input type="text" class="input-color" th:field="*{productDetails[__${detailIndex.index}__].color}">-->
+                                        <!--                                        </div>-->
+                                        <!--                                        <div class="form-check" style="margin-bottom: 10px" th:if="${productDetail.size} == 41">-->
+                                        <!--                                            <input class="form-check-input" type="checkbox" id="sizechek6" th:value="${productDetail.id}" th:field="*{productDetails[__${detailIndex.index}__].id}">-->
+                                        <!--                                            <label class="form-check-label" for="sizechek6" th:text="${'Size 41'}"></label>-->
+                                        <!--                                            <input type="number" class="input-quantity" th:field="*{productDetails[__${detailIndex.index}__].quantity}">-->
+                                        <!--                                            <input type="text" class="input-color" th:field="*{productDetails[__${detailIndex.index}__].color}">-->
+                                        <!--                                        </div>-->
 
-                                    <button type="submit" class="btn btn-primary btn-set-task w-sm-100 py-2 px-5 text-uppercase" style="margin: auto">Tiếp Tục</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                                        <!--                                        <div class="form-check" style="margin-bottom: 10px" th:if="${productDetail.size} == 42">-->
+                                        <!--                                            <input class="form-check-input" type="checkbox" id="sizechek7" th:value="${productDetail.id}" th:field="*{productDetails[__${detailIndex.index}__].id}">-->
+                                        <!--                                            <label class="form-check-label" for="sizechek7" th:text="${'Size 42'}"></label>-->
+                                        <!--                                            <input type="number" class="input-quantity" th:field="*{productDetails[__${detailIndex.index}__].quantity}">-->
+                                        <!--                                            <input type="text" class="input-color" th:field="*{productDetails[__${detailIndex.index}__].color}">-->
+                                        <!--                                        </div>-->
 
-                    <!-- Row end  -->
-
-                </div>
-            </div>
-
-            <!-- Modal Custom Settings-->
-            <div class="modal fade right" id="Settingmodal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog  modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Custom Settings</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body custom_setting">
-                            <!-- Settings: Color -->
-                            <div class="setting-theme pb-3">
-                                <h6 class="card-title mb-2 fs-6 d-flex align-items-center"><i class="icofont-color-bucket fs-4 me-2 text-primary"></i>Template Color Settings</h6>
-                                <ul class="list-unstyled row row-cols-3 g-2 choose-skin mb-2 mt-2">
-                                    <li data-theme="indigo">
-                                        <div class="indigo"></div>
-                                    </li>
-                                    <li data-theme="tradewind">
-                                        <div class="tradewind"></div>
-                                    </li>
-                                    <li data-theme="monalisa">
-                                        <div class="monalisa"></div>
-                                    </li>
-                                    <li data-theme="blue" class="active">
-                                        <div class="blue"></div>
-                                    </li>
-                                    <li data-theme="cyan">
-                                        <div class="cyan"></div>
-                                    </li>
-                                    <li data-theme="green">
-                                        <div class="green"></div>
-                                    </li>
-                                    <li data-theme="orange">
-                                        <div class="orange"></div>
-                                    </li>
-                                    <li data-theme="blush">
-                                        <div class="blush"></div>
-                                    </li>
-                                    <li data-theme="red">
-                                        <div class="red"></div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="sidebar-gradient py-3">
-                                <h6 class="card-title mb-2 fs-6 d-flex align-items-center"><i class="icofont-paint fs-4 me-2 text-primary"></i>Sidebar Gradient</h6>
-                                <div class="form-check form-switch gradient-switch pt-2 mb-2">
-                                    <input class="form-check-input" type="checkbox" id="CheckGradient">
-                                    <label class="form-check-label" for="CheckGradient">Enable Gradient! ( Sidebar )</label>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Settings: Template dynamics -->
-                            <div class="dynamic-block py-3">
-                                <ul class="list-unstyled choose-skin mb-2 mt-1">
-                                    <li data-theme="dynamic">
-                                        <div class="dynamic"><i class="icofont-paint me-2"></i> Click to Dyanmic Setting</div>
-                                    </li>
-                                </ul>
-                                <div class="dt-setting">
-                                    <ul class="list-group list-unstyled mt-1">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
-                                            <label>Primary Color</label>
-                                            <button id="primaryColorPicker" class="btn bg-primary avatar xs border-0 rounded-0"></button>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
-                                            <label>Secondary Color</label>
-                                            <button id="secondaryColorPicker" class="btn bg-secondary avatar xs border-0 rounded-0"></button>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
-                                            <label class="text-muted">Chart Color 1</label>
-                                            <button id="chartColorPicker1" class="btn chart-color1 avatar xs border-0 rounded-0"></button>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
-                                            <label class="text-muted">Chart Color 2</label>
-                                            <button id="chartColorPicker2" class="btn chart-color2 avatar xs border-0 rounded-0"></button>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
-                                            <label class="text-muted">Chart Color 3</label>
-                                            <button id="chartColorPicker3" class="btn chart-color3 avatar xs border-0 rounded-0"></button>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
-                                            <label class="text-muted">Chart Color 4</label>
-                                            <button id="chartColorPicker4" class="btn chart-color4 avatar xs border-0 rounded-0"></button>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1 px-2">
-                                            <label class="text-muted">Chart Color 5</label>
-                                            <button id="chartColorPicker5" class="btn chart-color5 avatar xs border-0 rounded-0"></button>
-                                        </li>
-                                    </ul>
+                        </div>
+                        <div class="col-xl-8 col-lg-8">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row g-3 align-items-center">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Tên</label>
+                                            <input type="text" class="form-control" id="name" name="product.name"
+                                                   th:value="${productEditDTo.product.name}">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Thương hiệu</label>
+                                            <select class="form-control" name="product.brand" id="product.brand"
+                                                    required th:value="${productEditDTo.product.brand}">
+                                                <option th:each="brand : ${@productAddController.getAllBrand()}"
+                                                        th:if="${brand.id} == ${productEditDTo.product.brand}"
+                                                        th:text="${brand.id} + ' | '+${brand.name} "
+                                                        th:value="${productEditDTo.product.brand}"></option>
+                                                <option th:each="brand : ${@productAddController.getAllBrand()}"
+                                                        th:text="${brand.id} + ' | '+${brand.name} "
+                                                        th:value="${brand.id}">
+                                                    Lựa chọn 1
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6" style="margin-top: 30px;">
+                                            <label class="form-label">Số lượng</label>
+                                            <input type="number" class="form-control" id="totalValue"
+                                                   name="product.totalValue"
+                                                   th:value="${productEditDTo.product.totalValue}"
+                                                   min="1">
+                                        </div>
+                                        <div class="col-md-6" style="margin-top: 30px;">
+                                            <label class="form-label">Số lượng sale</label>
+                                            <input type="number" class="form-control" id="soleValue"
+                                                   name="product.soleValue"
+                                                   th:value="${productEditDTo.product.soleValue}"
+                                                   min="1">
+                                        </div>
+
+                                        <div class="col-md-12" style="margin-top: 30px;">
+                                            <label class="form-label" for="description">Mô tả</label>
+                                            <textarea type="text"
+                                                      style="display: block; width: 100%; height: 150px; padding: 10px"
+                                                      th:text="${productEditDTo.product.description}"
+                                                      id="description" name="product.description"></textarea>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Settings: Font -->
-                            <div class="setting-font py-3">
-                                <h6 class="card-title mb-2 fs-6 d-flex align-items-center"><i class="icofont-font fs-4 me-2 text-primary"></i> Font Settings</h6>
-                                <ul class="list-group font_setting mt-1">
-                                    <li class="list-group-item py-1 px-2">
-                                        <div class="form-check mb-0">
-                                            <input class="form-check-input" type="radio" name="font" id="font-poppins" value="font-poppins">
-                                            <label class="form-check-label" for="font-poppins">
-                                                Poppins Google Font
-                                            </label>
+                            <div class="card mb-3" style="min-height: 200px;max-height: 441.5px">
+
+                                <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0"
+                                     style="padding-bottom: 0px!important;">
+                                    <h6 class="mb-0 fw-bold ">Hình ảnh</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="row g-3 align-items-center">
+                                            <div class="col-md-12" style="margin-top: 10px;">
+                                                <small class="d-block text-muted mb-2">Chỉ hình ảnh dọc hoặc hình vuông,
+                                                    chiều cao tối đa 2M và tối đa 2000px.</small>
+                                                <!--                                                <input type="file" id="input-file-to-destroy" class="dropify" multiple>-->
+                                                <label for="files">Chọn nhiều ảnh</label>
+                                                <input id="files" type="file" multiple="multiple"
+                                                       accept="image/jpeg, image/png, image/jpg">
+                                                <output id="result"></output>
+                                            </div>
                                         </div>
-                                    </li>
-                                    <li class="list-group-item py-1 px-2">
-                                        <div class="form-check mb-0">
-                                            <input class="form-check-input" type="radio" name="font" id="font-opensans" value="font-opensans" checked="">
-                                            <label class="form-check-label" for="font-opensans">
-                                                Open Sans Google Font
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item py-1 px-2">
-                                        <div class="form-check mb-0">
-                                            <input class="form-check-input" type="radio" name="font" id="font-montserrat" value="font-montserrat">
-                                            <label class="form-check-label" for="font-montserrat">
-                                                Montserrat Google Font
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item py-1 px-2">
-                                        <div class="form-check mb-0">
-                                            <input class="form-check-input" type="radio" name="font" id="font-mukta" value="font-mukta">
-                                            <label class="form-check-label" for="font-mukta">
-                                                Mukta Google Font
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
+                                    </form>
+                                </div>
                             </div>
-                            <!-- Settings: Light/dark -->
-                            <div class="setting-mode py-3">
-                                <h6 class="card-title mb-2 fs-6 d-flex align-items-center"><i class="icofont-layout fs-4 me-2 text-primary"></i>Contrast Layout</h6>
-                                <ul class="list-group list-unstyled mb-0 mt-1">
-                                    <li class="list-group-item d-flex align-items-center py-1 px-2">
-                                        <div class="form-check form-switch theme-switch mb-0">
-                                            <input class="form-check-input" type="checkbox" id="theme-switch">
-                                            <label class="form-check-label" for="theme-switch">Enable Dark Mode!</label>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex align-items-center py-1 px-2">
-                                        <div class="form-check form-switch theme-high-contrast mb-0">
-                                            <input class="form-check-input" type="checkbox" id="theme-high-contrast">
-                                            <label class="form-check-label" for="theme-high-contrast">Enable High Contrast</label>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex align-items-center py-1 px-2">
-                                        <div class="form-check form-switch theme-rtl mb-0">
-                                            <input class="form-check-input" type="checkbox" id="theme-rtl">
-                                            <label class="form-check-label" for="theme-rtl">Enable RTL Mode!</label>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="modal-footer justify-content-start">
-                            <button type="button" class="btn btn-white border lift" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary lift">Save Changes</button>
                         </div>
                     </div>
-                </div>
-            </div>
+                </form>
 
-            <!-- Modal Cropper-->
-            <div class="modal docs-cropped" id="getCroppedCanvasModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Cropped</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body"></div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-white border lift" data-bs-dismiss="modal">Close</button>
-                            <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
+            </div>
         </div>
 
     </div>
 
-    <!-- Jquery Core Js -->
-    <script type="text/javascript" th:src="@{/assets/bundles/libscripts.bundle.js}"  src="assets/bundles/libscripts.bundle.js"></script>
+</div>
 
-    <!-- Jquery Page Js -->
-    <script>
-        $(document).ready(function() {
-            //Ch-editer
-            ClassicEditor
-                .create(document.querySelector('#editor'))
-                .catch(error => {
-                    console.error(error);
-                });
-            //Datatable
-            $('#myCartTable')
-                .addClass('nowrap')
-                .dataTable({
-                    responsive: true,
-                    columnDefs: [{
-                        targets: [-1, -3],
-                        className: 'dt-body-right'
-                    }]
-                });
-            $('.deleterow').on('click', function() {
-                var tablename = $(this).closest('table').DataTable();
-                tablename
-                    .row($(this)
-                        .parents('tr'))
-                    .remove()
-                    .draw();
+<script type="text/javascript" th:src="@{/assets/bundles/libscripts.bundle.js}"
+        src="assets/bundles/libscripts.bundle.js"></script>
 
+
+<!-- Jquery Page Js -->
+<script>
+    $(document).ready(function () {
+        //Ch-editer
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
             });
-            //Multiselect
-            $('#optgroup').multiSelect({
-                selectableOptgroup: true
+        //Datatable
+        $('#myCartTable')
+            .addClass('nowrap')
+            .dataTable({
+                responsive: true,
+                columnDefs: [{
+                    targets: [-1, -3],
+                    className: 'dt-body-right'
+                }]
             });
+        $('.deleterow').on('click', function () {
+            var tablename = $(this).closest('table').DataTable();
+            tablename
+                .row($(this)
+                    .parents('tr'))
+                .remove()
+                .draw();
+
+        });
+        //Multiselect
+        $('#optgroup').multiSelect({
+            selectableOptgroup: true
+        });
+    });
+
+    $(function () {
+        $('.dropify').dropify();
+
+        var drEvent = $('#dropify-event').dropify();
+        drEvent.on('dropify.beforeClear', function (event, element) {
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
         });
 
-        $(function() {
-            $('.dropify').dropify();
-
-            var drEvent = $('#dropify-event').dropify();
-            drEvent.on('dropify.beforeClear', function(event, element) {
-                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
-            });
-
-            drEvent.on('dropify.afterClear', function(event, element) {
-                alert('File deleted');
-            });
-
-            $('.dropify-fr').dropify({
-                messages: {
-                    default: 'Glissez-dÃ©posez un fichier ici ou cliquez',
-                    replace: 'Glissez-dÃ©posez un fichier ou cliquez pour remplacer',
-                    remove: 'Supprimer',
-                    error: 'DÃ©solÃ©, le fichier trop volumineux'
-                }
-            });
+        drEvent.on('dropify.afterClear', function (event, element) {
+            alert('File deleted');
         });
-    </script>
-        <script src="../js/template.js"></script>
+
+        $('.dropify-fr').dropify({
+            messages: {
+                default: 'Glissez-dÃ©posez un fichier ici ou cliquez',
+                replace: 'Glissez-dÃ©posez un fichier ou cliquez pour remplacer',
+                remove: 'Supprimer',
+                error: 'DÃ©solÃ©, le fichier trop volumineux'
+            }
+        });
+    });
+</script>
+<script>
+    document.querySelector("#files").addEventListener("change", (e) => { //CHANGE EVENT FOR UPLOADING PHOTOS
+        if (window.File && window.FileReader && window.FileList && window.Blob) { //CHECK IF FILE API IS SUPPORTED
+            const files = e.target.files; //FILE LIST OBJECT CONTAINING UPLOADED FILES
+            const output = document.querySelector("#result");
+            output.innerHTML = "";
+            for (let i = 0; i < files.length; i++) { // LOOP THROUGH THE FILE LIST OBJECT
+                if (!files[i].type.match("image")) continue; // ONLY PHOTOS (SKIP CURRENT ITERATION IF NOT A PHOTO)
+                const picReader = new FileReader(); // RETRIEVE DATA URI
+                picReader.addEventListener("load", function (event) { // LOAD EVENT FOR DISPLAYING PHOTOS
+                    const picFile = event.target;
+                    const div = document.createElement("div");
+                    div.innerHTML = `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+                    output.appendChild(div);
+                });
+                picReader.readAsDataURL(files[i]); //READ THE IMAGE
+            }
+        } else {
+            alert("Your browser does not support File API");
+        }
+    });
+</script>
+<script src="../js/template.js"></script>
 
 </body>
-
 
 </html>
