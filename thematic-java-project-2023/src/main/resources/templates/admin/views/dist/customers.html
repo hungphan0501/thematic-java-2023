@@ -91,18 +91,24 @@
                     <div class="row clearfix g-3">
                         <div class="col-sm-12">
 
-                            <form style="margin: 20px 0;">
-                                <select name="" id="">
-                                    <option value="">ID</option>
-                                    <option value="">NAME</option> 
-                             
+                            <form th:action="@{/users-manage}" style="margin: 20px 0;display: flex; border-bottom: 3px solid #bdd4ff;width: 44%; "  method="POST">
+                                <select name="type" id="type" style="padding: 0px 5px;height: 30px; border-radius: 7px;font-weight: bold;">
+                                    <option value="id">ID khách hàng</option>
+                                    <option value="email">Email</option>
+                                    <option value="name">Họ tên</option>
                                 </select>
-                                <input type="radio" name="radio-select" id="up-radio" style="margin: 0 10px;cursor: pointer;">
-                                <label for="up-radio" style="cursor: pointer;">Tăng</label>
-                                <input type="radio" name="radio-select" id="down-radio" style="margin: 0 10px;cursor: pointer;">
-                                <label for="down-radio" style="cursor: pointer;">Giảm</label>
-                                <input type="text" style="margin: 0 10px">      
-                                <button type="submit" style="border: none; font-size: 25px; color: rgb(83, 83, 204);background-color: inherit;"><i class="fas fa-arrow-alt-circle-right"></i></button>        
+
+                                <input type="text" style="margin: 0 10px;height: 30px;padding: 0px 5px;border-radius: 7px" name="value" id="value" placeholder="Nhập dữ liệu" required>
+                                <div style="background: #c5c5c5; padding: 5px 10px;height: 30px; border-radius: 7px;width: 137px;">
+                                    <input type="radio" name="sort" id="up-radio" style=";cursor: pointer" value="0" checked>
+                                    <label for="up-radio" style="cursor: pointer;font-weight: bold">Tăng</label>
+                                    <input type="radio" name="sort" id="down-radio" style="margin-left: 5px;cursor: pointer;" value="1">
+                                    <label for="down-radio" style="cursor: pointer;font-weight: bold">Giảm</label>
+                                </div>
+                                <button type="submit"
+                                        style="border: none; font-size: 25px; color: rgb(83, 83, 204);background-color: inherit;margin: -3px 0 0 15px;">
+                                    <i class="fas fa-arrow-alt-circle-right" style="font-size: 30px"></i></button>
+
                             </form>
 
 

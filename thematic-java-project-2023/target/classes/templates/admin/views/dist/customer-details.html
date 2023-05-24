@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Danh sách khách hàng | Dragon Sport </title>
+    <title>Chi tiết khách hàng | Dragon Sport </title>
     <link rel="shortcut icon" th:href="@{/assets/images/logo.png}"/>
 
     <link rel="stylesheet" type="text/css" th:href="@{/assets/plugin/datatables/responsive.dataTables.min.css}"
@@ -15,10 +15,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/assets/css/ebazar.style.min.css}"
           href="assets/css/ebazar.style.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!--    <link rel="stylesheet"-->
-<!--          href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/fonts/boxicons.css?id=87122b3a3900320673311cebdeb618da">-->
-<!--    <link rel="stylesheet"-->
-<!--          href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/fonts/fontawesome.css?id=89157e39c524ff7f679d3aebf872b7b9">-->
     <style>
         .bg-label-primary {
             background-color: #e7e7ff !important;
@@ -175,9 +171,7 @@
 
                             </ul>
                             <div class="d-flex justify-content-center pt-3">
-                                <a th:href="@{/users-manage}" class="btn btn-primary me-3" data-bs-target="#editUser"
-                                   data-bs-toggle="modal">Quay lại</a>
-                                <!--                                <a href="javascript:;" class="btn btn-label-danger suspend-user">Suspended</a>-->
+                                <a th:href="@{/users-manage}" href="customer-details.html" class="btn btn-primary me-3" >Quay lại</a>
                             </div>
                         </div>
                     </div>
@@ -191,23 +185,24 @@
                             <h5 style="font-weight: bold;float: left;width: 37.5%;margin-top: 10px;">Danh sách các đơn
                                 hàng</h5>
                         </div>
-                        <form style="margin: 0px 0 10px; ">
-                            <select name="" id="">
-                                <option value="">ID</option>
-                                <option value="">Ngày đặt</option>
-                                <option value="">Trạng thái</option>
-
+                        <form style="margin: 20px 0;display: flex; border-bottom: 3px solid #bdd4ff;width: 62%; " th:action="@{/products-manage}" method="POST">
+                            <select name="type" id="type" style="padding: 0px 5px;height: 30px; border-radius: 7px;font-weight: bold;">
+                                <option value="id">ID hóa đơn</option>
+                                <option value="brand">Ngày đặt</option>
+                                <option value="name">Trạng thái</option>
                             </select>
-                            <input type="radio" name="radio-select" id="up-radio"
-                                   style="margin: 0 10px;cursor: pointer;">
-                            <label for="up-radio" style="cursor: pointer;">Tăng</label>
-                            <input type="radio" name="radio-select" id="down-radio"
-                                   style="margin: 0 10px;cursor: pointer;">
-                            <label for="down-radio" style="cursor: pointer;">Giảm</label>
-                            <input type="text" style="margin: 0 10px">
+
+                            <input type="text" style="margin: 0 10px;width: 155px;height: 30px;padding: 0px 5px;border-radius: 7px" name="value" id="value" placeholder="Nhập dữ liệu" required>
+                            <div style="background: #c5c5c5; padding: 5px 10px;height: 30px; border-radius: 7px;width: 137px;">
+                                <input type="radio" name="sort" id="up-radio" style=";cursor: pointer" value="0" checked>
+                                <label for="up-radio" style="cursor: pointer;font-weight: bold">Tăng</label>
+                                <input type="radio" name="sort" id="down-radio" style="margin-left: 5px;cursor: pointer;" value="1">
+                                <label for="down-radio" style="cursor: pointer;font-weight: bold">Giảm</label>
+                            </div>
                             <button type="submit"
-                                    style="border: none; font-size: 25px; color: rgb(83, 83, 204);background-color: inherit;">
-                                <i class="fas fa-arrow-alt-circle-right"></i></button>
+                                    style="border: none; font-size: 25px; color: rgb(83, 83, 204);background-color: inherit;margin: -3px 0 0 8px;">
+                                <i class="fas fa-arrow-alt-circle-right" style="font-size: 30px"></i></button>
+
                         </form>
 
 

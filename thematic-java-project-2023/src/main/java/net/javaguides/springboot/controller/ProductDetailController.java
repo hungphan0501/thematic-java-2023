@@ -1,19 +1,37 @@
 package net.javaguides.springboot.controller;
 
+import net.javaguides.springboot.model.Product;
 import net.javaguides.springboot.model.ProductDetail;
+import net.javaguides.springboot.repository.ProductRepository;
 import net.javaguides.springboot.service.ProductDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@RestController
-@RequestMapping("/productDetail")
+@Controller
+@RequestMapping("/product/detail")
 public class ProductDetailController {
     @Autowired
     ProductDetailService productDetailService;
+
+    @Autowired
+    ProductRepository productRepository;
+
+    @GetMapping("/{idproduct}")
+    public String getProductDetailPage(@PathVariable("idProduct") int idProduct, Model model) {
+        Product product = productRepository.getProductById(idProduct);
+        List<ProductDetail> list = productDetailService.getAllProductDetailByIdProduct(idProduct);
+
+        model.addAttribute("product",product);
+        model.addAttribute("details", list);
+
+        return "user/product";
+    }
 
     @GetMapping("")
     public ResponseEntity<List<ProductDetail>> getAllProductDetailByIdProduct(@RequestParam("id") int idProduct) {
