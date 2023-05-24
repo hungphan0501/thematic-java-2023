@@ -1,5 +1,6 @@
 package net.javaguides.springboot.repository;
 
+import net.javaguides.springboot.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,4 +23,10 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 
 	@Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = 'ROLE_USER'")
 	List<User> getAllUser();
+
+	@Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = 'ROLE_USER' AND u.name LIKE CONCAT('%', :name, '%')")
+	List<User> getAllByName(String name);
+
+	@Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = 'ROLE_USER' AND u.email=?1")
+	List<User> findAllByEmail(String email);
 }

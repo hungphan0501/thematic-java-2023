@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Danh sách khách hàng | Dragon Sport </title>
+    <title>Chi tiết hóa đơn | Dragon Sport </title>
     <link rel="shortcut icon" th:href="@{/assets/images/logo.png}"/>
 
     <link rel="stylesheet" type="text/css" th:href="@{/assets/plugin/datatables/responsive.dataTables.min.css}"
@@ -15,10 +15,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/assets/css/ebazar.style.min.css}"
           href="assets/css/ebazar.style.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet"
-          href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/fonts/boxicons.css?id=87122b3a3900320673311cebdeb618da">
-    <link rel="stylesheet"
-          href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/fonts/fontawesome.css?id=89157e39c524ff7f679d3aebf872b7b9">
     <style>
         .bg-label-primary {
             background-color: #e7e7ff !important;
@@ -26,28 +22,10 @@
         }
 
         .bx {
-            font-size: 1.15rem;
+            font-size: 27px;
             line-height: 1;
             vertical-align: middle;
         }
-
-        .bx-sm {
-            font-size: 1.55rem !important;
-        }
-
-        .bx {
-            speak: none;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            display: inline-block;
-            font-family: boxicons !important;
-            font-style: normal;
-            font-variant: normal;
-            font-weight: 400;
-            text-rendering: auto;
-            text-transform: none;
-        }
-
         .badge {
             line-height: .75;
             text-transform: uppercase;
@@ -143,18 +121,18 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-around flex-wrap my-4 py-3">
-                            <div class="d-flex align-items-start me-4 mt-3 gap-3">
+                            <div class="d-flex align-items-start  mt-3 gap-3">
                                 <span class="badge bg-label-primary p-2 rounded"><i
-                                        class="bx bx-check bx-sm"></i></span>
-                                <div>
+                                        class="bx fa-solid fa-check "></i></span>
+                                <div style="margin-left: -12px;">
                                     <h5 class="mb-0" th:text="${total}+'$'">1.23k</h5>
                                     <span>Tổng hóa đơn</span>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-start mt-3 gap-3">
+                            <div class="d-flex align-items-start mt-3 gap-3" >
                                 <span class="badge bg-label-primary p-2 rounded"><i
-                                        class="bx bx-customize bx-sm"></i></span>
-                                <div>
+                                        class="bx fa-solid fa-star "></i></span>
+                                <div style="margin-left: -12px;">
                                     <h5 class="mb-0">1256</h5>
                                     <span>Điểm xếp hạng</span>
                                 </div>
@@ -191,9 +169,7 @@
 
                             </ul>
                             <div class="d-flex justify-content-center pt-3">
-                                <a href="javascript:;" class="btn btn-primary me-3" data-bs-target="#editUser"
-                                   data-bs-toggle="modal">Xóa</a>
-                                <!--                                <a href="javascript:;" class="btn btn-label-danger suspend-user">Suspended</a>-->
+                                <a th:href="@{/users-manage/user/detail/{idUser}(idUser=${user.id})}" class="btn btn-primary me-3" >Quay lại</a>
                             </div>
                         </div>
                     </div>

@@ -68,4 +68,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query(value = "SELECT * FROM Product ORDER BY id ASC LIMIT 20", nativeQuery = true)
     List<Product> getManage();
+
+    Product getProductById(int id);
 }
