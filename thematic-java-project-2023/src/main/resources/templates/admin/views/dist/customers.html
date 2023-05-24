@@ -5,18 +5,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin | Dragon Sport </title>
-    <link rel="shortcut icon" href="/user/image/logo.png" />
+    <title>Danh sách khách hàng | Dragon Sport </title>
+    <link rel="shortcut icon" th:href="@{/assets/images/logo.png}"/>
 
-    <!-- Favicon-->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/plugin/datatables/responsive.dataTables.min.css}"
+          href="assets/plugin/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/plugin/datatables/dataTables.bootstrap5.min.css}"
+          href="assets/plugin/datatables/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/ebazar.style.min.css}"
+          href="assets/css/ebazar.style.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <!-- plugin css file  -->
-    <link rel="stylesheet" href="assets/plugin/datatables/responsive.dataTables.min.css">
-    <link rel="stylesheet" href="assets/plugin/datatables/dataTables.bootstrap5.min.css">
-
-    <!-- project css file  -->
-    <link rel="stylesheet" href="assets/css/ebazar.style.min.css">
 </head>
 
 <body>
@@ -31,34 +29,37 @@
                 </a>
                 <!-- Menu: main ul -->
                 <ul class="menu-list flex-grow-1 mt-3">
-                    <li><a class="m-link" href="index.html"><i class="fas fa-home" style="margin: 0 10px;"></i> <span>Trang chủ</span></a></li>
+                    <li><a class="m-link" th:href="@{/admin/dashboard}"><i class="fas fa-home" style="margin: 0 10px;"></i>
+                        <span>Trang chủ</span></a></li>
                     <li class="collapsed">
-                        <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-product" href="#">
+                        <a class="m-link " data-bs-toggle="collapse" data-bs-target="#menu-product" href="#">
                             <i class="fas fa-shopping-cart" style="margin: 0 10px;"></i> <span>Sản phẩm</span> </a>
                         <!-- Menu: Sub menu ul -->
                         <ul class="sub-menu collapse" id="menu-product">
-            
-                            <li><a class="ms-link" href="product-edit.html">Chỉnh sửa sản phẩm</a></li>
-                            <li><a class="ms-link" href="product-add.html">Thêm sản phẩm</a></li>
-                         
+
+                            <li><a class="ms-link" th:href="@{/products-manage}">Chỉnh sửa sản phẩm</a></li>
+                            <li><a class="ms-link " th:href="@{/products-manage/product/add}">Thêm sản phẩm</a></li>
+
                         </ul>
                     </li>
-            
-                    <li class="collapsed">
-                        <a class="m-link"  href="order-invoices.html">
+
+                    <li class="collapsed " >
+                        <a class="m-link " th:href="@{/products-manage}">
                             <i class="fab fa-intercom" style="margin: 0 10px;"></i> <span>Danh sách sản phẩm</span> </a>
-                            
-            
+
+
                     </li>
-                    <li class="collapsed">
-                        <a class="m-link active"  href="customers.html">
+                    <li class="collapsed active">
+                        <a class="m-link active" th:href="@{/users-manage}">
                             <i class="fas fa-user-alt" style="margin: 0 10px;"></i> <span>Khách hàng</span> </a>
-                        
+
                     </li>
-           
-                
-             
-                
+                    <li class="collapsed ">
+                        <a class="m-link " th:href="@{/logout}">
+                            <i class="fa-solid fa-right-from-bracket" style="margin: 0 10px;"></i> <span>Đăng xuất</span> </a>
+
+                    </li>
+
                 </ul>
                 <!-- Menu: menu collepce btn -->
                 <button type="button" class="btn btn-link sidebar-mini-btn text-light">
@@ -80,7 +81,8 @@
                         <div class="border-0 mb-4">
                             <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                                 <h3 class="fw-bold mb-0">Danh sách khách hàng</h3>
-                                <div class="col-auto d-flex w-sm-100">
+                                <div th:if="${message}" class="alert alert-success">
+                                    <p th:text="${message}"></p>
                                 </div>
                             </div>
                         </div>
@@ -114,106 +116,37 @@
                                                 <th>Ngày đăng kí</th>
                                                 <th>Mail</th>
                                                 <th>Số điện thoại</th>
-                                                <th>Quốc gia</th>
+                                                <th>Giới tính</th>
                                                 <th>Tổng hóa đơn</th>
-                                                <th>Hành đọngp</th>
+                                                <th>Hành động</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><strong>#CS-00002</strong></td>
+                                            <tr th:each="user : ${users}">
+                                                <td><a><strong th:text="${user.id}">#CS-00002</strong></a></td>
                                                 <td>
                                                     <a href="customer-detail.html">
-                                                            <img class="avatar rounded" src="assets/images/xs/avatar1.svg" alt="">
-                                                            <span class="fw-bold ms-1">Joan Dyer</span>
+                                                            <img class="avatar rounded" src="assets/images/xs/avatar1.svg" alt="" th:src="@{/assets/images/avatar/{img}(img=${user.avatar})}">
+                                                            <span class="fw-bold ms-1" th:text="${user.name}">Joan Dyer</span>
                                                         </a>
                                                 </td>
-                                                <td>
+                                                <td th:text="${user.createAt}">
                                                     12/03/2021
                                                 </td>
-                                                <td>JoanDyer@gmail.com</td>
-                                                <td>202-555-0983</td>
-                                                <td>South Africa</td>
+                                                <td th:text="${user.email}">JoanDyer@gmail.com</td>
+                                                <td th:text="${user.phone}">202-555-0983</td>
+                                                <td th:text="${user.gender}">South Africa</td>
                                                 <td>18</td>
                                                 <td>
                                                     <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                        <button type="button" class="btn btn-outline-secondary deleterow"><i class="fas fa-trash-alt"></i></button>
-                                                        <button type="button" class="btn btn-primary btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#expadd"><i class="fas fa-edit"></i></button>
+                                                        <a onclick="return confirm('Bạn có chắc chắn muốn xóa khách hàng này không?')" th:href="@{/users-manage/remove/{idUser} (idUser=${user.id})}" class="edit-remove-admin"><i class="fas fa-trash-alt"></i></a>
+                                                        <a th:href="@{/users-manage/user/detail/{idUser}(idUser=${user.id})}" class="edit-remove-admin"><i class="fas fa-edit"></i></a>
 
                                                     </div>
                                                 </td>
                                             </tr>
                                           
-                                            <tr>
-                                                <td><strong>#CS-00004</strong></td>
-                                                <td>
-                                                    <a href="customer-detail.html">
-                                                        <img class="avatar rounded" src="assets/images/xs/avatar3.svg" alt="">
-                                                        <span class="fw-bold ms-1">Phil	Glover</span>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    16/03/2021
-                                                </td>
-                                                <td>PhilGlover@gmail.com</td>
-                                                <td>843-555-0175</td>
-                                                <td>Sri Lanka</td>
-                                                <td>05</td>
-                                                <td>
-                                                    <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                        <button type="button" class="btn btn-outline-secondary deleterow"><i class="fas fa-trash-alt"></i></button>
-                                                        <button type="button" class="btn btn-primary btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#expadd"><i class="fas fa-edit"></i></button>
 
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                      
-                                            <tr>
-                                                <td><strong>#CS-00018</strong></td>
-                                                <td>
-                                                    <a href="customer-detail.html">
-                                                        <img class="avatar rounded" src="assets/images/xs/avatar5.svg" alt="">
-                                                        <span class="fw-bold ms-1">Sally Graham</span>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    16/02/2021
-                                                </td>
-                                                <td>SallyGraham@gmail.com</td>
-                                                <td>502-555-0118</td>
-                                                <td>Indonesia</td>
-                                                <td>03</td>
-                                                <td>
-                                                    <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                        <button type="button" class="btn btn-outline-secondary deleterow"><i class="fas fa-trash-alt"></i></button>
-                                                        <button type="button" class="btn btn-primary btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#expadd"><i class="fas fa-edit"></i></button>
-
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>#CS-00014</strong></td>
-                                                <td>
-                                                    <a href="customer-detail.html">
-                                                        <img class="avatar rounded" src="assets/images/xs/avatar6.svg" alt="">
-                                                        <span class="fw-bold ms-1">Robert Anderson</span>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    18/01/2021
-                                                </td>
-                                                <td>RobertAnderson@gmail.com</td>
-                                                <td>502-555-0133</td>
-                                                <td>Malaysia</td>
-                                                <td>02</td>
-                                                <td>
-                                                    <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                        <button type="button" class="btn btn-outline-secondary deleterow"><i class="fas fa-trash-alt"></i></button>
-                                                        <button type="button" class="btn btn-primary btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#expadd"><i class="fas fa-edit"></i></button>
-
-                                                    </div>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -280,85 +213,18 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Edit Customers
-            <div class="modal fade" id="expedit" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title  fw-bold" id="expeditLabel"> Edit Customers</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
+            <script type="text/javascript" th:src="@{/assets/bundles/libscripts.bundle.js}"
+                    src="assets/bundles/libscripts.bundle.js"></script>
 
-                            <div class="deadline-form">
-                                <form>
-                                    <div class="row g-3 mb-3">
-                                        <div class="col-sm-12">
-                                            <label for="item1" class="form-label">Customers Name</label>
-                                            <input type="text" class="form-control" id="item1" value="Cloth">
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <label for="taxtno1" class="form-label">Customers Profile</label>
-                                            <input type="file" class="form-control" id="taxtno1">
-                                        </div>
-                                    </div>
-                                    <div class="row g-3 mb-3">
-                                        <div class="col-sm-6">
-                                            <label class="form-label">Country</label>
-                                            <input type="text" class="form-control" value="South Africa">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="abc1" class="form-label">Customers Register date</label>
-                                            <input type="date" class="form-control w-100" id="abc1" value="2021-03-12">
-                                        </div>
-                                    </div>
-                                    <div class="row g-3 mb-3">
-                                        <div class="col-sm-6">
-                                            <label for="mailid" class="form-label">Mail</label>
-                                            <input type="text" class="form-control" id="mailid" value="PhilGlover@gmail.com">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="phoneid" class="form-label">Phone</label>
-                                            <input type="text" class="form-control" id="phoneid" value="843-555-0175">
-                                        </div>
-                                    </div>
-                                    <div class="row g-3 mb-3">
-                                        <div class="col-sm-6">
-                                            <label class="form-label">Total Order</label>
-                                            <input type="text" class="form-control" value="18">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+    <script type="text/javascript" th:src="@{/assets/bundles/dataTables.bundle.js}" src="assets/bundles/dataTables.bundle.js"></script>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-        </div>
-
-    </div>
-
-    <!-- Jquery Core Js -->
-    <script src="assets/bundles/libscripts.bundle.js"></script>
-
-    <!-- Plugin Js-->
-    <script src="assets/bundles/dataTables.bundle.js"></script>
-
-    <!-- Jquery Page Js -->
-    
         <script src="../js/template.js"></script>
 
 </body>

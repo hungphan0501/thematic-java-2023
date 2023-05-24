@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import net.javaguides.springboot.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -72,5 +73,13 @@ public class UserServiceImpl implements UserService{
 			id = user.getId();
 		}
 		return id;
+	}
+
+	public void removeUser(int idUser) {
+		// Kiểm tra xem sản phẩm có tồn tại trong cơ sở dữ liệu hay không
+		User user = userRepository.findById(idUser).orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng"));
+
+		// Xóa sản phẩm
+		userRepository.delete(user);
 	}
 }

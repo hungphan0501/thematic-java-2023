@@ -58,11 +58,7 @@ public class HomeController {
         return mav;
     }
 
-    @GetMapping("/product/add")
-    public ModelAndView addProductPage() {
-        ModelAndView mav = new ModelAndView("admin/views/dist/product-add");
-        return mav;
-    }
+
 
     public int countOrdersWaitingCompleted() {
         int result = ordersRepository.countOrdersWaitingCompleted();

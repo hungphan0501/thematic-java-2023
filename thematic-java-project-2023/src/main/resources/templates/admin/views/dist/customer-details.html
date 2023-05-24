@@ -1,0 +1,268 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Danh sách khách hàng | Dragon Sport </title>
+    <link rel="shortcut icon" th:href="@{/assets/images/logo.png}"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/plugin/datatables/responsive.dataTables.min.css}"
+          href="assets/plugin/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/plugin/datatables/dataTables.bootstrap5.min.css}"
+          href="assets/plugin/datatables/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/ebazar.style.min.css}"
+          href="assets/css/ebazar.style.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!--    <link rel="stylesheet"-->
+<!--          href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/fonts/boxicons.css?id=87122b3a3900320673311cebdeb618da">-->
+<!--    <link rel="stylesheet"-->
+<!--          href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/fonts/fontawesome.css?id=89157e39c524ff7f679d3aebf872b7b9">-->
+    <style>
+        .bg-label-primary {
+            background-color: #e7e7ff !important;
+            color: #696cff !important;
+        }
+
+        .bx {
+            font-size: 27px;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        .badge {
+            line-height: .75;
+            text-transform: uppercase;
+        }
+
+        .bg-label-secondary {
+            background-color: #ebeef0 !important;
+            color: #8592a3 !important;
+        }
+    </style>
+</head>
+
+<body>
+<div id="ebazar-layout" class="theme-blue">
+
+    <!-- sidebar -->
+    <div class="sidebar px-4 py-4 py-md-4 me-0">
+        <div class="d-flex flex-column h-100">
+            <a href="index.html" class="mb-0 brand-icon">
+
+                <span class="logo-text">Dragon Sport</span>
+            </a>
+            <!-- Menu: main ul -->
+            <ul class="menu-list flex-grow-1 mt-3">
+                <li><a class="m-link" th:href="@{/admin/dashboard}"><i class="fas fa-home" style="margin: 0 10px;"></i>
+                    <span>Trang chủ</span></a></li>
+                <li class="collapsed">
+                    <a class="m-link " data-bs-toggle="collapse" data-bs-target="#menu-product" href="#">
+                        <i class="fas fa-shopping-cart" style="margin: 0 10px;"></i> <span>Sản phẩm</span> </a>
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse" id="menu-product">
+
+                        <li><a class="ms-link" th:href="@{/products-manage}">Chỉnh sửa sản phẩm</a></li>
+                        <li><a class="ms-link " th:href="@{/products-manage/product/add}">Thêm sản phẩm</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="collapsed ">
+                    <a class="m-link " th:href="@{/products-manage}">
+                        <i class="fab fa-intercom" style="margin: 0 10px;"></i> <span>Danh sách sản phẩm</span> </a>
+
+
+                </li>
+                <li class="collapsed active">
+                    <a class="m-link active" th:href="@{/users-manage}">
+                        <i class="fas fa-user-alt" style="margin: 0 10px;"></i> <span>Khách hàng</span> </a>
+
+                </li>
+                <li class="collapsed ">
+                    <a class="m-link " th:href="@{/logout}">
+                        <i class="fa-solid fa-right-from-bracket" style="margin: 0 10px;"></i> <span>Đăng xuất</span> </a>
+
+                </li>
+
+            </ul>
+            <!-- Menu: menu collepce btn -->
+            <button type="button" class="btn btn-link sidebar-mini-btn text-light">
+                <span class="ms-2"><i class="fas fa-dot-circle"></i></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- main body area -->
+    <div class="main px-lg-4 px-md-4">
+
+        <!-- Body: Header -->
+
+
+        <!-- Body: Body -->
+        <div class="body d-flex py-lg-3 py-md-2">
+            <div class="container-xxl">
+                <div class="row align-items-center">
+                    <div class="border-0 mb-4">
+                        <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap" style="float:left;">
+                            <h3 class="fw-bold mb-0">Chi tiết khách hàng</h3>
+                            <div th:if="${message}" class="alert alert-success" style="padding:7px 10px;margin:0px 0 0 30px">
+                                <p th:text="${message}" style="margin:0px!important;">Đã xóa thành công</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4" style="float:left; width: 30%;">
+                    <div class="card-body">
+                        <div class="user-avatar-section">
+                            <div class=" d-flex align-items-center flex-column">
+                                <img class="img-fluid rounded my-4"
+                                     th:src="@{/assets/images/avatar/{img}(img=${user.avatar})}"
+                                     src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/img/avatars/10.png"
+                                     height="110" width="110" alt="User avatar">
+                                <div class="user-info text-center">
+                                    <h4 class="mb-2" th:text="${user.name}">Phan Văn Hùng</h4>
+                                    <span class="badge bg-label-secondary">Người dùng</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-around flex-wrap my-4 py-3">
+                            <div class="d-flex align-items-start  mt-3 gap-3">
+                                <span class="badge bg-label-primary p-2 rounded"><i
+                                        class="bx fa-solid fa-check bx-sm"></i></span>
+                                <div style="margin-left: -12px;">
+                                    <h5 class="mb-0" th:text="${total}+'$'">1.23k</h5>
+                                    <span>Tổng hóa đơn</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mt-3 gap-3" >
+                                <span class="badge bg-label-primary p-2 rounded"><i
+                                        class="bx fa-solid fa-star bx-sm"></i></span>
+                                <div style="margin-left: -12px;">
+                                    <h5 class="mb-0">1256</h5>
+                                    <span>Điểm xếp hạng</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="pb-2 border-bottom mb-4">Chi tiết</h5>
+                        <div class="info-container">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Họ Tên:</span>
+                                    <span th:text="${user.name}">hungphan.dev</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Email:</span>
+                                    <span th:text="${user.email}"></span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Giới tính:</span>
+                                    <span th:text="${user.gender}">Nam</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Ngày sinh:</span>
+                                    <span th:text="${user.dateOfBirth}">Nam</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Ngày đăng kí:</span>
+                                    <span class="" th:text="${user.createAt}">Active</span>
+                                </li>
+
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Số điện thoại:</span>
+                                    <span th:text="${user.phone}">Tax-8965</span>
+                                </li>
+
+                            </ul>
+                            <div class="d-flex justify-content-center pt-3">
+                                <a th:href="@{/users-manage}" class="btn btn-primary me-3" data-bs-target="#editUser"
+                                   data-bs-toggle="modal">Quay lại</a>
+                                <!--                                <a href="javascript:;" class="btn btn-label-danger suspend-user">Suspended</a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row end  -->
+                <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1"
+                     style="width: 68%; float:left;margin-left: 20px;background: white;padding: 0 20px;">
+                    <div class="col-sm-12">
+
+                        <div>
+                            <h5 style="font-weight: bold;float: left;width: 37.5%;margin-top: 10px;">Danh sách các đơn
+                                hàng</h5>
+                        </div>
+                        <form style="margin: 0px 0 10px; ">
+                            <select name="" id="">
+                                <option value="">ID</option>
+                                <option value="">Ngày đặt</option>
+                                <option value="">Trạng thái</option>
+
+                            </select>
+                            <input type="radio" name="radio-select" id="up-radio"
+                                   style="margin: 0 10px;cursor: pointer;">
+                            <label for="up-radio" style="cursor: pointer;">Tăng</label>
+                            <input type="radio" name="radio-select" id="down-radio"
+                                   style="margin: 0 10px;cursor: pointer;">
+                            <label for="down-radio" style="cursor: pointer;">Giảm</label>
+                            <input type="text" style="margin: 0 10px">
+                            <button type="submit"
+                                    style="border: none; font-size: 25px; color: rgb(83, 83, 204);background-color: inherit;">
+                                <i class="fas fa-arrow-alt-circle-right"></i></button>
+                        </form>
+
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <table id="myProjectTable" class="table table-hover align-middle mb-0"
+                                       style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th>ID hóa đơn</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thanh toán</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="order : ${orders}">
+                                        <td><a><strong th:text="${'#'}+ ${order.id}">#CS-00002</strong></a></td>
+                                        <td th:text="${order.createAt}">20/10/2020</td>
+                                        <td th:text="${order.totalPrice} + '$'">100$</td>
+                                        <td style="color: #5cb85c" th:text="${order.status}">Hoàn tất</td>
+                                        <td th:text="${order.statusPayment}">Đã thanh toán</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                <a th:href="@{/users-manage/{idUser}/order/remove/{orderId}(idUser=${user.id},orderId=${order.id})}" type="button" class="btn btn-outline-secondary deleterow "><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                                <a th:href="@{/users-manage/{idUser}/order/details/{orderId}(idUser=${user.id},orderId=${order.id})}"
+                                                        class="btn btn-primary btn-set-task w-sm-100 btn-view-details"
+                                                        data-bs-target="#expadd"><i class="fas fa-edit"></i></a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row End -->
+            </div>
+        </div>
+
+        <script type="text/javascript" th:src="@{/assets/bundles/libscripts.bundle.js}"
+                src="assets/bundles/libscripts.bundle.js"></script>
+
+        <script type="text/javascript" th:src="@{/assets/bundles/dataTables.bundle.js}"
+                src="assets/bundles/dataTables.bundle.js"></script>
+
+        <script src="../js/template.js"></script>
+
+</body>
+
+</html>
