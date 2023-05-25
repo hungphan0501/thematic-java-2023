@@ -159,6 +159,7 @@ public class Product {
                 ", create_at='" + create_at + '\'' +
                 ", update_at='" + update_at + '\'' +
                 ", description='" + description + '\'' +
+                ", img='" + img + '\'' +
                 '}';
     }
 }

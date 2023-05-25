@@ -11,10 +11,13 @@ public class MainController {
 		return "user/login";
 	}
 	
-	@GetMapping("/")
-	public String home() {
-		return "user/index";
-	}
+//	@GetMapping("/")
+//	public String home() {
+//		return "user/home";
+//	}
+
+	@GetMapping("/category")
+	public String category(){ return "user/category";}
 	@GetMapping("/forgotPasswordPage")
 	public String forgotPassword() {
 		return "user/forgotPassword";

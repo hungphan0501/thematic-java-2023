@@ -1,22 +1,27 @@
 package net.javaguides.springboot.controller;
 
 import net.javaguides.springboot.model.Product;
+import net.javaguides.springboot.repository.BrandRepository;
 import net.javaguides.springboot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/products")
 public class ProductController {
     @Autowired
     ProductService productService;
+    @Autowired
+    BrandRepository brandRepository;
 
 
     @GetMapping("/")
@@ -29,22 +34,31 @@ public class ProductController {
     }
 
     @GetMapping("/brand/{idBrand}")
-    public List<Product> findByBrand(@PathVariable("idBrand") int idBrand) {
-        System.out.println("id brand đâu thèn ngu này" + idBrand);
+    public String findByBrand(@PathVariable("idBrand") int idBrand, Model model) {
+        System.out.println("id brand " + idBrand);
         List<Product> list = productService.finByBrand(idBrand);
+        String nameBrand = findBrandById(idBrand);
+        System.out.println(nameBrand);
         for (Product p : list) {
             System.out.println(p.toString());
         }
-        return list;
+        model.addAttribute("brandName", nameBrand);
+        model.addAttribute("products", list);
+        return "user/category";
+    }
+
+    public String findBrandById(int idBrand){
+        return brandRepository.getNameById(idBrand);
     }
 
     @GetMapping("/category/{idCategory}")
-    public List<Product> findByCategory(@PathVariable("idCategory") int idCategory) {
+    public String findByCategory(@PathVariable("idCategory") int idCategory, Model model) {
         List<Product> list = productService.finByCategory(idCategory);
         for (Product p : list) {
             System.out.println(p.toString());
         }
-        return list;
+        model.addAttribute("products",list);
+        return "user/category";
     }
 
     @GetMapping("/price/{belowPrice}/{abovePrice}")

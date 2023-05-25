@@ -1,0 +1,901 @@
+
+/* Modal */
+
+.col-half {
+    float: left;
+    width: 25%;
+    padding: 6px;
+}
+.col-half-sub {
+    float: left;
+    width: 45%;
+    padding: 20px;
+}
+
+.login-modal,
+.modal-register{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 10000;
+    background-color: rgba(13, 13, 54, 0.7);
+    align-items: center;
+    justify-content: center ;
+    display: none;
+}
+
+.login-modal.open,
+.modal-register.open {
+    display: flex;
+}
+
+.modal-container-register,
+.modal-container {
+    background-color: #fff;
+    width: 450px;
+    height: 650px;
+}
+
+.modal-header-register,
+.modal-header {
+    position: relative;
+    background-color: #3f3fe6;
+    color: #fff;
+    padding: 10px;
+}
+
+.modal-close-register,
+.modal-close {
+    position: absolute;
+    font-size: 20px;
+    color: #000;
+    margin-top: -35px;
+    margin-left: 408px;
+}
+.modal-header{
+    font-size: 20px;
+    margin: 0px;
+}
+
+.modal-register .icon-close-register,
+.login-modal .icon-close {
+    padding: 11px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.modal-register .icon-close-register:hover,
+.login-modal .icon-close:hover {
+    background-color: #ccc;
+    color: #000;
+    border-radius: 50%;
+}
+
+.modal-body2,
+.modal-body {
+    padding:  30px;
+}
+
+.modal-body-register,
+.modal-body-login {
+    margin: 20px 0 30px;
+    border-bottom: 2px solid #ccc;
+    height: 13px;
+    
+    }
+
+.modal-body2 .sub,
+.modal-body .sub {
+    background-color: #fff;
+    border-width: 2px;
+    border-style:  solid;
+    border-color: #ccc;
+    border-radius: 12px;
+    margin-left: 10px;
+    margin-top: -25px;
+    text-align: center;
+    cursor: pointer;
+    color: #000;
+    padding: 5px 8px;
+    
+}
+
+/* .modal-register, */
+.modal-body2 .modal-sub-register ,
+.modal-body .modal-login {
+ background-color: #ccc;
+}
+
+.modal-register-another,
+.modal-login-another {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.login-another {
+    font-size: 15px;
+}
+
+
+.icon-login-another {
+   width: 50px;
+   margin: 10px 15px;
+   cursor: pointer;
+}
+
+
+
+.login-another {
+    text-align: center;
+    color: rgb(158, 156, 156);
+}
+
+.modal-input-section {
+    float: left;
+}
+
+.modal-input-section .email{
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 5px;
+    border-radius: 0;
+    border: 1px solid #ccc;
+}
+
+.modal-input-section .password {
+    margin-top: 10px;
+}
+
+.modal-input-section .forgot-password {
+    font-size: 12px;
+    color: #0000ed;
+}
+
+.modal-checkbox {
+    padding: 5px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.checkbox {
+    position: absolute;
+    margin-top: -25px;
+    margin-left: 17px;
+    font-size: 11px;
+    color: #4141ff;
+}
+
+.modal-bnt-register,
+.modal-bnt-login {
+    text-align: center;
+    display: inline-block;
+    padding: 10px 0 14px;
+    background-color: rgb(247, 100, 43);
+    height: 45px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.modal-bnt-register .bnt-login,
+.modal-bnt-login .bnt-login {
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+}
+
+.modal-bnt-register:hover,
+.modal-bnt-login:hover {
+    background-color: rgb(223, 69, 8);
+}
+
+
+.title-content {
+    text-align: justify;
+    line-height: 1.4;
+    font-size: 14.5px;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-140px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+
+    }
+}
+
+/* css thêm phần index */
+#main-banner .main-banner-section-center,
+#main-banner .main-banner-section {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(0,0,0,0.1);
+    text-align: center;
+}
+#main-banner .main-banner-section-center{
+    height: 20px;
+    margin-top: -100px;
+    background-color: rgba(0,0,0,0) ;
+}
+#main-banner .main-banner-section-center > a {
+    margin-top: 200px;
+    margin: auto;
+}
+
+#main-banner .shop-now-btn {
+    padding: 15px 40px;
+    background-color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+#main-banner .shop-now-btn:hover {
+    background-color: #0900ed;
+    color: white;
+    font-size: 25px;
+    padding: 15px 30px;
+    font-weight: bold;
+}
+.blog-desc {
+    height: 30px;
+}
+#content .blog1.sub {
+    width: 100%;
+    min-height: 275px;
+    text-align: justify;
+    background-color: #fff;
+    margin-right: 30px;
+}
+#content .blog1.sub .blog-title {
+    font-size: 22px;
+    width: 120%;
+    padding: 10px 0;
+    height: 60px;
+    margin-bottom: 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: justify;
+}
+#content .blog1.sub .blog-title-content {
+    font-size: 14px;
+    width: 120%;
+    margin-top: 10px;
+}
+#content .blog1.sub .shose-slect {
+    background-color: #1a94ff;
+    padding: 8px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    color: white;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+#content .blog1.sub .shose-slect:hover {
+    background-color: #0059ff;
+}
+#content .blog1.sub .blog-meta {
+    float: right;
+ }
+#u-url-blog {
+     display: inline-block;
+     margin-top: 11px;
+     background-color: #333;
+     padding: 8px 20px;
+     color: white;
+     font-weight: bold;
+ }
+ #u-url-blog:hover {
+    background-color: #000;
+
+ }
+ .col-2 #content {
+     margin-right: -14px;
+ }
+ #bg-search-blog {
+     display: inline-block;
+     width: 143%;
+     height: 70px;
+     background-color: #1a94ff;
+ }
+ #bg-search-blog .search-product {
+     margin: auto;
+     margin-top: 13px;
+     max-width: 95%;
+ }
+ #bg-search-blog .search-product-top {
+    width: 50px;
+  }
+ #new-posts-modal {
+     width: 143%;
+    padding: 30px;
+    background-color: #ffff;
+    padding-top: 50px;
+}
+#new-posts-modal .post-select {
+    width: 100%;
+    font-size: 20px;
+    padding: 20px 0;
+    border-bottom: 2px solid #ccc;
+}
+#new-posts-modal .post-select a {
+    color: rgb(66, 66, 66);
+}
+#new-posts-modal .post-select:hover a {
+    color: #0059ff;
+    font-weight: bold;
+}
+#new-posts-modal .title-post {
+    color: black;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+#new-posts-modal .title-sub {
+    background-color: #1a94ff;
+    height: 4px;
+    margin-top: 10px;
+}
+#see-more {
+    text-align: center;
+}
+#see-more .see {
+    padding: 10px 50px;
+    background-color: #1a94ff;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+/* css phần chính sách bán hàng trong page product */
+.sales-policy-modal {
+    background-color: white;
+    padding: 20px 10px 20px 15px;
+}
+.sales-policy-content,
+.sales-policy {
+    display: inline-block;
+    margin: 8px 0;
+}
+.sales-policy {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+.sales-policy-section .title-policy {
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+.sales-policy-content .icon-policy,
+.sales-policy .icon-free-ship {
+    width: 50px;
+    float: left;
+    padding-right: 10px;
+}
+.sales-policy-content .title-policy-content ,
+.sales-policy .title-free-ship {
+    max-width: 75%;
+    float: left;
+    font-size: 17px;
+    color: #51c400;
+}
+.sales-policy-content .title-policy-content {
+    color: rgb(70, 70, 70);
+}
+.see-more-policy {
+    text-align: center;
+    padding: 11px;
+}
+.see-more-policy .see-more {
+    color: blue;
+    font-size: 16px;
+    text-decoration: blue;
+}
+
+/* css phần product */
+.price-modal {
+    background-color: #f5f5f5;
+}
+.price-modal .price-box {
+    float: left;
+}
+.price-modal .price-sale {
+    text-decoration: line-through;
+    padding: 0 20px;
+    color: rgb(146, 145, 145);
+    margin: 18px 0;
+}
+.price-modal .price {
+color: #1a94ff;
+font-size: 25px;
+margin: 10px 0;
+}
+.price-modal .sale {
+    background-color: #1a94ff;
+    color: white;
+    padding: 4px;
+    margin: 12px 10px;
+}
+.size-shoes .num-size >button {
+    padding: 2px 18px;
+    background-color: white;
+    color: black;
+    margin-left: 7px;
+}
+.size-shoes .num-size >button:hover {
+    border: 1px solid #1a94ff;
+    color: #1a94ff;
+}
+#number {
+    width: 50px;
+    text-align: center;
+    color: black;
+}
+#values .set-value {
+    margin-left: 25px;
+    margin-right: 10px;
+}
+#values .value-box {
+    float: left;
+}
+#values .value {
+    width: 30px;
+    color: black;
+}
+.buy-product,
+.add-product {
+    display: inline-block;
+    background-color: #9bd0ff8d;
+    border: 1px solid #1a94ff;
+    padding: 10px 5px;
+    width: 35%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    margin: 0 3px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.buy-product {
+    background-color: #1a94ff;
+}
+.add-and-buy .buy {
+    color: white;
+}
+.add-and-buy .add {
+    color: #1a94ff;
+}
+.add-and-buy {
+    text-align: center;
+    margin-top: 50px;
+}
+#product-thumbnail.owl-carousel .owl-buttons .owl-prev {
+    margin-top: -20px;
+}
+#product-thumbnail.owl-carousel .owl-buttons .owl-next, 
+#product-thumbnail.owl-carousel:hover .owl-buttons .owl-next{
+    right: 10px;
+    margin-top: -20px;
+}
+.blog-title-content{
+    max-width: 120%;
+    font-size: 13px;
+    height: 60px;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: justify;
+}
+
+/* CSS Infor Customer */
+#info-customer{
+    background-color: #ffff;
+    height: 520px;
+    padding: 20px 30px;
+    color: #000;
+}
+#info-customer  li {
+    float: left;
+}
+#info-customer .info {
+    float: left;
+    width: 67%;
+    padding: 20px 0;
+    border-right: 1px solid rgb(221, 233, 255);
+}
+#info-customer .picture {
+    float: left;
+    width: 29%;
+    text-align: center;
+    margin-left: 20px;
+}
+.col-half-info {
+    float: left;
+    width: 20%;
+    margin-right: 20px;
+}
+.col-half-picture {
+    float: left;
+    width: 70%;
+    margin-bottom: 20px;
+}
+#birthday li {
+    margin-right: 5px;
+}
+#birthday select {
+    padding: 7px 0;
+    width: 100px;
+}
+#sex li {
+    margin-right: 15px;
+}
+.save {
+    background-color: #1a94ff;
+    color: #ffff;
+    font-weight: bold;
+    padding: 5px 30px;
+}
+.save:hover {
+    background-color: #1567ff;
+}
+#picture img {
+    width: 80%;
+    border-radius: 50%;
+}
+.picture .select-picture {
+    margin: 10px 0;
+    font-size: 12px;
+}
+.picture .select-picture:hover {
+    background-color: #ccc;
+}
+#accordion .panel-heading.a {
+    background-color: #108bea;
+    color: #ffff;
+}
+/* Message */
+.icon-mess {
+    width: 60px;
+}
+.icon-message {
+    position: fixed;
+    float: right;
+    bottom:90px;
+    right: 10px;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center ;
+    cursor: pointer;
+}
+
+
+.modal-message {
+    display: block;
+    width: 350px;
+    height: 590px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+    background-color: white;
+    border-radius: 30px;
+    float: right;
+    border: 1px solid #797979;
+}
+.message {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center ;
+    display: none;
+}
+.message.open {
+    display: flex;
+}
+.mess-header {
+    width: 350px;
+    background-color: #108bea;
+    padding: 13px 20px;
+    border-radius: 30px 30px 0 0;
+
+}
+.modal-message .icon-logo {
+    width: 25%;
+    cursor: pointer;
+}
+.modal-message .icon-close {
+    width: 30px;
+    border-radius: 50%;
+    float: right;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.mess-content {
+    padding: 10px 15px;
+}
+.mess-content-section {
+    background-color: #f5f5f5;
+    padding: 1px 15px;
+    border-radius: 10px;
+}
+.mess-content-section p {
+    color: #333;
+    margin-top: 15px;
+    text-align: justify;
+    line-height: 1.4;
+}
+.mess-content-section input {
+    width: 100%;
+    padding: 5px 0;
+}
+.mess-content-section .send {
+    background-color: #1a94ff;
+    color: white;
+    font-size: 15px;
+    padding: 8px 20px;
+    margin: 10px 75.8px;
+    border-radius: 8px;
+}
+.mess-content-section .text-send {
+    width: 100%;
+    height: 80px;
+}
+
+
+@media only screen and (min-width: 780px) and (max-width: 1500px) {
+    header {
+        margin-bottom: 30px;
+    }
+    #info-customer .info {
+        width:80%;
+        padding: 10px 0;
+    }
+    .col-half-picture {
+        width: 65%;
+    }
+    #info-customer .picture {
+        width: 25%;
+        margin-left: 30px;
+    }
+    #info-customer .info {
+        width: 70%;
+    }
+    .col-half-info {
+        width: 25%;
+    }
+    #birthday select {
+        width: 90px;
+    }
+
+    /* blog */
+    #content .blog1.sub {
+        width: 98%;
+        min-height: 225px;
+        margin-bottom: 20px;
+    }
+    .col-2 #content {
+        width: 67%;
+    }
+    #content .blog1.sub .shose-slect {
+        padding: 3px 10px;
+        margin-bottom: 0;
+    }
+    #content .blog1.sub .blog-title {
+        font-size: 16px;
+        height: 55px;
+    }
+    #content .blog1.sub .blog-title-content {
+        height: 40px;
+        margin-top: 0;
+    }
+    .col-half-sub {
+        padding: 20px 10px;
+    }
+    #u-url-blog {
+        margin-top: 19px;
+        padding: 5px 10px;
+    }
+    .blog-meta {
+        margin-top: 38px;
+        margin-right: -60px;
+    }
+    .blog-meta .clock {
+        display: none;
+    }
+    #new-posts-modal .post-select {
+        font-size: 17px;
+        padding: 15px 0;
+    }
+    #new-posts-modal {
+        padding-top: 20px;
+    }
+    #new-posts-modal .title-post {
+        margin: 0;
+    }
+    #see-more .see {
+        margin-bottom: 10px;
+        margin-top: 0;
+        padding: 10px 35px;
+    }
+
+    /* product */
+    .boxed-conten {
+        width: 55px;
+    }
+    .box_code {
+        width: 21.4%;
+        float: right;
+    }
+    .size-shoes .num-size >button {
+        padding: 2px 13px;
+        margin-left: 0px;
+    }
+    #values .set-value {
+        margin-left: 18px;
+        margin-right: 5px;
+    }
+    #number {
+        width: 33px;
+    }
+    .buy-product, .add-product {
+        width: 45%;
+    }
+    .value-box {
+        font-size: 9px;
+    }
+
+}
+@media only screen and (min-width: 370px) and (max-width: 530px) { 
+    header {
+        margin-bottom: 30px;
+    }
+    #info-customer {
+        padding: 10px;
+        height: 560px;
+    }
+    .search-product>input {
+        width: 330px;
+    }
+    .shipping-text {
+        margin-top: -21px;
+    }
+    #info-customer .info {
+        font-size: 12px;
+        width:70%;
+        padding: 10px 0;
+    }
+    #info-customer .picture {
+        margin-left: 0;
+        float: right;
+        padding: 10px 0;
+    }
+    .info p{
+        width: 100%;
+    }
+    .info input {
+        width: 95%;
+    }
+    .col-half-picture {
+        margin-bottom: 5px;
+        width: 100%;
+    }
+    .info p.id-customer ,
+    .info p.name-login {
+        float: left;
+        width: 43.5%;
+    }
+    .info p.id-customer{
+        border-bottom: 1px solid #ccc;
+    }
+  
+    #birthday select {
+        width: 75px;
+    }
+    #sex li {
+        width: 10%;
+        float: left;
+        display: inline-block;
+    }
+    #sex input {
+        width: 100%;
+    }
+    .save {
+        margin-top: 10px;
+    }
+    .subbbb{
+        line-height: 1.2;
+        font-size: 10px !important;
+    }
+    /* blog */
+    .col-half-sub {
+        padding: 5px;
+    }
+    #content .blog1.sub .shose-slect {
+        padding: 0 15px;
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+    #content .blog1.sub .blog-title {
+        font-size: 12px;
+        padding: 3px 0;
+        height: 30px;
+    }
+    #content .blog1.sub .blog-title-content {
+        font-size: 8px;
+        height: 20px;
+        margin-top: 5px;
+    }
+    #u-url-blog {
+        position: absolute;
+        background-color: rgba(73, 73, 73, 0.5);
+        font-size: 10px;
+        padding: 0px 5px;
+        margin-top: -48px;
+        margin-left: -120px;
+    }
+    .blog-meta {
+        margin-top: 11px;
+        margin-right: -41px;
+    }
+    .blog-meta>li {
+        font-size: 8px;
+    }
+    .blog-meta>li i {
+        font-size: 8px;
+
+    }
+    #content .blog1.sub {
+        min-height: 145px;
+        margin-bottom: 15px;
+        padding: 10px 0;
+    }
+    #see-more .see {
+        padding: 5px 25px;
+        font-size: 14px;
+        margin-top: 0px;
+    }
+    .buy-product, .add-product {
+        width: 45%;
+    }
+    .box_code {
+        margin-right: 8.5px;
+        float: right;
+    }
+    #values .set-value {
+        margin-right: 3px;
+    }
+    .size-shoes .num-size >button {
+        padding: 2px 16px;
+    }
+    #number {
+        width: 42px;
+    }
+}
+#remove_pr,
+#checkAll_Product {
+    width: 11%;
+    float: left;
+    margin-bottom: 10px;
+}
+.check_all,
+.icon_remove_pr {
+    float: left;
+    width: 20px;
+    cursor: pointer;
+}
+.label_check_all,
+.lb_remove {
+    float: left;
+    width: 80%;
+    padding: 0;
+    margin: 0;
+    margin-top: 1px;
+}
