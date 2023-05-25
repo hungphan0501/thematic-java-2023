@@ -92,14 +92,14 @@ function displayMenuNavigation() {
     
                                     <div class="item-nav-detail-info" id="item-category-brand">
                                         <div class="contain-brand" >
-                                            <img onclick="location.href='category.html'" src="image/brand/logo-brand-01.svg">
-                                            <img onclick="location.href='category.html'" src="image/brand/logo-brand-02.svg">
-                                            <img onclick="location.href='category.html'" src="image/brand/logo-brand-03.svg">
-                                            <img onclick="location.href='category.html'" src="image/brand/logo-brand-04.svg">
-                                            <img onclick="location.href='category.html'" src="image/brand/logo-brand-05.svg">
-                                            <img onclick="location.href='category.html'" src="image/brand/logo-brand-06.svg">
-                                            <img onclick="location.href='category.html'" src="image/brand/logo-brand-07.svg">
-                                            <img onclick="location.href='category.html'" src="image/brand/logo-brand-08.svg">
+                                            <img onclick="location.href='/products/brand/1'" th:src="@{/assets/images/brand/logo-brand-01.svg}" src="/assets/images/brand/logo-brand-01.svg">
+                                            <img onclick="location.href='/products/brand/2'" th:src="@{/assets/images/brand/logo-brand-02.svg}" src="/assets/images/brand/logo-brand-02.svg">
+                                            <img onclick="location.href='/products/brand/3'" th:src="@{/assets/images/brand/logo-brand-03.svg}" src="/assets/images/brand/logo-brand-03.svg">
+                                            <img onclick="location.href='/products/brand/4'" th:src="@{/assets/images/brand/logo-brand-04.svg}" src="/assets/images/brand/logo-brand-04.svg">
+                                            <img onclick="location.href='/products/brand/5'" th:src="@{/assets/images/brand/logo-brand-05.svg}" src="/assets/images/brand/logo-brand-05.svg">
+                                            <img onclick="location.href='/products/brand/6'" th:src="@{/assets/images/brand/logo-brand-06.svg}" src="/assets/images/brand/logo-brand-06.svg">
+                                            <img onclick="location.href='/products/brand/7'" th:src="@{/assets/images/brand/logo-brand-07.svg}" src="/assets/images/brand/logo-brand-07.svg">
+                                            <img onclick="location.href='/products/brand/8'" th:src="@{/assets/images/brand/logo-brand-08.svg}" src="/assets/images/brand/logo-brand-08.svg">
                                         </div>
                                    </div>
         
@@ -347,26 +347,26 @@ listIntroCategoryWoman.push("data/product/Shoe/Football/FootballWoman.js");
 
 function loadImageCarouselAndIntroduceCategory() {
     if (localStorage.getItem("currentPageCategory") == "man") {
-        $("#category-carousel-intro-1").attr("src", "image/banners/men-intro-carousel1.webp");
-        $("#category-carousel-intro-2").attr("src", "image/banners/men-intro-carousel2.webp");
-        $("#category-carousel-intro-3").attr("src", "image/banners/men-intro-carousel-3.jpg");
-        $("#category-intro-img-hitops").attr("src", "image/category/man-Hitops.webp");
-        $("#category-intro-img-running").attr("src", "image/category/man-running.webp");
-        $("#category-intro-img-slides").attr("src", "image/category/man-slides.jpg");
-        $("#category-intro-img-football").attr("src", "image/category/man-football.webp");
-        $("#category-intro-img-sneakers").attr("src", "image/category/man-sneakers.jpg");
-        $("#category-intro-img-skateboard").attr("src", "image/category/man-skateboard.jpg");
+        $("#category-carousel-intro-1").attr("src", "/assets/images/banners/men-intro-carousel1.webp");
+        $("#category-carousel-intro-2").attr("src", "/assets/images/banners/men-intro-carousel2.webp");
+        $("#category-carousel-intro-3").attr("src", "/assets/images/banners/men-intro-carousel-3.jpg");
+        $("#category-intro-img-hitops").attr("src", "/assets/images/category/man-Hitops.webp");
+        $("#category-intro-img-running").attr("src", "/assets/images/category/man-running.webp");
+        $("#category-intro-img-slides").attr("src", "/assets/images/category/man-slides.jpg");
+        $("#category-intro-img-football").attr("src", "/assets/images/category/man-football.webp");
+        $("#category-intro-img-sneakers").attr("src", "/assets/images/category/man-sneakers.jpg");
+        $("#category-intro-img-skateboard").attr("src", "/assets/images/category/man-skateboard.jpg");
     }
     else {
-        $("#category-carousel-intro-1").attr("src", "image/banners/women-intro-carousel1.webp");
-        $("#category-carousel-intro-2").attr("src", "image/banners/women-intro-carousel2.webp");
-        $("#category-carousel-intro-3").attr("src", "image/banners/women-intro-carousel3.webp");
-        $("#category-intro-img-hitops").attr("src", "image/category/woman-hitops.jpg");
-        $("#category-intro-img-running").attr("src", "image/category/running-woman.webp");
-        $("#category-intro-img-slides").attr("src", "image/category/woman-slide.jpg");
-        $("#category-intro-img-football").attr("src", "image/category/woman-football.jfif");
-        $("#category-intro-img-sneakers").attr("src", "image/category/woman-sneakers.webp");
-        $("#category-intro-img-skateboard").attr("src", "image/category/woman-skateboard.jfif");
+        $("#category-carousel-intro-1").attr("src", "/assets/images/banners/women-intro-carousel1.webp");
+        $("#category-carousel-intro-2").attr("src", "/assets/images/banners/women-intro-carousel2.webp");
+        $("#category-carousel-intro-3").attr("src", "/assets/images/banners/women-intro-carousel3.webp");
+        $("#category-intro-img-hitops").attr("src", "/assets/images/category/woman-hitops.jpg");
+        $("#category-intro-img-running").attr("src", "/assets/images/category/running-woman.webp");
+        $("#category-intro-img-slides").attr("src", "/assets/images/category/woman-slide.jpg");
+        $("#category-intro-img-football").attr("src", "/assets/images/category/woman-football.jfif");
+        $("#category-intro-img-sneakers").attr("src", "/assets/images/category/woman-sneakers.webp");
+        $("#category-intro-img-skateboard").attr("src", "/assets/images/category/woman-skateboard.jfif");
     }
 }
 $(window).ready(loadImageCarouselAndIntroduceCategory);

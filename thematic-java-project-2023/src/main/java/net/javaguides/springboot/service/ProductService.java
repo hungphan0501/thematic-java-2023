@@ -5,6 +5,7 @@ import net.javaguides.springboot.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -66,6 +67,43 @@ public class ProductService {
 
     public List<Product> getManage() {
         return productRepository.getManage();
+    }
+
+    public List<Product> getAllProductNew() {
+        List<Product> products = productRepository.getAllProductNew();
+        int count= 10;
+        if (products.size() <= count) {
+            List<Product> result = new ArrayList<>(products);
+            return result;
+        } else {
+            List<Product>  result = products.subList(0, count);
+            return result;
+        }
+
+    }
+
+    public List<Product> getAllProductDiscount() {
+        List<Product> products = productRepository.getAllProductDiscount();
+        int count= 10;
+        if (products.size() <= count) {
+            List<Product> result = new ArrayList<>(products);
+            return result;
+        } else {
+            List<Product>  result = products.subList(0, count);
+            return result;
+        }
+    }
+
+    public List<Product> getAllProductBestSeller() {
+        List<Product> products = productRepository.getAllProductBestSeller();
+        int count= 10;
+        if (products.size() <= count) {
+            List<Product> result = new ArrayList<>(products);
+            return result;
+        } else {
+            List<Product>  result = products.subList(0, count);
+            return result;
+        }
     }
 
 }
