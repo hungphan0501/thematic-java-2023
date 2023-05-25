@@ -1,8 +1,10 @@
 package net.javaguides.springboot.controller;
 
+import net.javaguides.springboot.model.Comment;
 import net.javaguides.springboot.model.LinkImg;
 import net.javaguides.springboot.model.Product;
 import net.javaguides.springboot.model.ProductDetail;
+import net.javaguides.springboot.repository.CommentRepository;
 import net.javaguides.springboot.repository.LinkImgRepository;
 import net.javaguides.springboot.repository.ProductRepository;
 import net.javaguides.springboot.service.ProductDetailService;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.*;
 
@@ -27,12 +30,18 @@ public class ProductDetailController {
     @Autowired
     LinkImgRepository linkImgRepository;
 
+    @Autowired
+    CommentRepository commentRepository;
+
     @GetMapping("/{idProduct}")
     public String getProductDetailPage(@PathVariable("idProduct") int idProduct, Model model) {
         Product product = productRepository.getProductById(idProduct);
         List<ProductDetail> list = productDetailService.getAllProductDetailByIdProduct(idProduct);
         List<LinkImg> linkImgs = getAllImgByIdProduct(idProduct);
-
+        List<Comment> comments = commentRepository.getAllByIdProduct(idProduct);
+        List<Product> getRelatedProducts = getRelatedProducts(idProduct);
+        model.addAttribute("comments", comments);
+        model.addAttribute("productsRelate", getRelatedProducts);
         model.addAttribute("product", product);
         model.addAttribute("details", list);
         model.addAttribute("linkImgs", linkImgs);
@@ -186,4 +195,25 @@ public class ProductDetailController {
             return null;
         }
     }
+
+    public List<Product> getRelatedProducts(int idProduct) {
+        List<Product> result = new ArrayList<>();
+        Product product = productRepository.getProductById(idProduct);
+        List<Product> list1 = productRepository.findByBrand(product.getBrand());
+        List<Product> list2 = productRepository.findByCategory(product.getCategory());
+        if (list1.size() > 4) {
+            result = list1.subList(0, 4);
+        }
+        if (list2.size() > 4) {
+            for (int i = 0 ; i<list2.size();i++){
+                if(i <4){
+                    result.add(list2.get(i));
+                }
+            }
+        }
+        Collections.shuffle(result);
+        return result;
+    }
+
+
 }

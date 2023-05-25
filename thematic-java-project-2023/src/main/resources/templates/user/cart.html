@@ -7,27 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="e-commerce site well design with responsive view." />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="css/dat-css.css">
-    <link href="css/stylesheet.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-    <link rel="stylesheet" href="font-awesome/fonts/fontawesome-free-6.0.0-beta3-web/css/all.css">
-    <link href="owl-carousel/owl.carousel.css" type="text/css" rel="stylesheet" media="screen" />
-    <link href="owl-carousel/owl.transitions.css" type="text/css" rel="stylesheet" media="screen" />
-    <script src="javascript/jquery-2.1.1.min.js" type="text/javascript"></script>
-    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="javascript/jstree.min.js" type="text/javascript"></script>
-    <script src="javascript/template.js" type="text/javascript"></script>
-    <script src="javascript/common.js" type="text/javascript"></script>
-    <script src="javascript/global.js" type="text/javascript"></script>
-    <script src="owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
-    <link rel="shortcut icon" href="image/logo.png" />
 
-    <link rel="stylesheet" href="css/dat-css.css">
-    <link rel="stylesheet" href="css/khanh-css.css">
-    <link rel="stylesheet" href="./css/hung-css.css">
-    <script src="javascript/khanh-js.js" type="text/javascript"></script>
+    <link th:href="@{/assets/bootstrap/css/bootstrap.min.css}" href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+          media="screen"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link th:href="@{/assets/css/stylesheet.css}" href="/assets/css/stylesheet.css" rel="stylesheet">
+    <link th:href="@{/assets/css/responsive.css}" href="/assets/css/responsive.css" rel="stylesheet">
+    <link th:href="@{/assets/css/all.css}" href="/assets/css/all.css" rel="stylesheet">
+    <link th:href="@{/assets/owl-carousel/owl.carousel.css}" href="/assets/owl-carousel/owl.carousel.css" type="text/css" rel="stylesheet"
+          media="screen"/>
+    <link th:href="@{/assets/owl-carousel/owl.transitions.css}" href="/assets/owl-carousel/owl.transitions.css" type="text/css"
+          rel="stylesheet" media="screen"/>
+    <script th:src="@{/assets/javascript/jquery-2.1.1.min.js}" src="/assets/javascript/jquery-2.1.1.min.js"
+            type="text/javascript"></script>
+    <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}" src="/assets/bootstrap/js/bootstrap.min.js"
+            type="text/javascript"></script>
+    <script th:src="@{/assets/javascript/jstree.min.js}" src="/assets/javascript/jstree.min.js" type="text/javascript"></script>
+    <script th:src="@{/assets/javascript/template.js}" src="/assets/javascript/template.js" type="text/javascript"></script>
+    <script th:src="@{/assets/javascript/common.js}" src="/assets/javascript/common.js" type="text/javascript"></script>
+    <script th:src="@{/assets/javascript/global.js}" src="/assets/javascript/global.js" type="text/javascript"></script>
+    <script th:src="@{/assets/owl-carousel/owl.carousel.min.js}" src="/assets/owl-carousel/owl.carousel.min.js"
+            type="text/javascript"></script>
+    <link th:href="@{/assets/images/themify-icons/themify-icons.css}" rel="stylesheet"
+          href="/assets/images/themify-icons/themify-icons.css">
+    <link rel="stylesheet" th:href="@{/assets/css/dat-css.css}" href="/assets/css/dat-css.css">
+    <link rel="stylesheet" th:href="@{/assets/css/khanh-css.css}" href="/assets/css/khanh-css.css">
+    <link rel="stylesheet" th:href="@{/assets/css/hung-css.css}" href="/assets/css/hung-css.css">
+    <script th:src="@{/assets/javascript/khanh-js.js}" src="/assets/javascript/khanh-js.js" type="text/javascript"></script>
+    <link th:href="@{/assets/images/logo.png}" rel="shortcut icon" href="/assets/image/logo.png"/>
+
 </head>
 
 <body class="cart col-2">
@@ -115,12 +125,12 @@
                                 <li>
                                     <table class="table table-striped">
                                         <tbody>
-                                            <tr>
+                                            <tr >
                                                 <td class="text-center">
-                                                    <a href="#"><img src="image/product/product-01.jpg" width="100px"
+                                                    <a href="#"><img  width="100px"
                                                             height="100px"></a>
                                                 </td>
-                                                <td class="text-left"><a href="#">lorem ippsum dolor dummy</a></td>
+                                                <td class="text-left"><a href="#" >lorem ippsum dolor dummy</a></td>
                                                 <td class="text-right">x 1</td>
                                                 <td class="text-right">$254.00</td>
                                                 <td class="text-center"><button class="btn btn-danger btn-xs"
@@ -185,12 +195,15 @@
 
             <div class="" id="content" style="width: 100%;">
                 <h1>Giỏ Hàng </h1>
+                <div th:if="${message}" class="">
+                    <p th:text="${message}">Thành công</p>
+                </div>
                 <div id="checkAll_Product">
-                    <input type="checkbox" id="" class="check_all">
+                    <input type="checkbox" id="allProduct" class="check_all">
                     <label class="label_check_all" for="allProduct">Chọn tất cả</label>
                 </div>
                 <div id="remove_pr">
-                    <i class="fa fa-trash icon_remove_pr"></i>
+                    <i id="bin" class="fa fa-trash icon_remove_pr"></i>
                     <label for="bin" class="lb_remove">Xóa</label>
                 </div>
                 <form enctype="multipart/form-data" method="post" action="#">
@@ -200,71 +213,46 @@
                                 <tr>
                                     <td class="text-center">Ảnh</td>
                                     <td class="text-left">Tên sản phẩm</td>
-                                    <td class="text-left">Kiểu mẫu</td>
+                                    <td class="text-left">Thể loại</td>
                                     <td class="text-left">Số lượng</td>
                                     <td class="text-right">Đơn giá</td>
                                     <td class="text-right">Tổng</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr th:each="cart : ${carts}">
                                     <td class="text-center">
-                                        <input type="checkbox" id="html" name="fav_language" value="HTML">
+                                        <input type="checkbox" id="html" class="productCheckbox" name="fav_language" value="HTML" th:value="(${@cartController.getProductByIdDetail(cart.idProductDetail).price} * (100 -${@cartController.getProductByIdDetail(cart.idProductDetail).saleRate}) /100) *${cart.quantity}">
                                         <a href="product.html"><img class="img-thumbnail"
                                                 title="women's New Wine is an alcoholic"
                                                 alt="women's New Wine is an alcoholic"
-                                                src="image/product/giay1s.jpg"></a>
+                                                                    th:src="@{/assets/images/product/{img}(img=${@cartController.getProductByIdDetail(cart.idProductDetail).img})}"></a>
                                     </td>
-                                    <td class="text-left"><a href="product.html">women's New Wine is an alcoholic</a>
+                                    <td class="text-left" style="max-width: 300px"><a href="product.html" th:text="${@cartController.getProductByIdDetail(cart.idProductDetail).name}">women's New Wine is an alcoholic</a>
                                     </td>
-                                    <td class="text-left">Sản phẩm 11</td>
+                                    <td class="text-left" th:text="${@cartController.getCategory(@cartController.getProductByIdDetail(cart.idProductDetail).category).name}">Sản phẩm 11</td>
                                     <td class="text-left">
-                                        <div style="max-width: 200px;" class="input-group btn-block">
-                                            <input type="text" class="form-control quantity" size="1" value="1"
-                                                name="quantity">
-                                            <span class="input-group-btn">
+                                        <form th:action="@{/cart/update}" method="POST">
+                                            <div style="max-width: 200px;" class="input-group btn-block">
+                                                <input type="hidden" name="idCart" th:value="${cart.id}">
+                                                <input type="text" class="form-control quantity" size="1" value="1"
+                                                       name="quantity" th:value="${cart.quantity}">
+                                                <span class="input-group-btn">
                                                 <button class="btn btn-primary" title="" data-toggle="tooltip"
-                                                    type="submit" data-original-title="Update"><i
+                                                        type="submit" data-original-title="Cập nhật"><i
                                                         class="fa fa-refresh"></i></button>
-                                                <button class="btn btn-danger" title="" data-toggle="tooltip"
-                                                    type="button" data-original-title="Remove"><i
-                                                        class="fa fa-times-circle"></i></button>
+                                                <a onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')" th:href="@{/cart/remove/{idCart} (idCart=${cart.id})}" class="btn btn-danger" title="" data-toggle="tooltip"
+                                                        type="button" data-original-title="Xóa"><i
+                                                        class="fa fa-times-circle"></i></a>
                                             </span>
-                                        </div>
+                                            </div>
+                                        </form>
+
                                     </td>
-                                    <td class="text-right">254.000 VNĐ</td>
-                                    <td class="text-right">254.000 VNĐ</td>
+                                    <td class="text-right" th:text="${@cartController.getProductByIdDetail(cart.idProductDetail).price} * (100 -${@cartController.getProductByIdDetail(cart.idProductDetail).saleRate}) /100 +'$'">254.000 VNĐ</td>
+                                    <td class="text-right " th:text="(${@cartController.getProductByIdDetail(cart.idProductDetail).price} * (100 -${@cartController.getProductByIdDetail(cart.idProductDetail).saleRate}) /100) *${cart.quantity} +'$'"> 254.000 VNĐ</td>
                                 </tr>
-                                <!-- ---------------- -->
-                                <tr>
-                                    <td class="text-center">
-                                        <input type="checkbox" id="html" name="fav_language" value="HTML">
-                                        <a href="product.html"><img class="img-thumbnail"
-                                                title="women's New Wine is an alcoholic"
-                                                alt="women's New Wine is an alcoholic"
-                                                src="image/product/giay1s.jpg"></a>
-                                    </td>
-                                    <td class="text-left"><a href="product.html">women's New Wine is an alcoholic</a>
-                                    </td>
-                                    <td class="text-left">Sản phẩm 11</td>
-                                    <td class="text-left">
-                                        <div style="max-width: 200px;" class="input-group btn-block">
-                                            <input type="text" class="form-control quantity" size="1" value="1"
-                                                name="quantity">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-primary" title="" data-toggle="tooltip"
-                                                    type="submit" data-original-title="Update"><i
-                                                        class="fa fa-refresh"></i></button>
-                                                <button class="btn btn-danger" title="" data-toggle="tooltip"
-                                                    type="button" data-original-title="Remove"><i
-                                                        class="fa fa-times-circle"></i></button>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="text-right">254.000 VNĐ</td>
-                                    <td class="text-right">254.000 VNĐ</td>
-                                </tr>
-                                <!-- sản phẩm đã đưa vào giỏi hàng -->
+
                             </tbody>
                         </table>
                     </div>
@@ -322,16 +310,16 @@
                                 <tbody>
                                     <tr>
                                         <td class="text-right"><strong>Tổng phụ:</strong></td>
-                                        <td class="text-right">210.000 VNĐ</td>
+                                        <td class="text-right " id="totalPriceSub">0$</td>
                                     </tr>
                                     <tr>
                                         <td class="text-right"><strong>VAT :</strong></td>
-                                        <td class="text-right">42.000 VNĐ</td>
+                                        <td class="text-right" id="vat">0$</td>
                                     </tr>
                                     <tr>
                                         <td class="text-right"><strong>Tổng:</strong></td>
                                         <td class="text-right">
-                                            <p id="totalPrice">252.000 VNĐ</p>
+                                            <p id="totalPrice">0$</p>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -339,7 +327,7 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="pull-left"><a class="btn btn-default" href="home.html">Tiếp Tục Mua Sắm</a></div>
+                        <div class="pull-left"><a class="btn btn-default" th:href="@{/}">Tiếp Tục Mua Sắm</a></div>
                         <div class="pull-right"><a class="btn btn-primary" href="checkout.html" id="Thanhtoan">Thanh
                                 Toán</a></div>
                     </div>
@@ -569,6 +557,36 @@
     </div>
     <!-- End: modal message -->
     <script src="./javascript/hung-js.js"></script>
+<script>
+    const checkboxes = document.querySelectorAll('.productCheckbox');
+    const totalPriceElement = document.getElementById('totalPrice');
+    const totalPriceSub = document.getElementById('totalPriceSub');
+    const vat = document.getElementById('vat');
+
+    function updateTotalPrice() {
+        const totalPriceSub2 = [...checkboxes]
+            .filter(checkbox => checkbox.checked)
+            .reduce((total, checkbox) => {
+                const price = parseFloat(checkbox.value);
+                return total + price;
+            }, 0);
+        const totalPrice = [...checkboxes]
+            .filter(checkbox => checkbox.checked)
+            .reduce((total, checkbox) => {
+                const price = parseFloat(checkbox.value);
+                return total + price +5;
+            }, 0);
+        totalPriceElement.innerText = `${totalPrice}$`;
+        totalPriceSub.innerText = `${totalPriceSub2}$`;
+        vat.innerText = `5$`;
+    }
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('click', updateTotalPrice);
+    });
+
+
+</script>
 </body>
 
 </html>

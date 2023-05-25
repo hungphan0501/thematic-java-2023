@@ -1,6 +1,7 @@
 package net.javaguides.springboot.service;
 
 import net.javaguides.springboot.model.Cart;
+import net.javaguides.springboot.model.Product;
 import net.javaguides.springboot.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,15 +44,10 @@ public class CartService {
         return cartRepository.findById(id);
     }
 
-
-
-    @Transactional
-    public void updateCart(int quantity, double totalPrice, int id) {
-        Query query = entityManager.createQuery("UPDATE Cart c SET c.quantity = :quantity, c.totalPrice = :totalPrice WHERE c.id = :id");
-        query.setParameter("quantity", quantity);
-        query.setParameter("totalPrice", totalPrice);
-        query.setParameter("id", id);
-        query.executeUpdate();
+    public void removeCart(int idCart) {
+        // Kiểm tra xem sản phẩm có tồn tại trong cơ sở dữ liệu hay không
+        Cart cart = cartRepository.findById(idCart).orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm"));
+        // Xóa sản phẩm
+        cartRepository.delete(cart);
     }
-
 }
