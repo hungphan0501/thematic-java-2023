@@ -1,7 +1,9 @@
 package net.javaguides.springboot.controller;
 
+import net.javaguides.springboot.model.LinkImg;
 import net.javaguides.springboot.model.Product;
 import net.javaguides.springboot.model.ProductDetail;
+import net.javaguides.springboot.repository.LinkImgRepository;
 import net.javaguides.springboot.repository.ProductRepository;
 import net.javaguides.springboot.service.ProductDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,18 @@ public class ProductDetailController {
     @Autowired
     ProductRepository productRepository;
 
-    @GetMapping("/{idproduct}")
+    @Autowired
+    LinkImgRepository linkImgRepository;
+
+    @GetMapping("/{idProduct}")
     public String getProductDetailPage(@PathVariable("idProduct") int idProduct, Model model) {
         Product product = productRepository.getProductById(idProduct);
         List<ProductDetail> list = productDetailService.getAllProductDetailByIdProduct(idProduct);
+        List<LinkImg> linkImgs = getAllImgByIdProduct(idProduct);
 
-        model.addAttribute("product",product);
+        model.addAttribute("product", product);
         model.addAttribute("details", list);
+        model.addAttribute("linkImgs", linkImgs);
 
         return "user/product";
     }
@@ -54,7 +61,7 @@ public class ProductDetailController {
         List<ProductDetail> list = productDetailService.getAllProductDetailByIdProduct(idProduct);
         if (!list.isEmpty()) {
             for (ProductDetail productDetail : list) {
-                result.put(productDetail.getId(),productDetail.getQuantity());
+                result.put(productDetail.getId(), productDetail.getQuantity());
             }
         }
         return result;
@@ -66,8 +73,8 @@ public class ProductDetailController {
         List<ProductDetail> list = productDetailService.getAllProductDetailByIdProduct(idProduct);
         if (!list.isEmpty()) {
             for (ProductDetail productDetail : list) {
-                if(productDetail.getColor().equals(color)) {
-                    result.put(productDetail.getId(),productDetail.getQuantity());
+                if (productDetail.getColor().equals(color)) {
+                    result.put(productDetail.getId(), productDetail.getQuantity());
                 }
             }
         }
@@ -93,12 +100,12 @@ public class ProductDetailController {
 
     //lấy size của 1 màu của 1 sản phẩm
     @GetMapping("/getSizeOfColor/{idProduct}/{color}")
-    public List<Integer> getSizeOfColor(@PathVariable int idProduct,@PathVariable String color) {
+    public List<Integer> getSizeOfColor(@PathVariable int idProduct, @PathVariable String color) {
         List<Integer> listSize = new ArrayList<>();
         List<ProductDetail> productDetailList = productDetailService.getAllProductDetailByIdProduct(idProduct);
         if (!productDetailList.isEmpty()) {
             for (ProductDetail productDetail : productDetailList) {
-                if(productDetail.getColor().equals(color)){
+                if (productDetail.getColor().equals(color)) {
                     listSize.add(productDetail.getSize());
                 }
             }
@@ -108,7 +115,7 @@ public class ProductDetailController {
 
     //cách 2 là lấy danh sách màu và size tương ứng của màu
     @GetMapping("/getAllSizeOfColor/{idProduct}")
-    public Map<String, List<Integer>> getAllSizeOfColor (@PathVariable int idProduct) {
+    public Map<String, List<Integer>> getAllSizeOfColor(@PathVariable int idProduct) {
         Map<String, List<Integer>> result = new HashMap<>();
         List<ProductDetail> productDetailList = productDetailService.getAllProductDetailByIdProduct(idProduct);
 
@@ -132,40 +139,51 @@ public class ProductDetailController {
      * Trong page cart có danh sách các sản phẩm trong giỏ hàng
      * người dùng muốn mua 1 số sản phẩm trong danh sách đó thì cần phải chọn vào check box
      * FrontEnd xử dụng cách dưới để gửi danh sách được chọn xuống để BackEnd xử lý và tiếp tục thanh toán
-     *
+     * <p>
      * const selectedCarts = [
-     *   {
-     *     id: 1,
-     *     idProduct: 1,
-     *     size: 'M',
-     *     color: 'Black',
-     *     quantity: 2,
-     *     totalPrice: 200000
-     *   },
-     *   {
-     *     id: 2,
-     *     idProduct: 2,
-     *     size: 'L',
-     *     color: 'White',
-     *     quantity: 1,
-     *     totalPrice: 100000
-     *   }
+     * {
+     * id: 1,
+     * idProduct: 1,
+     * size: 'M',
+     * color: 'Black',
+     * quantity: 2,
+     * totalPrice: 200000
+     * },
+     * {
+     * id: 2,
+     * idProduct: 2,
+     * size: 'L',
+     * color: 'White',
+     * quantity: 1,
+     * totalPrice: 100000
+     * }
      * ];
-     *
+     * <p>
      * $.ajax({
-     *   url: '/carts/checkout',
-     *   type: 'POST',
-     *   data: JSON.stringify(selectedCarts),
-     *   contentType: 'application/json',
-     *   success: function(response) {
-     *     console.log(response);
-     *     // Xử lý kết quả trả về từ server (nếu có)
-     *   },
-     *   error: function(error) {
-     *     console.error(error);
-     *     // Xử lý lỗi (nếu có)
-     *   }
+     * url: '/carts/checkout',
+     * type: 'POST',
+     * data: JSON.stringify(selectedCarts),
+     * contentType: 'application/json',
+     * success: function(response) {
+     * console.log(response);
+     * // Xử lý kết quả trả về từ server (nếu có)
+     * },
+     * error: function(error) {
+     * console.error(error);
+     * // Xử lý lỗi (nếu có)
+     * }
      * });
-     * **/
-
+     **/
+    public List<LinkImg> getAllImgByIdProduct(int idProduct) {
+        try {
+            List<LinkImg> list = linkImgRepository.getAllByIdProduct(idProduct);
+            if (!list.isEmpty()) {
+                return list;
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
