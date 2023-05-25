@@ -184,6 +184,8 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    public User getUserById (int idUser) {
+        return userRepository.getUserById(idUser);
+    }
 
 }

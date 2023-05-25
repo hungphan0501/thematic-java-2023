@@ -1,27 +1,23 @@
 package net.javaguides.springboot.controller;
 
-import net.javaguides.springboot.model.Cart;
-import net.javaguides.springboot.model.Product;
-import net.javaguides.springboot.model.ProductDetail;
-import net.javaguides.springboot.model.User;
-import net.javaguides.springboot.repository.ProductDetailRepository;
-import net.javaguides.springboot.repository.ProductRepository;
-import net.javaguides.springboot.repository.UserRepository;
+import net.javaguides.springboot.model.*;
+import net.javaguides.springboot.repository.*;
 import net.javaguides.springboot.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/cart")
+@Controller
 public class CartController {
 
     @Autowired
@@ -33,24 +29,31 @@ public class CartController {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
 
-    @GetMapping("/cartById/{id}")
-    public Cart getCartById(@PathVariable int id) {
-        return cartService.getCartById(id).get();
+    @Autowired
+    CartRepository cartRepository;
+
+    public Product getProductByIdDetail(int idDetail) {
+        ProductDetail productDetail =  productDetailRepository.getProductDetailById(idDetail);
+        Product product = productRepository.getProductById(productDetail.getIdProduct());
+        return product;
     }
 
-    @GetMapping("/allProductInCart/{idCustomer}")
-    public ResponseEntity<List<Cart>> allProductInCart(@PathVariable("idCustomer") int idCustomer) {
-        try {
-            List<Cart> list = cartService.getAllProductInCartOfCustomer(idCustomer);
-            if (list.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } else {
-                return new ResponseEntity<List<Cart>>(list, HttpStatus.OK);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    @GetMapping("/cart")
+    public String cartPage(Model model) {
+        int idUser = 0;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            User user = userRepository.findByEmail(username);
+            idUser = user.getId();
         }
+        List<Cart> cartList = cartService.getAllProductInCartOfCustomer(idUser);
+        model.addAttribute("carts",cartList);
+        return "user/cart";
+
     }
 
     @PostMapping("/addCart1")
@@ -72,7 +75,7 @@ public class CartController {
 
     @GetMapping("/addCart/{idProductDetail}/{quantity}")
     public String addToCart(@PathVariable("idProductDetail") int idProductDetail, @PathVariable("quantity") int quantity, Principal principal) {
-        System.out.println("Vào rồi!"); 
+        System.out.println("Vào rồi!");
         try {
 //            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //            if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
@@ -156,33 +159,66 @@ public class CartController {
         return ResponseEntity.ok().build();
     }
 
-    //update số lượng cart
-    @GetMapping("/update/{id}/{quantity}")
-    public ResponseEntity<Cart> updateCart(@PathVariable int id, @PathVariable int quantity) {
-        try {
-            Optional<Cart> cart = cartService.findById(id);
-            if (cart.isPresent()) {
-                Cart cart1 = cart.get();
-                double price = cart1.getTotalPrice() / cart1.getQuantity();
-                cart1.setQuantity(quantity);
-                cart1.setTotalPrice(quantity * price);
-                cartService.updateCart(quantity,price,id);
-                return new ResponseEntity<Cart>(cart1, HttpStatus.OK);
+
+    @PostMapping("/addToCart/idDetail/{idDetail}/quantity/{quantity}")
+    public RedirectView addToCart(@PathVariable("idDetail") int idDetail, @PathVariable("quantity") int quantity) {
+        System.out.println("id: " + idDetail + "\tquantity: " + quantity);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            User user = userRepository.findByEmail(username);
+            if (user != null) {
+                Optional<Cart> optionalCart = cartService.findByUserIdAndProductDetailId(user.getId(), idDetail);
+                Optional<ProductDetail> optionalProductDetail = productDetailRepository.findById(idDetail);
+                if (optionalProductDetail.isPresent()) {
+                    ProductDetail productDetail = optionalProductDetail.get();
+                    Optional<Product> optionalProduct = productRepository.findById(productDetail.getIdProduct());
+                    Product product = optionalProduct.get();
+                    double totalPrice = (product.getPrice() * (100-product.getSaleRate())/100) * quantity;
+                    Cart cart;
+                    if (optionalCart.isPresent()) {
+                        cart = optionalCart.get();
+                        cart.setQuantity(cart.getQuantity() + quantity);
+                        cart.setTotalPrice(cart.getTotalPrice() + totalPrice);
+                    } else {
+                        cart = new Cart();
+                        cart.setIdCustomer(user.getId());
+                        cart.setIdProductDetail(idDetail);
+                        cart.setQuantity(quantity);
+                        cart.setTotalPrice(totalPrice);
+                    }
+                    cartService.addCart(cart);
+                } else {
+                    return new RedirectView("/login");
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            return new RedirectView("/login");
         }
-        return null;
+        return new RedirectView("/cart");
     }
 
+    public Category getCategory(int id) {
+        return categoryRepository.getCategoryById(id);
+    }
 
-    @GetMapping("/my-page")
-    public String myPage() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            return "redirect:/login"; // chuyển hướng về trang đăng nhập nếu chưa đăng nhập
+    @PostMapping("/cart/update")
+    public String updateCarts(@RequestParam("idCart") int idCart, @RequestParam("quantity") int quantity,RedirectView redirectView) {
+        Optional<Cart> cart = cartService.findById(idCart);
+        if (cart.isPresent()) {
+            Cart cart1 = cart.get();
+            double price = cart1.getTotalPrice() / cart1.getQuantity();
+            cart1.setQuantity(quantity);
+            cart1.setTotalPrice(quantity * price);
+            cartRepository.save(cart1);
+            redirectView.addStaticAttribute("message", "Cập nhật giỏ hàng thành công!");
         }
-        return "my-page";
+        return "redirect:/cart";
+    }
+    @RequestMapping(value = "/cart/remove/{idCart}", method = {RequestMethod.GET, RequestMethod.DELETE})
+    public String removeCart(@PathVariable("idCart") int idCart,RedirectView redirectView) {
+        cartService.removeCart(idCart);
+        redirectView.addStaticAttribute("message", "Sản phẩm đã được xóa");
+        return "redirect:/cart";
     }
 }
