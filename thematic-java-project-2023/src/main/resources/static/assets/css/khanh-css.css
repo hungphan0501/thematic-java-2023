@@ -921,8 +921,23 @@
     .contain-form-adjust-address {
         display: none;
     }
+    .add-contain-available-address{
+        margin: 0 10px;
+        font-size: 18px;
+        background-color: #f5f5f5;
+        padding: 10px;
+    }
+    .add-contain-form-adjust-address{
+        display: none;
+    }
 
     #submit-adjust-address-customer {
+        color: rgb(74, 74, 74);
+        background-color: rgb(253, 216, 53);
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .submit-adjust-address-customer {
         color: rgb(74, 74, 74);
         background-color: rgb(253, 216, 53);
         padding: 10px;
