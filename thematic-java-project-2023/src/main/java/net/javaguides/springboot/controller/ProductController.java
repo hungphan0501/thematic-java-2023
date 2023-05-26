@@ -38,7 +38,6 @@ public class ProductController {
         System.out.println("id brand " + idBrand);
         List<Product> list = productService.finByBrand(idBrand);
         String nameBrand = findBrandById(idBrand);
-        System.out.println(nameBrand);
         for (Product p : list) {
             System.out.println(p.toString());
         }

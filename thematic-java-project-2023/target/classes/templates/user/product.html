@@ -891,7 +891,7 @@
                             </div>
                             <form th:action="@{/comment/upload}" method="POST">
                                 <div class="writing">
-                                    <input type="hidden" name="idProduct" th:value="${product.id}">
+                                    <input type="text" name="idProduct" th:value="${product.id}">
                                     <div >
                                         <textarea name="content" style="width: 100%;border: none"></textarea>
                                     </div>
