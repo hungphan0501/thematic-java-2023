@@ -1,20 +1,14 @@
 package net.javaguides.springboot.controller;
 
 
-import com.paypal.api.payments.*;
-import com.paypal.base.rest.APIContext;
-import com.paypal.base.rest.OAuthTokenCredential;
-import com.paypal.base.rest.PayPalRESTException;
 import net.javaguides.springboot.model.*;
-import net.javaguides.springboot.repository.OrderDetailRepository;
-import net.javaguides.springboot.repository.OrdersRepository;
-import net.javaguides.springboot.repository.ProductDetailRepository;
-import net.javaguides.springboot.repository.ProductRepository;
-import net.javaguides.springboot.service.ProductService;
+import net.javaguides.springboot.repository.*;
 import net.javaguides.springboot.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jmx.export.naming.IdentityNamingStrategy;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -25,8 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/checkout")
+@Controller
 public class CheckOutController {
     String clientId = "AROAKMekTQJgIeU7-SdhWlX1VMRbAmBiAclM6cUY753HNXchrLmLfz1Z0NntWJuivqxdi2vGpYKw0w_P";
     String clientSecret = "EDVHtLQaWGIFJOqsUpqWYgWXSeChoY_0dD3OUu_wsSc-RDgNoDcrfvCnN8uXEyfLEWzPhOIPEOvQb_hY";
@@ -46,8 +39,33 @@ public class CheckOutController {
     @Autowired
     ProductDetailRepository productDetailRepository;
 
+    @Autowired
+    CartRepository cartRepository;
+
+    @GetMapping("/checkout")
+    public String getPageCheckOut(@RequestParam("cartsId") List<String> cartsId, Model model) {
+        System.out.println("CartIds: " + cartsId);
+        List<Cart> cartList = new ArrayList<>();
+        String cartIds ="";
+        double totalPrice=0;
+        for (String id: cartsId) {
+            int idCart = Integer.parseInt(id);
+            Optional<Cart> cart = cartRepository.findById(idCart);
+            cartList.add(cart.get());
+        }
+        for(Cart cart : cartList) {
+             totalPrice +=cart.getTotalPrice();
+            cartIds+=cart.getId()+"/";
+        }
+        model.addAttribute("carts", cartList);
+        model.addAttribute("cartIds", cartIds);
+        model.addAttribute("totalPrice", totalPrice);
+        System.out.println("Cart list:" +cartList);
+        return "user/checkout";
+    }
+
     //thanh toan khi nhan hang
-    @PostMapping("/onDelivery")
+    @PostMapping("/checkout/onDelivery")
     public ResponseEntity<String> paymentOnDelivery(@RequestBody List<Cart> cartList, @RequestParam("idAddress") int idAddress){
         int idUser = userService.getIdUserByUserName();
 
@@ -68,6 +86,13 @@ public class CheckOutController {
             orderDetailRepository.save(orderDetail);
         }
         return ResponseEntity.ok("Order successfully");
+    }
+
+    @PostMapping("/checkout/paypal")
+    public String handleCheckout(@RequestParam("carts") List<String> carts) {
+        // Xử lý danh sách carts ở đây
+        System.out.println("------------------------------" +carts);
+        return "redirect:/success";
     }
 
 //    //thanh toan khi nhan hang

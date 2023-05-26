@@ -222,7 +222,7 @@
                             <tbody>
                                 <tr th:each="cart : ${carts}">
                                     <td class="text-center">
-                                        <input type="checkbox" id="html" class="productCheckbox" name="fav_language" value="HTML" th:value="(${@cartController.getProductByIdDetail(cart.idProductDetail).price} * (100 -${@cartController.getProductByIdDetail(cart.idProductDetail).saleRate}) /100) *${cart.quantity}">
+                                        <input type="checkbox" id="html" class="productCheckbox" name="fav_language" th:data-idCart="${cart.id}" value="HTML" th:value="(${@cartController.getProductByIdDetail(cart.idProductDetail).price} * (100 -${@cartController.getProductByIdDetail(cart.idProductDetail).saleRate}) /100) *${cart.quantity}">
                                         <a href="product.html"><img class="img-thumbnail"
                                                 title="women's New Wine is an alcoholic"
                                                 alt="women's New Wine is an alcoholic"
@@ -328,7 +328,7 @@
                     </div>
                     <div class="buttons">
                         <div class="pull-left"><a class="btn btn-default" th:href="@{/}">Tiếp Tục Mua Sắm</a></div>
-                        <div class="pull-right"><a class="btn btn-primary" href="checkout.html" id="Thanhtoan">Thanh
+                        <div class="pull-right"><a class="btn btn-primary"  id="checkoutButton">Thanh
                                 Toán</a></div>
                     </div>
                 </div>
@@ -585,6 +585,32 @@
         checkbox.addEventListener('click', updateTotalPrice);
     });
 
+
+</script>
+<!--Xử lý chuyển hướng đến trang checkout cùng với list cart đã chọn (checked)-->
+<script>
+    const cartCheckboxes = document.querySelectorAll('.productCheckbox');
+    const checkoutButton = document.getElementById('checkoutButton');
+
+    checkoutButton.addEventListener('click', () => {
+        const selectedCarts = [...cartCheckboxes]
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.getAttribute('data-idCart'));
+
+
+        if (selectedCarts.length === 0) {
+            alert("Vui lòng chọn sản phẩm để thanh toán!");
+        } else {
+            // Xây dựng URL chứa danh sách cartsId
+            const params = new URLSearchParams();
+            selectedCarts.forEach(cartId => {
+                params.append('cartsId', cartId);
+            });
+
+            const checkoutURL = `/checkout?${params.toString()}`;
+            window.location.href = checkoutURL;
+        }
+    });
 
 </script>
 </body>

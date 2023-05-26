@@ -35,12 +35,18 @@ public class CartController {
     @Autowired
     CartRepository cartRepository;
 
+    @Autowired
+    BrandRepository brandRepository;
+
     public Product getProductByIdDetail(int idDetail) {
         ProductDetail productDetail =  productDetailRepository.getProductDetailById(idDetail);
         Product product = productRepository.getProductById(productDetail.getIdProduct());
         return product;
     }
 
+    public ProductDetail getProductDetailById(int idDetail) {
+        return productDetailRepository.getProductDetailById(idDetail);
+    }
     @GetMapping("/cart")
     public String cartPage(Model model) {
         int idUser = 0;
@@ -200,6 +206,9 @@ public class CartController {
 
     public Category getCategory(int id) {
         return categoryRepository.getCategoryById(id);
+    }
+    public Brand getBrand(int id) {
+        return brandRepository.getBrandById(id);
     }
 
     @PostMapping("/cart/update")
