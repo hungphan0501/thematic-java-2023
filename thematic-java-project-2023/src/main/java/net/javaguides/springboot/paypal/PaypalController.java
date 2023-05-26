@@ -6,6 +6,7 @@ import net.javaguides.springboot.model.Cart;
 import net.javaguides.springboot.model.OrderDetail;
 import net.javaguides.springboot.model.Orders;
 import net.javaguides.springboot.model.User;
+import net.javaguides.springboot.repository.CartRepository;
 import net.javaguides.springboot.repository.OrderDetailRepository;
 import net.javaguides.springboot.repository.OrdersRepository;
 import net.javaguides.springboot.repository.UserRepository;
@@ -14,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/paypal")
@@ -41,9 +42,20 @@ public class PaypalController {
     @Autowired
     OrderDetailRepository orderDetailRepository;
 
-    @GetMapping("/pay")
-    public RedirectView pay(@RequestBody List<Cart> cartList,@RequestParam("idAddress") int idAddress,HttpServletRequest request) {
+    @Autowired
+    CartRepository cartRepository;
+
+    @PostMapping("/pay")
+    public RedirectView pay(@RequestParam("cartIds") String cartIds,@RequestParam("idAddress") int idAddress,HttpServletRequest request) {
         RedirectView redirectView = new RedirectView();
+        String[] listCartId = cartIds.split("/");
+        List<Cart> cartList = new ArrayList<>();
+        for (String id : listCartId) {
+            int idC = Integer.parseInt(id);
+            Optional<Cart> cart = cartRepository.findById(idC);
+            cartList.add(cart.get());
+        }
+        System.out.println("-id-cart---------------" + listCartId[1]);
         try {
             String cancelUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
                     + request.getContextPath() + "/paypal/cancel";
@@ -51,6 +63,7 @@ public class PaypalController {
                     + request.getContextPath() + "/paypal/success";
 
             // create payment
+
             Payment payment = paypalService.createPayment(cartList,idAddress, "USD", cancelUrl, successUrl);
             for (Links link : payment.getLinks()) {
                 if (link.getRel().equals("approval_url")) {
@@ -96,8 +109,9 @@ public class PaypalController {
 //    }
 
     @GetMapping("/success")
-    public ResponseEntity<String> success(@RequestParam("paymentId") String paymentId,
+    public RedirectView success(@RequestParam("paymentId") String paymentId,
                                           @RequestParam("PayerID") String payerId) {
+        RedirectView redirectView = new RedirectView();
         try {
             Payment payment = paypalService.executePayment(paymentId, payerId);
             if (payment.getState().equals("approved")) {
@@ -123,15 +137,19 @@ public class PaypalController {
                 Orders orders = new Orders(idUser, totalPrice, date, getIdAddress(), "Đã đặt hàng", "Paypal", "Da thanh toan");
                 ordersRepository.save(orders);
                 for (Cart cart : cartList) {
+                    cartRepository.delete(cart);
                     OrderDetail orderDetail = new OrderDetail(orders.getId(), cart.getQuantity(), cart.getIdProductDetail());
                     orderDetailRepository.save(orderDetail);
+
                 }
-                return ResponseEntity.status(HttpStatus.OK).body("Payment successful");
+                String url = "/user/history/detail/" + orders.getId();
+                redirectView.setUrl(url);
             }
         } catch (PayPalRESTException e) {
             // handle exception
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Paypal payment failed");
+
+        return redirectView;
     }
 
     @GetMapping("/cancel")

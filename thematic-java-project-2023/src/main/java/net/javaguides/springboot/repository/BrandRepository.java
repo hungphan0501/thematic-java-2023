@@ -10,4 +10,6 @@ public interface BrandRepository extends JpaRepository<Brand,Integer> {
 
     @Query("SELECT b.name FROM Brand b WHERE b.id=?1")
     String getNameById(int id);
+
+    Brand getBrandById(int id);
 }
