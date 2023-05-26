@@ -40,51 +40,59 @@ public class UserController {
     AddressRepository addressRepository;
 
     @GetMapping("/infor")
-    public String getInForUser( Model model) {
+    public String getInForUser(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             String username = authentication.getName();
             User user = userRepository.findByEmail(username);
             if (user != null) {
                 model.addAttribute("user", user);
+                List<Address> addresses = addressRepository.getAddressByIdUser(user.getId());
+                model.addAttribute("addresses", addresses);
             } else {
                 return "redirect:/login";
             }
         }
-     return "user/customer";
+        return "user/customer";
     }
 
+
     @PostMapping("/infor/update")
-    public String update( User user, Model model) {
-       User getUser = userRepository.getUserById(user.getId());
+    public String update(User user, Model model) {
+        User getUser = userRepository.getUserById(user.getId());
         getUser.setName(user.getName());
         getUser.setGender(user.getGender());
         getUser.setPhone(user.getPhone());
         getUser.setDateOfBirth(user.getDateOfBirth());
         userRepository.save(getUser);
-        if(user!=null) {
-            model.addAttribute("message","Cập nhật thành công!");
-        }
-        else {
-            model.addAttribute("message","Cập nhật không thành công!");
+        if (user != null) {
+            model.addAttribute("message", "Cập nhật thông tin thành công!");
+        } else {
+            model.addAttribute("message", "Cập nhật thông tin không thành công!");
 
         }
         return "user/customer";
     }
 
-    @PostMapping("/process-form")
-    public String processForm(@RequestParam("email") String email, @RequestBody ChangeUserInforDTO changeUserInforDTO, Model model) {
-        String name = changeUserInforDTO.getName();
-        String phone = changeUserInforDTO.getPhone();
-        int day = changeUserInforDTO.getDay();
-        int month = changeUserInforDTO.getMonth();
-        int year = changeUserInforDTO.getYear();
-        String gender = changeUserInforDTO.getGender();
-        System.out.println(changeUserInforDTO);
+    @PostMapping("/infor/update-address/{idAddress}")
+    public String updateAddress(Address address, @PathVariable("idAddress") int idAddress, Model model) {
+        Address addressById = addressRepository.getAddressById(idAddress);
+        System.out.println(addressById);
+        addressById.setCity(address.getCity());
+        addressById.setDistrict(address.getDistrict());
+        addressById.setWard(address.getWard());
+        addressById.setSpecificAddress(address.getSpecificAddress());
+        addressById.setPhone(address.getPhone());
+        addressById.setUserName(address.getUserName());
+        addressById.setIsDefault(address.getIsDefault());
+        addressRepository.save(addressById);
+        if (addressById != null) {
+            model.addAttribute("message", "Cập nhật địa chỉ thành công!");
+        } else {
+            model.addAttribute("message", "Cập nhật địa chỉ không thành công!");
 
-        User getUser = userRepository.findByEmail(email);
-        System.out.println(getUser);
-        return "user/change-infor-user";
+        }
+        return "user/customer";
     }
 
     @PostMapping("/upload")
@@ -159,52 +167,56 @@ public class UserController {
     //thay đổi địa chỉ mặc định
     @PostMapping("/address/changeDefault/{idAddress}")
     public String changeAddressDefault(@PathVariable("idAddress") int idAddress) {
-        try {
-            int idUser = 0;
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if (authentication != null && authentication.isAuthenticated()) {
-                String username = authentication.getName();
-                User user = userRepository.findByEmail(username);
-                idUser = user.getId();
-            }
-            List<Address> list = addressRepository.getAllByIdUser(idUser);
-            System.out.println(list.toString());
-            Address address = addressRepository.getAddressById(idAddress);
-            System.out.println("address:  " + address);
-            address.setIsDefault(0);
-            addressRepository.save(address);
-            for (Address a : list) {
-                if (!(address.getId() == a.getId())) {
-                    a.setIsDefault(1);
-                    addressRepository.save(a);
-                }
-            }
-
-            User user = userRepository.getUserById(idUser);
-            user.setIdAddress(idAddress);
-            userRepository.save(user);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        int idUser = 0;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            User user = userRepository.findByEmail(username);
+            idUser = user.getId();
         }
+        List<Address> list = addressRepository.getAllByIdUser(idUser);
+        System.out.println(list.toString());
+        Address address = addressRepository.getAddressById(idAddress);
+        System.out.println("address:  " + address);
+        address.setIsDefault(0);
+        addressRepository.save(address);
+        for (Address a : list) {
+            if (!(address.getId() == a.getId())) {
+                a.setIsDefault(1);
+                addressRepository.save(a);
+            }
+        }
+
+        User user = userRepository.getUserById(idUser);
+        user.setIdAddress(idAddress);
+        userRepository.save(user);
+
         return "change successfully";
     }
 
     //Them address
-    @PostMapping("/address/add")
-    public ResponseEntity<Address> addAddress(@RequestBody Address address) {
-        try {
-            if (address == null) {
-                System.out.println("Address is null!");
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-            addressRepository.save(address);
-            return new ResponseEntity<Address>(address, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    @PostMapping("/infor/address/add")
+    public RedirectView addAddress(Address address) {
+        RedirectView redirectView = new RedirectView();
+        int idUser = 0;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            User user = userRepository.findByEmail(username);
+            idUser = user.getId();
         }
+        System.out.println(address);
+        if (address == null) {
+            System.out.println("Address is null!");
+
+        }
+        address.setIdUser(idUser);
+        addressRepository.save(address);
+        redirectView.setUrl("/user/infor");
+        return redirectView;
     }
-    public User getUserById (int idUser) {
+
+    public User getUserById(int idUser) {
         return userRepository.getUserById(idUser);
     }
 

@@ -449,10 +449,12 @@ function accessInfoCustomer() {
     });
 
     $(".contain-add-map").click(() => {
-        $(".contain-form-adjust-address").css("display", "block");
-        $(".available-address").css("display", "none");
-        $("#submit-adjust-address-customer").val("Thêm");
-        $(".default-address").css("display", "none");
+        // $(".contain-form-adjust-address").css("display", "none");
+        // $(".available-address").css("display", "none");
+        // $(".default-address").css("display", "none");
+        $(".contain-available-address").css("display", "none");
+        $(".add-contain-available-address").css("display", "block");
+        $(".add-contain-form-adjust-address").css("display", "block");
     });
 
     $("#submit-adjust-address-customer").click(() => {
@@ -650,5 +652,3 @@ function blabla(e, color) {
     }
     return re
 }
-
-

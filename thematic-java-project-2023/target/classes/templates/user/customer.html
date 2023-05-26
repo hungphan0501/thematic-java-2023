@@ -244,19 +244,18 @@
         </div>
 
         <div class="col-sm-9 bg-item bd-rd mg-t" id="contain-info-customer">
+
             <div id="accordion" class="panel-group bg-item bd-rd">
                 <!-- lam o day -->
                 <div id="info-customer">
                     <h1 class="hoso">Hồ Sơ Của Tôi</h1>
-                    <div th:if="${message}">
-                        <span th:text="${message}"></span>
-                    </div>
+
                     <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
                     <hr>
                     <form th:action="@{/user/infor/update}" id="infor-form" method="post">
                         <div class="info col-half-sub">
                             <p class="name-login col-half-info" >Tên Đăng Nhập</p>
-                            <p id="id-customer " class=" id-customer name col-half-picture" th:text="${user.email}">hungphan0501</p>
+                            <p id="id-customer " class=" id-customer name col-half-picture" th:text="${user.email}"></p>
                             <p class="Ten col-half-info">Tên</p>
                             <input id="name" name="name" type="text" class="col-half-picture" th:value="${user.name}">
                             <input id="id" name="id" type="hidden" class="col-half-picture" th:value="${user.id}">
@@ -281,7 +280,7 @@
                     </form>
                     <div class="picture col-half">
                         <div id="picture">
-                            <img th:src="@{/assets/images/1.jpg}" src="/assets/image/1.jpg" alt="">
+                            <img th:src="@{'/assets/images/avatar/' + ${user.avatar}}" alt="">
                         </div>
                         <button class="select-picture">Chọn Ảnh</button>
                         <p class="subbbb" style="color: rgb(158, 158, 158); font-size: 12px;">Dụng lượng file tối đa
@@ -297,55 +296,83 @@
                         <i class="fas fa-plus"></i>
                         <span class="add-address">Thêm địa chỉ mới</span>
                     </button>
-                    <div class="contain-available-address">
+                    <div class="contain-available-address" style="margin-top: 10px;" th:each="addresse : ${addresses}">
                         <div class="option-address">
-                            <p style="cursor: pointer; color: rgb(57, 57, 207);" class="adjust-address-customer">
+                            <p style="cursor: pointer; color: rgb(57, 57, 207);" class="adjust-address-customer"
+                               th:attr="data-address-id=${addresse.id}">
                                 Chỉnh sửa</p>
                         </div>
                         <div class="available-address">
-                            <p style="color: black;margin: 10px 0;"><span style="color: rgb(70, 67, 67);">Địa chỉ :
-                                    </span> a199t, tổ 1a, khu phố bình nhâm, bình nhâm 20, Phường Bình Nhâm, Thị xã
-                                Thuận An, Bình Dương</p>
-                            <p style="color: black;margin: 10px 0;"><span style="color: rgb(73, 72, 72);">Điện thoại
-                                        :</span> 0123456789</p>
-
-
+                            <p style="color: black;margin: 10px 0;"><span style="color: rgb(70, 67, 67);">
+                                Họ và tên: <span th:text="${addresse.userName}"></span></span></p>
+                            <p style="color: black;margin: 10px 0;"><span style="color: rgb(70, 67, 67);">
+                                Địa chỉ: <span th:text="${addresse.specificAddress}"></span></span> </p>
+                            <p style="color: black;margin: 10px 0;"><span style="color: rgb(73, 72, 72);">
+                                Điện thoại: <span th:text="${addresse.phone}"></span></span></p>
                         </div>
 
-                        <form class="contain-form-adjust-address">
+                        <form id="infor-form-address" class="contain-form-adjust-address" th:action="@{'/user/infor/update-address/' + ${addresse.id}}" method="post">
                             <div class="contain-adjust-address">
                                 <span class="label-address">Tỉnh/ Thành phố:</span>
-                                <select id="contain-option-city" class="input-address">
-                                    <!-- khanh-js loadLocation() display this -->
-                                </select>
+                                <input id="contain-option-city" name="city" class="input-address" th:value="${addresse.city}">
+
                                 <span class="label-address">Quận/ Huyện:</span>
-                                <select id="contain-option-district" class="input-address">
-                                    <!-- khanh-js loadLocation() display this -->
-                                </select>
+                                <input id="contain-option-district" name="district" class="input-address" th:value="${addresse.district}">
+
                                 <span class="label-address">Phường/ Xã:</span>
-                                <select id="contain-option-ward" class="input-address">
-                                    <!-- khanh-js loadLocation() display this -->
-                                </select>
+                                <input id="contain-option-ward" name="ward" class="input-address" th:value="${addresse.ward}">
+
+                                <span class="label-address">Số điện thoại:</span>
+                                <input id="contain-option-phone" name="phone" class="input-address" th:value="${addresse.phone}">
+
+                                <span class="label-address">Họ và tên:</span>
+                                <input id="contain-option-name" name="userName" class="input-address" th:value="${addresse.userName}">
+
                                 <span class="label-address">Địa chỉ</span>
-                                <textarea rows="4" cols="50" style="border-radius: 10px;"></textarea>
+                                <textarea rows="4" cols="50" name="specificAddress" style="border-radius: 10px;" th:value="${addresse.getSpecificAddress()}"></textarea>
                             </div>
-                            <div class="contain-default-address-customer" style="margin: 10px 0">
+                            <div class="contain-default-address-customer" name="isDefault" style="margin: 10px 0">
                                 <input type="checkbox" id="default-address-customer">
-                                <label for="default-address-customer" style="font-size: 17px">Đặt làm địa chỉ mặc
-                                    định</label><br>
+                                <label for="default-address-customer" style="font-size: 17px">Đặt làm địa chỉ mặc định</label>
                             </div>
-                            <input type="button" id="submit-adjust-address-customer" value="Chỉnh sửa">
-                            <input type="button" id="delete-adjust-address-customer" value="Xóa">
+                            <input type="submit" id="submit-adjust-address-customer" value="Chỉnh sửa">
 
                         </form>
+                    </div>
+                    <div class="add-contain-available-address">
+                        <form id="add-address-form" class="add-contain-form-adjust-address" th:action="@{/user/infor/address/add}" method="post">
+                            <div class="contain-adjust-address">
+                                <span class="label-address">Tỉnh/ Thành phố:</span>
+                                <input name="city" class="input-address">
 
+                                <span class="label-address">Quận/ Huyện:</span>
+                                <input name="district" class="input-address">
 
+                                <span class="label-address">Phường/ Xã:</span>
+                                <input name="ward" class="input-address">
+
+                                <span class="label-address">Số điện thoại:</span>
+                                <input name="phone" class="input-address">
+
+                                <span class="label-address">Họ và tên:</span>
+                                <input name="userName" class="input-address">
+
+                                <span class="label-address">Địa chỉ</span>
+                                <textarea rows="4" cols="50" name="specificAddress" style="border-radius: 10px;" ></textarea>
+                            </div>
+                            <div class="contain-default-address-customer" name="isDefault" style="margin: 10px 0">
+                                <input type="checkbox">
+                                <label for="default-address-customer" style="font-size: 17px">Đặt làm địa chỉ mặc định</label>
+                            </div>
+                            <input type="submit" class="submit-adjust-address-customer" value="Thêm">
+
+                        </form>
                     </div>
                 </div>
                 <div id="password-customer">
                     <div>
                         <label for="username">Mật Khẩu Hiện Tại:</label>
-                        <input type="password" id="username" name="username" z style="width: 25%;">
+                        <input type="password" id="username" name="username"  style="width: 25%;">
                     </div>
 
                     <div>
@@ -938,12 +965,6 @@
 <!-- End: modal message -->
 
 <script th:src="@{/assets/javascript/hung-js.js}" src="/assets/javascript/hung-js.js"></script>
-
-
-<script>
-
-</script>
-
 </body>
 
 </html>
