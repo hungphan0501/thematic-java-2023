@@ -2,18 +2,23 @@ package net.javaguides.springboot.controller;
 
 import net.javaguides.springboot.model.Address;
 import net.javaguides.springboot.model.Cart;
+import net.javaguides.springboot.model.Comment;
 import net.javaguides.springboot.model.User;
 import net.javaguides.springboot.repository.AddressRepository;
 import net.javaguides.springboot.repository.UserRepository;
+import net.javaguides.springboot.web.dto.ChangeUserInforDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -25,7 +30,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -34,37 +39,52 @@ public class UserController {
     @Autowired
     AddressRepository addressRepository;
 
-    @GetMapping
-    public ResponseEntity<User> getInForUser(@RequestParam("email") String email) {
-        try {
-            User user = userRepository.findByEmail(email);
-            return new ResponseEntity<User>(user, HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    @GetMapping("/infor")
+    public String getInForUser( Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            User user = userRepository.findByEmail(username);
+            if (user != null) {
+                model.addAttribute("user", user);
+            } else {
+                return "redirect:/login";
+            }
         }
+     return "user/customer";
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<User> update(@RequestParam("email") String email, @RequestBody User user) {
-        try {
-            User getUser = userRepository.findByEmail(email);
-            if (getUser == null) {
-                return ResponseEntity.notFound().build();
-            }
-            getUser.setName(user.getName());
-            getUser.setGender(user.getGender());
-            getUser.setPhone(user.getPhone());
-            getUser.setDateOfBirth(user.getDateOfBirth());
-
-            User updateUser = userRepository.save(getUser);
-
-            return new ResponseEntity<User>(updateUser, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    @PostMapping("/infor/update")
+    public String update( User user, Model model) {
+       User getUser = userRepository.getUserById(user.getId());
+        getUser.setName(user.getName());
+        getUser.setGender(user.getGender());
+        getUser.setPhone(user.getPhone());
+        getUser.setDateOfBirth(user.getDateOfBirth());
+        userRepository.save(getUser);
+        if(user!=null) {
+            model.addAttribute("message","Cập nhật thành công!");
         }
+        else {
+            model.addAttribute("message","Cập nhật không thành công!");
+
+        }
+        return "user/customer";
+    }
+
+    @PostMapping("/process-form")
+    public String processForm(@RequestParam("email") String email, @RequestBody ChangeUserInforDTO changeUserInforDTO, Model model) {
+        String name = changeUserInforDTO.getName();
+        String phone = changeUserInforDTO.getPhone();
+        int day = changeUserInforDTO.getDay();
+        int month = changeUserInforDTO.getMonth();
+        int year = changeUserInforDTO.getYear();
+        String gender = changeUserInforDTO.getGender();
+        System.out.println(changeUserInforDTO);
+
+        User getUser = userRepository.findByEmail(email);
+        System.out.println(getUser);
+        return "user/change-infor-user";
     }
 
     @PostMapping("/upload")
@@ -150,7 +170,7 @@ public class UserController {
             List<Address> list = addressRepository.getAllByIdUser(idUser);
             System.out.println(list.toString());
             Address address = addressRepository.getAddressById(idAddress);
-            System.out.println("address:  "+address);
+            System.out.println("address:  " + address);
             address.setIsDefault(0);
             addressRepository.save(address);
             for (Address a : list) {

@@ -10,6 +10,7 @@
     box-sizing: border-box;
     position: relative;
     height: 60px;
+    /*background-color: rgba(220, 220, 220, 0.28);*/
     }
     
     #content form .table-responsive .table thead tr .text-right {

@@ -1,4 +1,4 @@
-// search at top
+
 $(function () {
     $(".input-text-search-top").click(() => {
         $(".contain-search-popular").css("display", "flex");
