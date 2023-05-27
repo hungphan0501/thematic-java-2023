@@ -209,72 +209,73 @@
         </button>
         <div class="col-sm-3 contain-filter-search" style="margin-right: 90px;">
             <div class="panel panel-default filter" style="padding-top: 0">
-                <div class="filter-block">
-                    <div class="list-group">
-                        <a class="list-group-item">Nhãn hàng</a>
-                        <div class="list-group-item">
-                            <div class="contain-dropdown-item filter-search">
-                                <label class="checkbox-filter-search">
-                                    <input name="brand" type="checkbox" value="1"/>
-                                    ADIDAS</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="brand" type="checkbox" value="2"/>
-                                    ON RUNNING</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="brand" type="checkbox" value="3"/>
-                                    PUMA</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="brand" type="checkbox" value="4"/>
-                                    Reebok</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="brand" type="checkbox" value="17"/>
-                                    NIKE</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="brand" type="checkbox" value="10"/>
-                                    ASICS</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="brand" type="checkbox" value="9"/>
-                                    VANS</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="brand" type="checkbox" value="7"/>
-                                    UNDER ARMOUR</label>
+                <form th:action="@{/products/filter}" method="GET">
+                    <div class="filter-block">
+                        <div class="list-group">
+                            <a class="list-group-item">Nhãn hàng</a>
+                            <div class="list-group-item">
+                                <div class="contain-dropdown-item filter-search">
+                                    <label class="checkbox-filter-search">
+                                        <input name="brand" type="checkbox" value="1"/>
+                                        ADIDAS</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="brand" type="checkbox" value="2"/>
+                                        ON RUNNING</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="brand" type="checkbox" value="3"/>
+                                        PUMA</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="brand" type="checkbox" value="4"/>
+                                        Reebok</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="brand" type="checkbox" value="17"/>
+                                        NIKE</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="brand" type="checkbox" value="10"/>
+                                        ASICS</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="brand" type="checkbox" value="9"/>
+                                        VANS</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="brand" type="checkbox" value="7"/>
+                                        UNDER ARMOUR</label>
+                                    <input type="text" name="brands">
 
+                                </div>
                             </div>
-                        </div>
-                        <a class="list-group-item">Kích thước</a>
-                        <div class="list-group-item">
-                            <div class="contain-dropdown-size filter-search">
-                                <!-- function displaySizeShoe() in khanh-js -->
-
-                                <label class="checkbox-filter-search">
-                                    <input name="size" type="checkbox" value="36"/>
-                                    SIZE 36</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="size" type="checkbox" value="37"/>
-                                    SIZE 37</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="size" type="checkbox" value="38"/>
-                                    SIZE 38</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="size" type="checkbox" value="39"/>
-                                    SIZE 39</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="size" type="checkbox" value="40"/>
-                                    SIZE 40</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="size" type="checkbox" value="41"/>
-                                    SIZE 41</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="size" type="checkbox" value="42"/>
-                                    SIZE 42</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="size" type="checkbox" value="43"/>
-                                    SIZE 43</label>
+                            <a class="list-group-item">Kích thước</a>
+                            <div class="list-group-item">
+                                <div class=" filter-search">
+                                    <label class="checkbox-filter-search">
+                                        <input name="size" type="checkbox" value="36"/>
+                                        SIZE 36</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="size" type="checkbox" value="37"/>
+                                        SIZE 37</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="size" type="checkbox" value="38"/>
+                                        SIZE 38</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="size" type="checkbox" value="39"/>
+                                        SIZE 39</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="size" type="checkbox" value="40"/>
+                                        SIZE 40</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="size" type="checkbox" value="41"/>
+                                        SIZE 41</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="size" type="checkbox" value="42"/>
+                                        SIZE 42</label>
+                                    <label class="checkbox-filter-search">
+                                        <input name="size" type="checkbox" value="43"/>
+                                        SIZE 43</label>
+                                    <input type="text" name="sizes">
+                                </div>
                             </div>
-                        </div>
-                        <a class="list-group-item">Đánh giá</a>
-                        <div class="list-group-item">
-                            <div id="filter-group2" class="contain-rate-search">
+                            <a class="list-group-item">Đánh giá</a>
+                            <div class="list-group-item">
+                                <div id="filter-group2" class="contain-rate-search">
                                     <span class="rate-search">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
@@ -283,41 +284,43 @@
                                         <i class="fas fa-star"></i>
                                         <span style="margin-left: 5px">5 sao</span>
                                     </span>
-                                <span class="rate-search">
+                                    <span class="rate-search">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <span style="margin-left: 5px">4 sao</span>
                                     </span>
-                                <span class="rate-search">
+                                    <span class="rate-search">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <span style="margin-left: 5px">3 sao</span>
                                     </span>
+                                </div>
                             </div>
-                        </div>
-                        <a class="list-group-item">Giá</a>
-                        <div class="list-group-item">
-                            <div id="filter-group3" class="contain-price-search">
-                                <form class="price-search-highest-lowest">
-                                    <input type="radio" id="price-search-highest" name="price-search-radio"
-                                           style="margin-top: 10px;">
-                                    <label for="price-search-highest">Từ cao đến thấp</label>
-                                    <input type="radio" id="price-search-lowest" name="price-search-radio"
-                                           style="margin-top: 10px;">
-                                    <label for="price-search-lowest">Từ thấp đến cao</label>
-                                </form>
+                            <a class="list-group-item">Giá</a>
+                            <div class="list-group-item">
+                                <div id="filter-group3" class="contain-price-search">
+                                    <form class="price-search-highest-lowest">
+                                        <input type="radio" id="price-search-highest" name="price-sort" value="1" checked
+                                               style="margin-top: 10px;">
+                                        <label for="price-search-highest">Từ cao đến thấp</label>
+                                        <input type="radio" id="price-search-lowest" name="price-sort" value="0"
+                                               style="margin-top: 10px;">
+                                        <label for="price-search-lowest" >Từ thấp đến cao</label>
+                                    </form>
 
+                                </div>
                             </div>
                         </div>
+                        <div class="panel-footer text-right">
+                            <button type="submit" id="button-filter" class="btn btn-primary btn-refine-search">Tìm kiếm
+                            </button>
+                        </div>
                     </div>
-                    <div class="panel-footer text-right">
-                        <button type="button" id="button-filter" class="btn btn-primary btn-refine-search">Tìm kiếm
-                        </button>
-                    </div>
-                </div>
+
+                </form>
             </div>
 
 
@@ -639,6 +642,35 @@
 </div>
 <!-- End: modal message -->
 <script src="./javascript/hung-js.js"></script>
+
+<script>
+    const checkboxes = document.querySelectorAll('input[name="brand"]');
+    const hiddenInput = document.querySelector('input[name="brands"]');
+
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('click', (event) => {
+            const selectedValues = Array.from(checkboxes)
+                .filter((checkbox) => checkbox.checked)
+                .map((checkbox) => checkbox.value);
+
+            hiddenInput.value = selectedValues.join('/');
+        });
+    });
+
+    const checkboxesSize = document.querySelectorAll('input[name="size"]');
+    const hiddenInputSize = document.querySelector('input[name="sizes"]');
+
+    checkboxesSize.forEach((checkbox) => {
+        checkbox.addEventListener('click', (event) => {
+            const selectedValues = Array.from(checkboxesSize)
+                .filter((checkbox) => checkbox.checked)
+                .map((checkbox) => checkbox.value);
+
+            hiddenInputSize.value = selectedValues.join('/');
+        });
+    });
+</script>
+
 </body>
 
 </html>

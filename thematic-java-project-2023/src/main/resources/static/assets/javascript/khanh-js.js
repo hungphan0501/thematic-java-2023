@@ -385,16 +385,16 @@ function displayPagination() {
 
 
 
-// function displaySizeShoe() {
-//     let sizeArr = [34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]
-//     sizeArr.forEach((value) => {
-//         $(".contain-dropdown-size").append(
-//             " <label class=\"checkbox-filter-search\">\n" +
-//             " <input name=\"filter[]\" type=\"checkbox\" value=\"1\" />\n" +
-//             value + "</label>"
-//         );
-//     });
-// }
+function displaySizeShoe() {
+    let sizeArr = [34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]
+    sizeArr.forEach((value) => {
+        $(".contain-dropdown-size").append(
+            " <label class=\"checkbox-filter-search\">\n" +
+            " <input name=\"filter[]\" type=\"checkbox\" value=\"1\" />\n" +
+            value + "</label>"
+        );
+    });
+}
 
 $(displaySizeShoe)
 

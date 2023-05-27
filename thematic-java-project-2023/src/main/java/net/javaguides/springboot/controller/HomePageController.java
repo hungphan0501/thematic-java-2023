@@ -36,24 +36,27 @@ public class HomePageController {
     @GetMapping("/")
     public String getHomePage(Model model) {
 
-        List<Product> productsNew= productService.getAllProductNew();
-        List<Product> productsDiscount= productService.getAllProductDiscount();
-        List<Product> productsBestSeller= productService.getAllProductBestSeller();
+        List<Product> productsNew = productService.getAllProductNew();
+        List<Product> productsDiscount = productService.getAllProductDiscount();
+        List<Product> productsBestSeller = productService.getAllProductBestSeller();
         double totalPrice = 0;
         List<Cart> carts = getCartsOfUser();
-        for(Cart cart : carts) {
-            totalPrice +=cart.getTotalPrice();
+        if(carts!= null){
+            for (Cart cart : carts) {
+                totalPrice += cart.getTotalPrice();
+            }
         }
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("productsNew", productsNew);
-        model.addAttribute("carts",carts);
+        model.addAttribute("carts", carts);
         model.addAttribute("productsDiscount", productsDiscount);
         model.addAttribute("productsBestSeller", productsBestSeller);
         return "user/home";
     }
+
     @GetMapping("/search")
-    public String searchByHeader(@RequestParam("content") String content,Model model) {
-        List<Product> result= new ArrayList<>();
+    public String searchByHeader(@RequestParam("content") String content, Model model) {
+        List<Product> result = new ArrayList<>();
 
         String[] contents = content.split(" ");
         for (String c : contents) {
@@ -70,13 +73,16 @@ public class HomePageController {
     }
 
     public List<Cart> getCartsOfUser() {
-        int idUser = 0;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             String username = authentication.getName();
             User user = userRepository.findByEmail(username);
-            idUser = user.getId();
-        }
-         return cartRepository.getAllProductInCartOfCustomer(idUser);
+            if(user != null){
+                return cartRepository.getAllProductInCartOfCustomer(user.getId());
+            }
+            return null;
+
+        } else return null;
+
     }
 }

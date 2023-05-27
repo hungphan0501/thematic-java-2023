@@ -11,9 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/products")
@@ -72,44 +71,50 @@ public class ProductController {
 
     //lọc sản phẩm
     @GetMapping("/filter")
-    public ResponseEntity<List<Product>> filterProduct(@RequestParam(value = "size", required = false) List<Integer> sizes,
-                                                       @RequestParam(value = "brand", required = false) List<Integer> brands,
-                                                       @RequestParam(value = "min_price", required = false) Optional<Integer> minPrice,
-                                                       @RequestParam(value = "max_price", required = false) Optional<Integer> maxPrice) {
+    public String filterProduct(@RequestParam("brands") String brand,
+                                @RequestParam("sizes") String size,
+                                @RequestParam("price-sort") int priceSort, Model model) {
 
+        String[] sizeStrings = size.split("/");
+        List<Integer> sizes = Arrays.stream(sizeStrings)
+                .filter(s -> !s.isEmpty())
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        String[] brandStrings = brand.split("/");
+        List<Integer> brands = Arrays.stream(brandStrings)
+                .filter(s -> !s.isEmpty())
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        System.out.println("brand[] " +brands + "\tsizes[] " +sizes);
         List<Product> list = null;
-        if (sizes!=null && brands !=null && minPrice.isPresent()==true && maxPrice .isPresent()==true)
-            //all
-            list = productService.filterProducts(sizes, brands, minPrice.get(), maxPrice.get());
-        if (sizes==null && brands!=null && minPrice.isPresent()==true && maxPrice.isPresent()==true)
-            //brand and price
-            list = productService.filterProductsByBrandAndPrice(brands, minPrice.get(), maxPrice.get());
-        if (sizes!=null && brands==null && minPrice.isPresent()==true && maxPrice.isPresent()==true)
-            //sizes and price
-            list = productService.filterProductsExceptBrand(sizes, minPrice.get(), maxPrice.get());
-        if (sizes!=null && brands !=null && minPrice.isPresent()==false && maxPrice.isPresent()==false)
-            //sizes and brands
-            list = productService.filterProductsBySizesAndBrand(sizes, brands);
-        if (sizes==null && brands ==null && minPrice.isPresent()==true && maxPrice.isPresent()==true)
-            //price
-            list = productService.filterProductsBYPrice(minPrice.get(), maxPrice.get());
-        if (sizes==null && brands !=null && minPrice.isPresent()==false && maxPrice.isPresent()==false)
-            //brand
-            list = productService.filterProductsByBrand(brands);
-        if (sizes!=null && brands ==null && minPrice.isPresent()==false && maxPrice.isPresent()==false)
-            //sizes
-            list = productService.filterProductsBySizes(sizes);
-
-        try {
-            if (list.isEmpty())
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            return new ResponseEntity<List<Product>>(list, HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (!sizes.isEmpty() && !brands.isEmpty()) {
+            if (priceSort == 1) {
+                list = productService.filterProductsDesc(sizes, brands);
+            } else {
+                list = productService.filterProductsAsc(sizes, brands);
+            }
+        } else if (!brands.isEmpty()) {
+            list = productService.filterProductsByBrandAndPrice(brands);
+            if (priceSort == 0) {
+                Collections.reverse(list);
+            }
+        } else if (!sizes.isEmpty()) {
+            list = productService.filterProductsExceptBrand(sizes);
+            if (priceSort == 0) {
+                Collections.reverse(list);
+            }
+        } else {
+            list = productService.filterProductsBYPrice();
+            if (priceSort == 0) {
+                Collections.reverse(list);
+            }
         }
 
-
+        model.addAttribute("products", list);
+        return "user/category";
     }
+
 
 }
