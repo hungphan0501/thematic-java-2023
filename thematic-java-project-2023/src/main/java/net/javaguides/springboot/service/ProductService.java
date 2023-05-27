@@ -70,7 +70,7 @@ public class ProductService {
     }
 
     public List<Product> getAllProductNew() {
-        List<Product> products = productRepository.getAllProductNew();
+        List<Product> products = productRepository.getAllProductNew(0);
         int count= 10;
         if (products.size() <= count) {
             List<Product> result = new ArrayList<>(products);

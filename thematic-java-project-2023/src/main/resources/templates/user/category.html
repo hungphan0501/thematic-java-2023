@@ -208,48 +208,68 @@
             <i class="fas fa-sliders-h"></i>
         </button>
         <div class="col-sm-3 contain-filter-search" style="margin-right: 90px;">
-            <div class="panel panel-default filter">
+            <div class="panel panel-default filter" style="padding-top: 0">
                 <div class="filter-block">
                     <div class="list-group">
                         <a class="list-group-item">Nhãn hàng</a>
                         <div class="list-group-item">
                             <div class="contain-dropdown-item filter-search">
                                 <label class="checkbox-filter-search">
-                                    <input name="filter[]" type="checkbox" value="1"/>
-                                    ASICS</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="filter[]" type="checkbox" value="2"/>
+                                    <input name="brand" type="checkbox" value="1"/>
                                     ADIDAS</label>
                                 <label class="checkbox-filter-search">
-                                    <input name="filter[]" type="checkbox" value="3"/>
-                                    KARRIMOR</label>
+                                    <input name="brand" type="checkbox" value="2"/>
+                                    ON RUNNING</label>
                                 <label class="checkbox-filter-search">
-                                    <input name="filter[]" type="checkbox" value="4"/>
-                                    NIKE</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="filter[]" type="checkbox" value="5"/>
-                                    Reebok</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="filter[]" type="checkbox" value="6"/>
-                                    NEW BALANCE</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="filter[]" type="checkbox" value="7"/>
-                                    SLAZENGER</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="filter[]" type="checkbox" value="8"/>
-                                    UNDER ARMOUR</label>
-                                <label class="checkbox-filter-search">
-                                    <input name="filter[]" type="checkbox" value="9"/>
+                                    <input name="brand" type="checkbox" value="3"/>
                                     PUMA</label>
                                 <label class="checkbox-filter-search">
-                                    <input name="filter[]" type="checkbox" value="10"/>
+                                    <input name="brand" type="checkbox" value="4"/>
+                                    Reebok</label>
+                                <label class="checkbox-filter-search">
+                                    <input name="brand" type="checkbox" value="17"/>
+                                    NIKE</label>
+                                <label class="checkbox-filter-search">
+                                    <input name="brand" type="checkbox" value="10"/>
+                                    ASICS</label>
+                                <label class="checkbox-filter-search">
+                                    <input name="brand" type="checkbox" value="9"/>
                                     VANS</label>
+                                <label class="checkbox-filter-search">
+                                    <input name="brand" type="checkbox" value="7"/>
+                                    UNDER ARMOUR</label>
+
                             </div>
                         </div>
                         <a class="list-group-item">Kích thước</a>
                         <div class="list-group-item">
                             <div class="contain-dropdown-size filter-search">
                                 <!-- function displaySizeShoe() in khanh-js -->
+
+                                <label class="checkbox-filter-search">
+                                    <input name="size" type="checkbox" value="36"/>
+                                    SIZE 36</label>
+                                <label class="checkbox-filter-search">
+                                    <input name="size" type="checkbox" value="37"/>
+                                    SIZE 37</label>
+                                <label class="checkbox-filter-search">
+                                    <input name="size" type="checkbox" value="38"/>
+                                    SIZE 38</label>
+                                <label class="checkbox-filter-search">
+                                    <input name="size" type="checkbox" value="39"/>
+                                    SIZE 39</label>
+                                <label class="checkbox-filter-search">
+                                    <input name="size" type="checkbox" value="40"/>
+                                    SIZE 40</label>
+                                <label class="checkbox-filter-search">
+                                    <input name="size" type="checkbox" value="41"/>
+                                    SIZE 41</label>
+                                <label class="checkbox-filter-search">
+                                    <input name="size" type="checkbox" value="42"/>
+                                    SIZE 42</label>
+                                <label class="checkbox-filter-search">
+                                    <input name="size" type="checkbox" value="43"/>
+                                    SIZE 43</label>
                             </div>
                         </div>
                         <a class="list-group-item">Đánh giá</a>
@@ -290,27 +310,6 @@
                                     <label for="price-search-lowest">Từ thấp đến cao</label>
                                 </form>
 
-                                <div class="contain-select-price">
-                                        <span class="price-search" id="price-search-01">
-                                            Dưới 1.000.000 Đ
-                                        </span>
-                                    <span class="price-search" id="price-search-02">
-
-                                            Từ 1.000.000 Đ
-                                           Đến
-                                            3.000.000 Đ
-
-                                        </span>
-                                    <span class="price-search" id="price-search-03">
-                                            Trên 3.000.000 Đ
-                                        </span>
-                                </div>
-
-
-                                <div class="min-max-price-search">
-                                    <input class="min-search" placeholder="Từ">
-                                    <input class="max-search" placeholder="Đến">
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -354,10 +353,13 @@
                     <div class="product-layout product-grid col-lg-4 col-md-5 col-sm-6 col-xs-10"
                          style="background-color: white; padding: 10px 0">
                         <div class="product-thumb">
-                            <div class="image product-imageblock">
-                                <a th:href="@{/productDetai/detail(idProduct=${product.id})}">
-                                    <div class="related-product-sale">
-                                        <h5 style="margin-top: 10px"> -20%</h5>
+                            <div class="image product-imageblock" style="height: 200px !important">
+                                <a th:href="@{/product/detail/{idProduct}(idProduct=${product.id})}">
+                                    <div class="related-product-sale" th:if="${product.saleRate == 0}" style="top: 0px !important;">
+                                        <h5 style="margin-top: 10px" >New</h5>
+                                    </div>
+                                    <div class="related-product-sale" th:if="${product.saleRate > 0}" style="top: 0px !important;">
+                                        <h5 style="margin-top: 10px" th:text="'-' +${product.saleRate}+'%'"> -20%</h5>
                                     </div>
                                     <img th:src="@{'/assets/images/product/' + ${product.getImg()}}" id="imgCategory"
                                          alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy"
@@ -374,7 +376,7 @@
                             <div class="caption product-detail intro-product-detail-list">
                                 <h2 id="brandCategory" style="margin-top: 5px; text-transform: uppercase"><span th:text="${brandName}"></span></h2>
                                 <h4 class="product-name">
-                                    <a th:href="@{/productDetai/detail(idProduct=${product.id})}" id="nameCategory"  title="lorem ippsum dolor dummy"
+                                    <a th:href="@{/product/detail/{idProduct}(idProduct=${product.id})}" id="nameCategory"  title="lorem ippsum dolor dummy"
                                        style="text-transform: capitalize">
                                         <span th:text="${product.getName()}"></span></a>
                                 </h4>

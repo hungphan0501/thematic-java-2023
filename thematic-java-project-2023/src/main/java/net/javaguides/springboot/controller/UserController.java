@@ -219,5 +219,24 @@ public class UserController {
     public User getUserById(int idUser) {
         return userRepository.getUserById(idUser);
     }
-
+    public String nameByEmail() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            User user = userRepository.findByEmail(username);
+            return user.getName();
+        } else {
+            return "";
+        }
+    }
+    public String getAvatar() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            User user = userRepository.findByEmail(username);
+            return user.getAvatar();
+        } else {
+            return "";
+        }
+    }
 }
