@@ -324,7 +324,7 @@
         <div class="col-sm-4 contain-pay-all bg-item pd-5 bd-rd">
             <!-- thanh toán -->
             <h2>Chọn hình thức thanh toán cho đơn hàng này.</h2>
-            <form th:action="@{/paypal/pay}" id="formCheckOut" class="contain-form-payment"  method="POST">
+            <form th:action="@{/payment/paypal/pay}" id="formCheckOut" class="contain-form-payment"  method="POST">
                 <input type="text" name="cartIds"  th:value="${cartIds}" />
                 <div class="payment-input payment-input-active"  id="contain-payment-cod">
                     <input type="hidden" name="idAddress" value="9">

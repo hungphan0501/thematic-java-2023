@@ -58,23 +58,27 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT SUM(p.price*(100 - p.saleRate)/100) FROM Product p WHERE p.saleRate> 0")
     double getSpending();
 
-    @Query("SELECT p FROM Product p JOIN Brand b ON p.brand = b.id WHERE b.name=?1")
-    List<Product> getAllByNameBrand(String nameBrand);
+    @Query("SELECT p FROM Product p JOIN Brand b ON p.brand = b.id WHERE b.name LIKE CONCAT('%', :name, '%')")
+    List<Product> getAllByNameBrand(String name);
+
+    @Query("SELECT p FROM Product p JOIN Category b ON p.brand = b.id WHERE b.name LIKE CONCAT('%', :name, '%')")
+    List<Product> getAllByNameCategory(String name);
 
     List<Product> getAllByPrice(int price);
 
     @Query("SELECT p FROM Product p WHERE p.name LIKE CONCAT('%', :name, '%')")
     List<Product> getAllByName(String name);
 
+
     @Query(value = "SELECT * FROM Product ORDER BY id ASC LIMIT 20", nativeQuery = true)
     List<Product> getManage();
 
     Product getProductById(int id);
 
-    @Query("SELECT p FROM Product p ORDER BY p.create_at ASC")
-    List<Product> getAllProductNew();
+    @Query("SELECT p FROM Product p WHERE p.saleRate=?1 ORDER BY p.create_at ASC")
+    List<Product> getAllProductNew(int sale);
 
-    @Query("SELECT p FROM Product p ORDER BY p.saleRate ASC")
+    @Query("SELECT p FROM Product p ORDER BY p.saleRate DESC")
     List<Product> getAllProductDiscount();
 
     @Query("SELECT p FROM Product p" )

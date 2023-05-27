@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/paypal")
+@RequestMapping("/payment/paypal")
 public class PaypalController {
 
     @Autowired
@@ -58,9 +58,9 @@ public class PaypalController {
         System.out.println("-id-cart---------------" + listCartId[1]);
         try {
             String cancelUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-                    + request.getContextPath() + "/paypal/cancel";
+                    + request.getContextPath() + "/payment/paypal/cancel";
             String successUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-                    + request.getContextPath() + "/paypal/success";
+                    + request.getContextPath() + "/payment/paypal/success";
 
             // create payment
 
@@ -74,7 +74,7 @@ public class PaypalController {
         } catch (PayPalRESTException e) {
             // handle exception
         }
-        redirectView.setUrl("/paypal/cancel");
+        redirectView.setUrl("/payment/paypal/cancel");
         return redirectView;
     }
 //    @GetMapping("/pay")
