@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -30,22 +31,27 @@ public class ProductService {
         return productRepository.findByPrices(belowPrice, abovePrice);
     }
 
-    public List<Product> filterProducts(List<Integer> sizes, List<Integer> brands, int minPrice,int maxPrice) {
-        return productRepository.findBySizeInAndBrandAndPriceBetween(sizes, brands,minPrice, maxPrice);
+    public List<Product> filterProductsDesc(List<Integer> sizes, List<Integer> brands) {
+        return productRepository.findBySizeInAndBrandAndPriceBetweenDesc(sizes, brands);
+    }
+    public List<Product> filterProductsAsc(List<Integer> sizes, List<Integer> brands) {
+        List<Product> productList = productRepository.findBySizeInAndBrandAndPriceBetweenDesc(sizes, brands);
+        Collections.reverse(Collections.singletonList(productList));
+        return productList;
     }
 
-    public List<Product> filterProductsByBrandAndPrice( List<Integer> brands, int minPrice,int maxPrice) {
-        return productRepository.findByBrandAndPriceBetween(brands,minPrice, maxPrice);
+    public List<Product> filterProductsByBrandAndPrice( List<Integer> brands) {
+        return productRepository.findByBrandAndPriceBetween(brands);
     }
-    public List<Product> filterProductsExceptBrand( List<Integer> sizes, int minPrice,int maxPrice) {
-        return productRepository.findBySizeInAndPriceBetween(sizes,minPrice, maxPrice);
+    public List<Product> filterProductsExceptBrand( List<Integer> sizes) {
+        return productRepository.findBySizeInAndPriceBetween(sizes);
     }
     public List<Product> filterProductsBySizesAndBrand( List<Integer> sizes, List<Integer> brands) {
         return productRepository.findBySizeInAndBrand(sizes,brands);
     }
 
-    public List<Product> filterProductsBYPrice( int minPrice,int maxPrice) {
-        return productRepository.findByPrice(minPrice, maxPrice);
+    public List<Product> filterProductsBYPrice() {
+        return productRepository.findByPrice();
     }
 
     public List<Product> filterProductsByBrand( List<Integer> brands) {

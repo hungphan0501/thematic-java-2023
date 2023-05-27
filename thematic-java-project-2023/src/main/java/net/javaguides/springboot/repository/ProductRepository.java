@@ -21,24 +21,25 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     public List<Product> findByPrices(int belowPrice, int abovePrice);
 
     //all
-    @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE pd.size IN :sizes AND p.brand IN :brands AND p.price BETWEEN :minPrice AND :maxPrice")
-    List<Product> findBySizeInAndBrandAndPriceBetween(@Param("sizes") List<Integer> sizes, @Param("brands") List<Integer> brands, @Param("minPrice") int minPrice, @Param("maxPrice") int maxPrice);
+    @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE pd.size IN :sizes AND p.brand IN :brands ORDER BY p.price DESC ")
+    List<Product> findBySizeInAndBrandAndPriceBetweenDesc(@Param("sizes") List<Integer> sizes, @Param("brands") List<Integer> brands);
 
     //price and brands
-    @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE p.brand IN :brands AND p.price BETWEEN :minPrice AND :maxPrice")
-    List<Product> findByBrandAndPriceBetween(@Param("brands") List<Integer> brands, @Param("minPrice") int minPrice, @Param("maxPrice") int maxPrice);
+    @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE p.brand IN :brands ORDER BY p.price DESC")
+    List<Product> findByBrandAndPriceBetween(@Param("brands") List<Integer> brands);
 
     //sizes and price
-    @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE pd.size IN :sizes  AND p.price BETWEEN :minPrice AND :maxPrice")
-    List<Product> findBySizeInAndPriceBetween(@Param("sizes") List<Integer> sizes, @Param("minPrice") int minPrice, @Param("maxPrice") int maxPrice);
+    @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE pd.size IN :sizes  ORDER BY p.price DESC")
+    List<Product> findBySizeInAndPriceBetween(@Param("sizes") List<Integer> sizes );
 
     //sizes and brand
     @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE pd.size IN :sizes AND p.brand IN :brands")
     List<Product> findBySizeInAndBrand(@Param("sizes") List<Integer> sizes, @Param("brands") List<Integer> brands);
 
     //price
-    @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE p.price BETWEEN :minPrice AND :maxPrice")
-    List<Product> findByPrice(@Param("minPrice") int minPrice, @Param("maxPrice") int maxPrice);
+    @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct  order by p.price DESC")
+    List<Product> findByPrice();
+
 
     //brand
     @Query("SELECT p FROM Product p JOIN ProductDetail pd ON p.id=pd.idProduct WHERE p.brand IN :brands")

@@ -54,6 +54,9 @@ public class CartController {
         if (authentication != null && authentication.isAuthenticated()) {
             String username = authentication.getName();
             User user = userRepository.findByEmail(username);
+            if (user == null) {
+                return "redirect:/login";
+            }
             idUser = user.getId();
         }
         List<Cart> cartList = cartService.getAllProductInCartOfCustomer(idUser);
