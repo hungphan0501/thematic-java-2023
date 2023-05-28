@@ -1,10 +1,9 @@
 package net.javaguides.springboot.controller;
 
-import net.javaguides.springboot.model.Address;
-import net.javaguides.springboot.model.Cart;
-import net.javaguides.springboot.model.Comment;
-import net.javaguides.springboot.model.User;
+import net.javaguides.springboot.model.*;
 import net.javaguides.springboot.repository.AddressRepository;
+import net.javaguides.springboot.repository.OrderDetailRepository;
+import net.javaguides.springboot.repository.OrdersRepository;
 import net.javaguides.springboot.repository.UserRepository;
 import net.javaguides.springboot.web.dto.ChangeUserInforDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -38,6 +39,10 @@ public class UserController {
 
     @Autowired
     AddressRepository addressRepository;
+    @Autowired
+    OrdersRepository ordersRepository;
+    @Autowired
+    OrderDetailRepository orderDetailRepository;
 
     @GetMapping("/infor")
     public String getInForUser(Model model) {
@@ -46,9 +51,11 @@ public class UserController {
             String username = authentication.getName();
             User user = userRepository.findByEmail(username);
             if (user != null) {
-                model.addAttribute("user", user);
+                List<Orders> ordersList = ordersRepository.getAllByIdUser(user.getId());
                 List<Address> addresses = addressRepository.getAddressByIdUser(user.getId());
                 model.addAttribute("addresses", addresses);
+                model.addAttribute("user", user);
+                model.addAttribute("orders", ordersList);
             } else {
                 return "redirect:/login";
             }
@@ -56,6 +63,24 @@ public class UserController {
         return "user/customer";
     }
 
+    @GetMapping("/history/{idOrder}")
+    public String getHistory(@PathVariable("idOrder") int idOrder ,Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            User user = userRepository.findByEmail(username);
+            if (user != null) {
+                List<OrderDetail> orderDetails = orderDetailRepository.getAllByIdOrder(idOrder);
+                model.addAttribute("orderDetails", orderDetails);
+                model.addAttribute("user", user);
+            } else {
+                return "redirect:/login";
+            }
+        }
+        model.addAttribute("orderId", idOrder);
+
+        return "user/orders";
+    }
 
     @PostMapping("/infor/update")
     public String update(User user, Model model) {
@@ -76,6 +101,7 @@ public class UserController {
 
     @PostMapping("/infor/update-address/{idAddress}")
     public String updateAddress(Address address, @PathVariable("idAddress") int idAddress, Model model) {
+        RedirectView redirectView = new RedirectView();
         Address addressById = addressRepository.getAddressById(idAddress);
         System.out.println(addressById);
         addressById.setCity(address.getCity());
@@ -86,13 +112,9 @@ public class UserController {
         addressById.setUserName(address.getUserName());
         addressById.setIsDefault(address.getIsDefault());
         addressRepository.save(addressById);
-        if (addressById != null) {
-            model.addAttribute("message", "Cập nhật địa chỉ thành công!");
-        } else {
-            model.addAttribute("message", "Cập nhật địa chỉ không thành công!");
 
-        }
-        return "user/customer";
+
+        return "redirect:/user/infor";
     }
 
     @PostMapping("/upload")
@@ -216,9 +238,64 @@ public class UserController {
         return redirectView;
     }
 
+//    @GetMapping("/infor/order-history")
+//    public String getUserDetailPage( Model model) {
+//        int idUser = 0;
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication != null && authentication.isAuthenticated()) {
+//            String username = authentication.getName();
+//            User user = userRepository.findByEmail(username);
+//            idUser = user.getId();
+//        }
+//
+//        User user = userRepository.getUserById(idUser);
+//        List<Orders> ordersList = ordersRepository.getAllByIdUser(idUser);
+//        System.out.println(ordersList);
+//        int total = 0;
+//        for (Orders orders : ordersList) {
+//            total += orders.getTotalPrice();
+//        }
+//
+//        model.addAttribute("user", user);
+//        model.addAttribute("orders", ordersList);
+//        model.addAttribute("total", total);
+//        return "user/customer";
+//    }
+
+    @PostMapping("/infor/order-history/details")
+    public String getOrderDetails(@RequestParam("orderId") int orderId, Model model) {
+        int idUser = 0;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            User user = userRepository.findByEmail(username);
+            idUser = user.getId();
+        }
+
+        List<OrderDetail> orderDetails = orderDetailRepository.getAllByIdOrder(orderId);
+        User user = userRepository.getUserById(idUser);
+        List<Orders> ordersList = ordersRepository.getAllByIdUser(idUser);
+        int total = 0;
+        for (Orders orders : ordersList) {
+            total += orders.getTotalPrice();
+        }
+        model.addAttribute("total", total);
+        model.addAttribute("user", user);
+        model.addAttribute("orderId", orderId);
+        model.addAttribute("orderDetails", orderDetails);
+        return "user/customer";
+    }
+
+    public Product getProductByIdProductDetail(int idProductDetail) {
+        ProductDetail productDetail = orderDetailRepository.getProductDetailById(idProductDetail);
+        Product product = orderDetailRepository.getProductByIdProductDetail(productDetail.getId());
+        return product;
+    }
+
     public User getUserById(int idUser) {
         return userRepository.getUserById(idUser);
     }
+
     public String nameByEmail() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
@@ -229,6 +306,7 @@ public class UserController {
             return "";
         }
     }
+
     public String getAvatar() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {

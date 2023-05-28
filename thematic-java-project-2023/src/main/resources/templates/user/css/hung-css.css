@@ -46,6 +46,10 @@
     padding: 10px;
 }
 
+.list-order-detail-history{
+    display: none;
+}
+
 .modal-close-register,
 .modal-close {
     position: absolute;

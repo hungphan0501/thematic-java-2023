@@ -57,4 +57,14 @@ public class OrderDetail {
     public void setIdProductDetail(int idProductDetail) {
         this.idProductDetail = idProductDetail;
     }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "id=" + id +
+                ", idOrder=" + idOrder +
+                ", quantity=" + quantity +
+                ", idProductDetail=" + idProductDetail +
+                '}';
+    }
 }

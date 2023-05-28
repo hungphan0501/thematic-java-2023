@@ -871,6 +871,10 @@
         display: grid;
     }
 
+    .hidden{
+        display: none;
+    }
+
     .contain-adjust-address .label-address {
         margin: 10px 20px;
     }
