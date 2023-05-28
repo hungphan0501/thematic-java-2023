@@ -49,30 +49,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers(
-//				 "/registration**",
-//					"/productDetail/**",
-//					"/api/linkImg/**",
-//					"/forgotPassword/**",
-//					"/forgotPasswordPage/**",
-//					"/products/**",
-//	                "/js/**",
-//	                "/css/**",
-//	                "/img/**").permitAll()
-//		.anyRequest().authenticated()
-//		.and()
-//		.formLogin()
-//		.loginPage("/login")
-//		.successHandler(customAuthenticationSuccessHandler) // Sử dụng custom authentication success handler
-//		.permitAll()
-//		.and()
-//		.logout()
-//		.invalidateHttpSession(true)
-//		.clearAuthentication(true)
-//		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//		.logoutSuccessUrl("/login?logout")
-//		.permitAll();
-
 		http.authorizeRequests()
 				.antMatchers(
 						"/registration**",
@@ -91,7 +67,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 						"/css/**",
 						"/img/**"
 				).permitAll()
-				.antMatchers("/admin/**").hasRole("ADMIN")
+				.antMatchers("/admin/**",
+						"/products-manage/**",
+						"/users-manage/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()

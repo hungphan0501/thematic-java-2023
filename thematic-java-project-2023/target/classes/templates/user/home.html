@@ -322,12 +322,10 @@
                 <div id="tabs" class="customtab-wrapper">
                     <ul class='customtab-inner'>
                         <li class='tab'><a href="#tab-latest">Sản Phẩm Mới Nhất</a></li>
-                        <li class='tab'><a href="#tab-special">Sản Phẩm Giảm Giá</a></li>
-                        <li class='tab'><a href="#tab-bestseller">Sản Phẩm Bán Chạy</a></li>
                     </ul>
                 </div>
                 <div id="tab-latest" class="tab-content">
-                    <div class="box">
+                    <div class="">
                         <div id="latest-slidertab" class="row owl-carousel product-slider">
                             <div class="item" th:each="product : ${productsNew}">
                                 <div class="product-thumb transition">
@@ -348,7 +346,7 @@
                                                     class="fas fa-shopping-cart"></i></button>
                                         </div>
                                     </div>
-                                    <div class="caption product-detail">
+                                    <div class="caption product-detail" style="height: 55px;">
                                         <h4 class="product-name"><a th:href="@{/product/detail/{idProduct}(idProduct=${product.id})}" title="lorem ippsum dolor dummy"
                                                                     th:text="${product.getName()}"></a></h4>
                                         <p class="price product-price" th:text="${product.getPrice() +' $'}"></p>
@@ -378,9 +376,17 @@
                         </div>
                     </div>
                 </div>
-                <!-- tab-latest-->
+
+            </div>
+            <div class="customtab">
+                <div  class="customtab-wrapper">
+                    <ul class='customtab-inner'>
+                        <li class='tab'><a style="border-bottom: 5px solid #000;color: #000;">Sản Phẩm Giảm Giá</a></li>
+                    </ul>
+                </div>
+
                 <div id="tab-special" class="tab-content">
-                    <div class="box">
+                    <div class="">
                         <div id="special-slidertab" class="row owl-carousel product-slider">
                             <div class="item" th:each="product : ${productsDiscount}">
                                 <div class="product-thumb transition">
@@ -402,7 +408,7 @@
                                                     class="fas fa-shopping-cart"></i></button>
                                         </div>
                                     </div>
-                                    <div class="caption product-detail">
+                                    <div class="caption product-detail " style="height: 55px;">
                                         <h4 class="product-name"><a
                                                 th:href="@{/product/detail/{idProduct}(idProduct=${product.id})}"
                                                 title="lorem ippsum dolor dummy" th:text="${product.getName()}"></a>
@@ -429,8 +435,16 @@
                     </div>
                 </div>
                 <!-- tab-special-->
+            </div>
+            <div class="customtab">
+                <div id="tabs" class="customtab-wrapper">
+                    <ul class='customtab-inner'>
+                        <li class='tab'><a style="border-bottom: 5px solid #000;color: #000;">Sản Phẩm Bán Chạy</a></li>
+                    </ul>
+                </div>
+                <!-- tab-special-->
                 <div id="tab-bestseller" class="tab-content">
-                    <div class="box">
+                    <div class="">
                         <div id="bestseller-slidertab" class="row owl-carousel product-slider">
                             <div class="item" th:each="product : ${productsBestSeller}">
                                 <div class="product-thumb transition">
@@ -452,7 +466,7 @@
                                                     class="fas fa-shopping-cart"></i></button>
                                         </div>
                                     </div>
-                                    <div class="caption product-detail">
+                                    <div class="caption product-detail" style="height: 55px;">
                                         <h4 class="product-name"><a
                                                 th:href="@{/product/detail/{idProduct}(idProduct=${product.id})}"
                                                 title="lorem ippsum dolor dummy" th:text="${product.getName()}"></a>
@@ -479,7 +493,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
