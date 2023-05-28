@@ -485,26 +485,40 @@
                             <ul class="list-inline">
                                 <li class="account"><a href="/admin/pixelwibes.com/template/ebazar/html/dist/index.html"
                                                        class="notify"><i
-                                        class="fas fa-bell color-header" style="margin-right: 10px"></i><span
-                                        style="margin: 0 5px;" class="color-header">Thông
-                                        báo</span><span style="margin-right: 10px;"
-                                                        class="color-header">(0)</span></a>
+                                        class="fas fa-bell color-header" style="margin-right: 10px"></i>
+                                    <sp
+                                            style="margin: 0 5px;" class="color-header">Thông
+                                        báo
+                                    </sp>
+                                    <span style="margin-right: 10px;"
+                                          class="color-header">(0)</span></a>
                                 </li>
                                 <li class="account"><a href="customer.html" id="wishlist-total"
                                                        title="Wish List (0)"><i
                                         class="fa fa-heart color-header"></i><span
                                         class="color-header">Danh sách
-                                                    yêu thích</span><span style="margin-right: 10px;"
-                                                                          class="color-header">(0)</span></a>
+                                                yêu thích</span><span style="margin-right: 10px;"
+                                                                      class="color-header">(0)</span></a>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"
+                                       sec:authorize="!isAuthenticated()">
                                         <i class="fa fa-user color-header"></i><span class="color-header">Tài
-                                                    khoản</span> <span style=" font-size: 15px;"
-                                                                       class="caret color-header"></span></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="#" class="js-login" id="Login">Đăng Nhập</a></li>
-                                        <li><a href="#" class="js_register">Đăng Ký</a></li>
+                                                khoản</span> <span style=" font-size: 15px;"
+                                                                   class="caret color-header"></span></a>
+                                    <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"
+                                       sec:authorize="isAuthenticated()">
+                                        <i class="fa fa-user color-header"></i><span class="color-header"
+                                                                                     th:text="'Hi! '+${@userController.nameByEmail()}">
+                                                </span> <span style=" font-size: 15px;"
+                                                              class="caret color-header"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right" sec:authorize="!isAuthenticated()">
+                                        <li><a th:href="@{/login}" class="js-login">Đăng Nhập</a></li>
+                                        <li><a th:href="@{/registration}" class="js_register">Đăng Ký</a></li>
+                                    </ul>
+                                    <ul class="dropdown-menu dropdown-menu-right" sec:authorize="isAuthenticated()">
+                                        <li><a th:href="@{/user/infor}" class="js-login">Hồ sơ</a></li>
+                                        <li><a th:href="@{/logout}" class="js_register">Đăng xuất</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -522,67 +536,93 @@
                     <div>
                         <div class="header-middle-top">
                             <div id="logo" class="color-header" style="margin: 0; padding: 0;">
-                                <a th:href="@{/}"><img th:src="@{/assets/images/logo.png}" title="E-Commerce"
-                                                       alt="E-Commerce"
+                                <a th:href="@{/}"><img th:src="@{assets/images/logo.png}" src="/assets/images/logo.png"
+                                                       title="E-Commerce" alt="E-Commerce"
                                                        class="logo-header"/></a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="text-center contain-search">
-                    <div class="contain-search-product-popular">
-                        <form id="form-header-search" class="search-product">
-                            <input name="input-search-header" id="input-search-header"
-                                   class="input-text-search-top"
-                                   placeholder="Tìm kiếm" type="text" autocomplete="off"/>
-                            <button type="submit" class="search-product-top" id="button-search-header"><i
-                                    class="fa fa-search"></i></button>
-                        </form>
-                        <div class="contain-search-popular">
+                <form th:action="@{/search}" method="GET">
+                    <div class="text-center contain-search">
+                        <div class="contain-search-product-popular">
+                            <div class="search-product">
+                                <input class="input-text-search-top" placeholder="Tìm kiếm" type="text" name="content">
+                                <button class="search-product-top"><i class="fa fa-search"></i></button>
+                            </div>
+                            <div class="contain-search-popular">
+                                <span>X-Ray 2</span>
+                                <span>Nike Air Force 2</span>
+                                <span>Under Armour darkside</span>
+                                <span>X9000L4 Shoes Mens</span>
+                                <span>Adidas dragon sport</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
 
                 <div class="col-sm-4 col-xs-12 header-right header-nav-right">
 
                     <div id="cart" class="btn-group btn-block" style="margin: 0; padding: 0;">
                         <button type="button"
-                                class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button cart-nav p-3">
-                                <span class="color-header">
-                                    <span class="cart-title color-header m-2"
-                                          style="margin-left: 10px">Giỏ hàng - </span>254.000 Đ</span>
-                            <span class="value-header-product" style="margin: 0 10px">3</span>
+                                class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button cart-nav">
+                            <span class="cart-title color-header" style="float: left;margin: 9px;">Giỏ hàng - </span>
+                            <span id="cart-total" class="color-header"  sec:authorize="isAuthenticated()"  th:text="${totalPrice} + '$'">254.000 Đ</span>
+                            <span class="value-header-product" style="margin-bottom: 10px"
+                                  sec:authorize="isAuthenticated()"  th:text="${carts.size()}">1</span>
                             <i class="fas fa-shopping-cart cart-icon-nav"></i>
                         </button>
 
 
                         <ul class="dropdown-menu pull-right cart-dropdown-menu">
-                            <li class="cart-filter"
-                                style="display: grid;max-height: 328px;overflow-y: scroll;overflow-x: hidden">
+                            <li style="display: grid;
+                                max-height: 300px;
+                                overflow-y: scroll;
+                                overflow-x: hidden;
+                             " class=" filter-search">
                                 <table class="table table-striped">
                                     <tbody>
-
-
+                                    <tr  sec:authorize="isAuthenticated()" th:if="${carts}!=null" th:each="cart : ${carts}">
+                                        <td class="text-center">
+                                            <a href="#"><img
+                                                    th:src="@{/assets/images/product/{img}(img=${@cartController.getProductByIdDetail(cart.idProductDetail).img})}"
+                                                    src="/assets/images/product/product-01.jpg" width="100px"
+                                                    height="100px"></a>
+                                        </td>
+                                        <td class="text-left"><a href="#"
+                                                                 th:text="${@cartController.getProductByIdDetail(cart.idProductDetail).name}">lorem
+                                            ippsum dolor dummy</a></td>
+                                        <td class="text-right"
+                                            th:text="(${@cartController.getProductByIdDetail(cart.idProductDetail).price} * (100 -${@cartController.getProductByIdDetail(cart.idProductDetail).saleRate}) /100) *${cart.quantity} +'$'">
+                                            $254.00
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-danger btn-xs"
+                                                    title="Remove" type="button"><i
+                                                    class="fa fa-times"></i></button>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
+
                             </li>
                             <li>
                                 <div>
                                     <table class="table table-bordered">
                                         <tbody>
-                                        <br>
+
                                         <tr>
                                             <td class="text-right"><strong>Tạm tính</strong></td>
-                                            <td class="text-right">254.000Đ</td>
+                                            <td class="text-right" th:text="${totalPrice} +'$'">254.000Đ</td>
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <p class="text-right"> <span class="btn-viewcart"><a href="/project/Cart"><strong><i
+                                    <p class="text-right"> <span class="btn-viewcart"><a th:href="@{/cart}"><strong><i
                                             class="fa fa-shopping-cart"></i> View
-                                                            Cart</strong></a></span> <span class="btn-checkout"><a
-                                            href="checkout.html"><strong><i class="fa fa-share"></i>
-                                                            Checkout</strong></a></span></p>
+                                                        Cart</strong></a></span> <span class="btn-checkout"><a
+                                            th:href="@{/cart}"><strong><i class="fa fa-share"></i>
+                                                        Checkout</strong></a></span></p>
                                 </div>
                             </li>
                         </ul>
@@ -591,109 +631,11 @@
                 <button type="button" class="bt-nav-collapse hidden-lg hidden-md"><i
                         class="fa fa-bars"></i></button>
             </div>
+
         </div>
     </div>
     <nav id="menu-navigation" class="navbar" style="width: 100%;">
-        <div class="nav-inner">
-            <div class="navbar-collapse" style="background-color: #0f6cb2;">
-                <ul class="main-navigation">
-                    <li><a href="index.jsp" style="color: white" class="parent" id="home-nav">TRANG CHỦ</a></li>
-                    <li style="position: relative">
-                        <a href="SearchListProduct?categoryGender=Man" style="color: white" class="parent category-item"
-                           id="category-man">
-                            NAM
-                            <i class="fas fa-caret-down"></i>
-                        </a>
-                        <ul class="man-category"
-                            style="background-color: #0f6cb2; border:none; position:absolute; top: 35px;left:-15px;">
-                            <li id="running-man" class="category-product category-product-man">
-                                <a href="SearchListProduct?categoryOnNav=Running Man&pagination=1"
-                                   class="link-navigation" style="color:white;background-color: #0f6cb2">Runnings</a>
-                            </li>
-                            <li id="slides-man" class="category-product category-product-man">
-                                <a href="SearchListProduct?categoryOnNav=Slides Man&pagination=1"
-                                   class="link-navigation" style="color:white;background-color: #0f6cb2">Slides</a>
-                            </li>
-                            <li id="sneakers-man" class="category-product category-product-man">
-                                <a href="SearchListProduct?categoryOnNav=Sneakers Man&pagination=1"
-                                   class="link-navigation" style="color:white;background-color: #0f6cb2">Sneakers</a>
-                            </li>
-                            <li id="skateboard-man" class="category-product category-product-man">
-                                <a href="SearchListProduct?categoryOnNav=Skateboard Man&pagination=1"
-                                   class="link-navigation" style="color:white;background-color: #0f6cb2">SkateBoard</a>
-                            </li>
-                            <li id="trainers-man" class="category-product category-product-man">
-                                <a href="SearchListProduct?categoryOnNav=Trainers Man&pagination=1"
-                                   class="link-navigation" style="color:white;background-color: #0f6cb2">Trainers</a>
-                            </li>
-                        </ul>
-
-                    </li>
-                    <li style="position: relative"
-                    ><a href="SearchListProduct?categoryGender=Woman" style="color: white" class="parent category-item"
-                        id="category-woman">NỮ <i class="fas fa-caret-down"></i></a>
-
-                        <ul class="woman-category"
-                            style="background-color: #0f6cb2; border:none; position:absolute; top: 35px;left: -15px">
-                            <li id="running-woman" class="category-product category-product-woman">
-                                <a href="SearchListProduct?category=Running Woman&categoryGender=description&pagination=1"
-                                   class="link-navigation" style="color:white;background-color: #0f6cb2">Running</a>
-                            </li>
-                            </li>
-                            <li id="slides-woman" class="category-product category-product-woman">
-                                <a href="SearchListProduct?category=Slides Woman&categoryGender=description&pagination=1"
-                                   class="link-navigation" style="color:white;background-color: #0f6cb2">Slides</a>
-                            </li>
-                            </li>
-                            <li id="sneakers-woman" class="category-product category-product-woman">
-                                <a href="SearchListProduct?category=Sneakers Woman&categoryGender=description&pagination=1"
-                                   class="link-navigation" style="color:white;background-color: #0f6cb2">Sneakers</a>
-                            </li>
-                            </li>
-                            <li id="skateboard-woman" class="category-product category-product-woman">
-                                <a href="SearchListProduct?category=Skateboard Woman&categoryGender=description&pagination=1"
-                                   class="link-navigation" style="color:white;background-color: #0f6cb2">Skateboard</a>
-                            </li>
-                            <li id="trainers-woman" class="category-product category-product-woman">
-                                <a href="SearchListProduct?categoryOnNav=Trainers Woman&pagination=1"
-                                   class="link-navigation" style="color:white;background-color: #0f6cb2">Trainers</a>
-                            </li>
-                            </li>
-                        </ul>
-
-                    </li>
-                    <li><a href="category.html" style="color: white" class="parent category-item" id="category-brand">NHÃN
-                        HÀNG <i class="fas fa-caret-down"></i></a></li>
-                    <li><a href="/project_war/views.customer/blog.jsp" style="color: white" class="parent"
-                           id="blog-nav">BLOG</a></li>
-                    <li><a href="about-us.html" style="color: white" id="about-nav">VỀ CHÚNG TÔI</a></li>
-                </ul>
-                <div class="nav-detail-info">
-
-                    <div class="item-nav-detail-info" id="item-category-brand">
-                        <div class="contain-brand">
-                            <img onclick="location.href='SearchListProduct?brand=ASICS&pagination=1'"
-                                 src="image/brand/logo-brand-01.svg">
-                            <img onclick="location.href='SearchListProduct?brand=ADIDAS'"
-                                 src="image/brand/logo-brand-02.svg">
-                            <img onclick="location.href='CategoryProduct?category=VANS&categoryGender=brand&pagination=1'"
-                                 src="image/brand/logo-brand-03.jpg">
-                            <img onclick="location.href='CategoryProduct?category=NIKE&categoryGender=brand&pagination=1'"
-                                 src="image/brand/logo-brand-04.svg">
-                            <img onclick="location.href='CategoryProduct?category=REEBOK&categoryGender=brand&pagination=1'"
-                                 src="image/brand/logo-brand-05.svg">
-                            <img onclick="location.href='CategoryProduct?category=NEW BALANCE&categoryGender=brand&pagination=1'"
-                                 src="image/brand/logo-brand-06.svg">
-                            <img onclick="location.href='CategoryProduct?category=ON RUNNING&categoryGender=brand&pagination=1'"
-                                 src="image/brand/logo-brand-07.jpg">
-                            <img onclick="location.href='CategoryProduct?category=UNDER ARMOUR&categoryGender=brand&pagination=1'"
-                                 src="image/brand/logo-brand-08.svg">
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+        <!--function displayMenuNavigation() in khanh-js.js-->
     </nav>
 </header>
 
@@ -891,7 +833,7 @@
                             </div>
                             <form th:action="@{/comment/upload}" method="POST">
                                 <div class="writing">
-                                    <input type="text" name="idProduct" th:value="${product.id}">
+                                    <input type="hidden" name="idProduct" th:value="${product.id}">
                                     <div >
                                         <textarea name="content" style="width: 100%;border: none"></textarea>
                                     </div>

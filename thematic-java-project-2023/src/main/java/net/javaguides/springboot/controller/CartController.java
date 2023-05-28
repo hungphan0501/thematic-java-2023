@@ -60,6 +60,13 @@ public class CartController {
             idUser = user.getId();
         }
         List<Cart> cartList = cartService.getAllProductInCartOfCustomer(idUser);
+        double totalPrice = 0;
+        if(cartList!= null){
+            for (Cart cart : cartList) {
+                totalPrice += cart.getTotalPrice();
+            }
+        }
+        model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("carts",cartList);
         return "user/cart";
 

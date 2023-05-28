@@ -72,13 +72,24 @@
                                                                       class="color-header">(0)</span></a>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"
+                                       sec:authorize="!isAuthenticated()">
                                         <i class="fa fa-user color-header"></i><span class="color-header">Tài
                                                 khoản</span> <span style=" font-size: 15px;"
                                                                    class="caret color-header"></span></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="#" class="js-login">Đăng Nhập</a></li>
-                                        <li><a href="#" class="js_register">Đăng Ký</a></li>
+                                    <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"
+                                       sec:authorize="isAuthenticated()">
+                                        <i class="fa fa-user color-header"></i><span class="color-header"
+                                                                                     th:text="'Hi! '+${@userController.nameByEmail()}">
+                                                </span> <span style=" font-size: 15px;"
+                                                              class="caret color-header"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right" sec:authorize="!isAuthenticated()">
+                                        <li><a th:href="@{/login}" class="js-login">Đăng Nhập</a></li>
+                                        <li><a th:href="@{/registration}" class="js_register">Đăng Ký</a></li>
+                                    </ul>
+                                    <ul class="dropdown-menu dropdown-menu-right" sec:authorize="isAuthenticated()">
+                                        <li><a th:href="@{/user/infor}" class="js-login">Hồ sơ</a></li>
+                                        <li><a th:href="@{/logout}" class="js_register">Đăng xuất</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -96,55 +107,67 @@
                     <div>
                         <div class="header-middle-top">
                             <div id="logo" class="color-header" style="margin: 0; padding: 0;">
-                                <a th:href="@{/}" ><img th:src="@{/assets/images/logo.png}"
-                                                         src="/assets/images/logo.png" title="E-Commerce"
-                                                         alt="E-Commerce"
-                                                         class="logo-header"/></a>
+                                <a th:href="@{/}"><img th:src="@{assets/images/logo.png}" src="/assets/images/logo.png"
+                                                       title="E-Commerce" alt="E-Commerce"
+                                                       class="logo-header"/></a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="text-center contain-search">
-                    <div class="contain-search-product-popular">
-                        <div class="search-product">
-                            <input class="input-text-search-top" placeholder="Tìm kiếm" type="text">
-                            <button class="search-product-top"><i class="fa fa-search"></i></button>
-                        </div>
-                        <div class="contain-search-popular">
-                            <span>X-Ray 2</span>
-                            <span>Nike Air Force 2</span>
-                            <span>Under Armour darkside</span>
-                            <span>X9000L4 Shoes Mens</span>
-                            <span>Adidas dragon sport</span>
+                <form th:action="@{/search}" method="GET">
+                    <div class="text-center contain-search">
+                        <div class="contain-search-product-popular">
+                            <div class="search-product">
+                                <input class="input-text-search-top" placeholder="Tìm kiếm" type="text" name="content">
+                                <button class="search-product-top"><i class="fa fa-search"></i></button>
+                            </div>
+                            <div class="contain-search-popular">
+                                <span>X-Ray 2</span>
+                                <span>Nike Air Force 2</span>
+                                <span>Under Armour darkside</span>
+                                <span>X9000L4 Shoes Mens</span>
+                                <span>Adidas dragon sport</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
 
                 <div class="col-sm-4 col-xs-12 header-right header-nav-right">
 
                     <div id="cart" class="btn-group btn-block" style="margin: 0; padding: 0;">
                         <button type="button"
                                 class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button cart-nav">
-                            <span
-                                    id="cart-total" class="color-header"><span class="cart-title color-header">Giỏ hàng - </span>254.000 Đ</span>
-                            <span class="value-header-product" style="margin-bottom: 10px">1</span>
+                            <span class="cart-title color-header" style="float: left;margin: 9px;">Giỏ hàng - </span>
+                            <span id="cart-total" class="color-header"  sec:authorize="isAuthenticated()"  th:text="${totalPrice} + '$'">254.000 Đ</span>
+                            <span class="value-header-product" style="margin-bottom: 10px"
+                                  sec:authorize="isAuthenticated()"  th:text="${carts.size()}">1</span>
                             <i class="fas fa-shopping-cart cart-icon-nav"></i>
                         </button>
 
 
                         <ul class="dropdown-menu pull-right cart-dropdown-menu">
-                            <li>
+                            <li style="display: grid;
+                                max-height: 300px;
+                                overflow-y: scroll;
+                                overflow-x: hidden;
+                             " class=" filter-search">
                                 <table class="table table-striped">
                                     <tbody>
-                                    <tr>
+                                    <tr  sec:authorize="isAuthenticated()" th:if="${carts}!=null" th:each="cart : ${carts}">
                                         <td class="text-center">
-                                            <a href="#"><img src="image/product/product-01.jpg" width="100px"
-                                                             height="100px"></a>
+                                            <a href="#"><img
+                                                    th:src="@{/assets/images/product/{img}(img=${@cartController.getProductByIdDetail(cart.idProductDetail).img})}"
+                                                    src="/assets/images/product/product-01.jpg" width="100px"
+                                                    height="100px"></a>
                                         </td>
-                                        <td class="text-left"><a href="#">lorem ippsum dolor dummy</a></td>
-                                        <td class="text-right">x 1</td>
-                                        <td class="text-right">$254.00</td>
+                                        <td class="text-left"><a href="#"
+                                                                 th:text="${@cartController.getProductByIdDetail(cart.idProductDetail).name}">lorem
+                                            ippsum dolor dummy</a></td>
+                                        <td class="text-right"
+                                            th:text="(${@cartController.getProductByIdDetail(cart.idProductDetail).price} * (100 -${@cartController.getProductByIdDetail(cart.idProductDetail).saleRate}) /100) *${cart.quantity} +'$'">
+                                            $254.00
+                                        </td>
                                         <td class="text-center">
                                             <button class="btn btn-danger btn-xs"
                                                     title="Remove" type="button"><i
@@ -153,46 +176,31 @@
                                     </tr>
                                     </tbody>
                                 </table>
+
                             </li>
                             <li>
                                 <div>
                                     <table class="table table-bordered">
                                         <tbody>
-                                        <tr>
-                                            <td class="text-right"><strong>Tổng</strong></td>
-                                            <td class="text-right">210.000Đ</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><strong>Thuế (-2.00)</strong></td>
-                                            <td class="text-right">2%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><strong>VAT (20%)</strong></td>
-                                            <td class="text-right">4%</td>
-                                        </tr>
+
                                         <tr>
                                             <td class="text-right"><strong>Tạm tính</strong></td>
-                                            <td class="text-right">254.000Đ</td>
+                                            <td class="text-right" th:text="${totalPrice} +'$'">254.000Đ</td>
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <p class="text-right"> <span class="btn-viewcart"><a href="cart.html"><strong><i
+                                    <p class="text-right"> <span class="btn-viewcart"><a th:href="@{/cart}"><strong><i
                                             class="fa fa-shopping-cart"></i> View
                                                         Cart</strong></a></span> <span class="btn-checkout"><a
-                                            href="checkout.html"><strong><i class="fa fa-share"></i>
+                                            th:href="@{/cart}"><strong><i class="fa fa-share"></i>
                                                         Checkout</strong></a></span></p>
                                 </div>
                             </li>
                         </ul>
                     </div>
-
-
                 </div>
-
-
                 <button type="button" class="bt-nav-collapse hidden-lg hidden-md"><i
                         class="fa fa-bars"></i></button>
-
             </div>
 
         </div>
@@ -239,7 +247,7 @@
                                     <label class="checkbox-filter-search">
                                         <input name="brand" type="checkbox" value="7"/>
                                         UNDER ARMOUR</label>
-                                    <input type="text" name="brands">
+                                    <input type="hidden" name="brands">
 
                                 </div>
                             </div>
@@ -270,7 +278,7 @@
                                     <label class="checkbox-filter-search">
                                         <input name="size" type="checkbox" value="43"/>
                                         SIZE 43</label>
-                                    <input type="text" name="sizes">
+                                    <input type="hidden" name="sizes">
                                 </div>
                             </div>
                             <a class="list-group-item">Đánh giá</a>

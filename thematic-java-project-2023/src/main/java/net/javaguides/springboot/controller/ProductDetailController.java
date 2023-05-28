@@ -1,16 +1,13 @@
 package net.javaguides.springboot.controller;
 
-import net.javaguides.springboot.model.Comment;
-import net.javaguides.springboot.model.LinkImg;
-import net.javaguides.springboot.model.Product;
-import net.javaguides.springboot.model.ProductDetail;
-import net.javaguides.springboot.repository.CommentRepository;
-import net.javaguides.springboot.repository.LinkImgRepository;
-import net.javaguides.springboot.repository.ProductRepository;
+import net.javaguides.springboot.model.*;
+import net.javaguides.springboot.repository.*;
 import net.javaguides.springboot.service.ProductDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +30,11 @@ public class ProductDetailController {
     @Autowired
     CommentRepository commentRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CartRepository cartRepository;
     @GetMapping("/{idProduct}")
     public String getProductDetailPage(@PathVariable("idProduct") int idProduct, Model model) {
         Product product = productRepository.getProductById(idProduct);
@@ -40,6 +42,15 @@ public class ProductDetailController {
         List<LinkImg> linkImgs = getAllImgByIdProduct(idProduct);
         List<Comment> comments = commentRepository.getAllByIdProduct(idProduct);
         List<Product> getRelatedProducts = getRelatedProducts(idProduct);
+        double totalPrice = 0;
+        List<Cart> carts = getCartsOfUser();
+        if(carts!= null){
+            for (Cart cart : carts) {
+                totalPrice += cart.getTotalPrice();
+            }
+        }
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("carts", carts);
         model.addAttribute("comments", comments);
         model.addAttribute("productsRelate", getRelatedProducts);
         model.addAttribute("product", product);
@@ -48,7 +59,19 @@ public class ProductDetailController {
 
         return "user/product";
     }
+    public List<Cart> getCartsOfUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            User user = userRepository.findByEmail(username);
+            if(user != null){
+                return cartRepository.getAllProductInCartOfCustomer(user.getId());
+            }
+            return null;
 
+        } else return null;
+
+    }
     @GetMapping("")
     public ResponseEntity<List<ProductDetail>> getAllProductDetailByIdProduct(@RequestParam("id") int idProduct) {
         try {
