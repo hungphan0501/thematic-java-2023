@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Customer | Dragon Sport</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,156 +57,160 @@
     <div class="contain-header-inner">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12 contain-header">
-                    <div class="contain-nav-info">
-                        <div id="top-links" class="nav pull-left">
-                            <ul class="list-inline">
-                                <li class="account"><a href="/admin/pixelwibes.com/template/ebazar/html/dist/index.html"
-                                                       class="notify"><i
-                                        class="fas fa-bell color-header" style="margin-right: 10px"></i>
-                                    <sp
-                                            style="margin: 0 5px;" class="color-header">Thông
-                                        báo
-                                    </sp>
-                                    <span style="margin-right: 10px;"
-                                          class="color-header">(0)</span></a>
-                                </li>
-                                <li class="account"><a href="customer.html" id="wishlist-total"
-                                                       title="Wish List (0)"><i
-                                        class="fa fa-heart color-header"></i><span
-                                        class="color-header">Danh sách
+                <div class="row">
+                    <div class="col-sm-12 contain-header">
+                        <div class="contain-nav-info">
+                            <div id="top-links" class="nav pull-left">
+                                <ul class="list-inline">
+                                    <li class="account"><a
+                                            href="/admin/pixelwibes.com/template/ebazar/html/dist/index.html"
+                                            class="notify"><i
+                                            class="fas fa-bell color-header" style="margin-right: 10px"></i>
+                                        <sp
+                                                style="margin: 0 5px;" class="color-header">Thông
+                                            báo
+                                        </sp>
+                                        <span style="margin-right: 10px;"
+                                              class="color-header">(0)</span></a>
+                                    </li>
+                                    <li class="account"><a href="customer.html" id="wishlist-total"
+                                                           title="Wish List (0)"><i
+                                            class="fa fa-heart color-header"></i><span
+                                            class="color-header">Danh sách
                                                 yêu thích</span><span style="margin-right: 10px;"
                                                                       class="color-header">(0)</span></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-user color-header"></i><span class="color-header">Tài
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="fa fa-user color-header"></i><span class="color-header">Tài
                                                 khoản</span> <span style=" font-size: 15px;"
                                                                    class="caret color-header"></span></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="#" class="js-login">Đăng Nhập</a></li>
-                                        <li><a href="#" class="js_register">Đăng Ký</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="#" class="js-login">Đăng Nhập</a></li>
+                                            <li><a href="#" class="js_register">Đăng Ký</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="container">
-            <div class="header-inner">
+            <div class="container">
+                <div class="header-inner">
 
-                <div class="header-top">
-                    <div>
-                        <div class="header-middle-top">
-                            <div id="logo" class="color-header" style="margin: 0; padding: 0;">
-                                <a th:href="@{/}"><img th:href="@{/assets/images/logo.png}"
-                                                       src="/assets/images/logo.png" title="E-Commerce" alt="E-Commerce"
-                                                       class="logo-header"/></a>
+                    <div class="header-top">
+                        <div>
+                            <div class="header-middle-top">
+                                <div id="logo" class="color-header" style="margin: 0; padding: 0;">
+                                    <a th:href="@{/}"><img th:href="@{/assets/images/logo.png}"
+                                                           src="/assets/images/logo.png" title="E-Commerce"
+                                                           alt="E-Commerce"
+                                                           class="logo-header"/></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="text-center contain-search">
-                    <div class="contain-search-product-popular">
-                        <div class="search-product">
-                            <input class="input-text-search-top" placeholder="Tìm kiếm" type="text">
-                            <button class="search-product-top"><i class="fa fa-search"></i></button>
-                        </div>
-                        <div class="contain-search-popular">
-                            <span>X-Ray 2</span>
-                            <span>Nike Air Force 2</span>
-                            <span>Under Armour darkside</span>
-                            <span>X9000L4 Shoes Mens</span>
-                            <span>Adidas dragon sport</span>
+                    <div class="text-center contain-search">
+                        <div class="contain-search-product-popular">
+                            <div class="search-product">
+                                <input class="input-text-search-top" placeholder="Tìm kiếm" type="text">
+                                <button class="search-product-top"><i class="fa fa-search"></i></button>
+                            </div>
+                            <div class="contain-search-popular">
+                                <span>X-Ray 2</span>
+                                <span>Nike Air Force 2</span>
+                                <span>Under Armour darkside</span>
+                                <span>X9000L4 Shoes Mens</span>
+                                <span>Adidas dragon sport</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-sm-4 col-xs-12 header-right header-nav-right">
+                    <div class="col-sm-4 col-xs-12 header-right header-nav-right">
 
-                    <div id="cart" class="btn-group btn-block" style="margin: 0; padding: 0;">
-                        <button type="button"
-                                class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button cart-nav">
+                        <div id="cart" class="btn-group btn-block" style="margin: 0; padding: 0;">
+                            <button type="button"
+                                    class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button cart-nav">
                             <span
                                     id="cart-total" class="color-header"><span class="cart-title color-header">Giỏ hàng - </span>254.000 Đ</span>
-                            <span class="value-header-product" style="margin-bottom: 10px">1</span>
-                            <i class="fas fa-shopping-cart cart-icon-nav"></i>
-                        </button>
+                                <span class="value-header-product" style="margin-bottom: 10px">1</span>
+                                <i class="fas fa-shopping-cart cart-icon-nav"></i>
+                            </button>
 
 
-                        <ul class="dropdown-menu pull-right cart-dropdown-menu">
-                            <li>
-                                <table class="table table-striped">
-                                    <tbody>
-                                    <tr>
-                                        <td class="text-center">
-                                            <a href="#"><img th:href="@{/assets/images/product/product-01.jpg}"
-                                                             src="/assets/images/product/product-01.jpg" width="100px"
-                                                             height="100px"></a>
-                                        </td>
-                                        <td class="text-left"><a href="#">lorem ippsum dolor dummy</a></td>
-                                        <td class="text-right">x 1</td>
-                                        <td class="text-right">$254.00</td>
-                                        <td class="text-center">
-                                            <button class="btn btn-danger btn-xs"
-                                                    title="Remove" type="button"><i
-                                                    class="fa fa-times"></i></button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </li>
-                            <li>
-                                <div>
-                                    <table class="table table-bordered">
+                            <ul class="dropdown-menu pull-right cart-dropdown-menu">
+                                <li>
+                                    <table class="table table-striped">
                                         <tbody>
                                         <tr>
-                                            <td class="text-right"><strong>Tổng</strong></td>
-                                            <td class="text-right">210.000Đ</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><strong>Thuế (-2.00)</strong></td>
-                                            <td class="text-right">2%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><strong>VAT (20%)</strong></td>
-                                            <td class="text-right">4%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><strong>Tạm tính</strong></td>
-                                            <td class="text-right">254.000Đ</td>
+                                            <td class="text-center">
+                                                <a href="#"><img th:href="@{/assets/images/product/product-01.jpg}"
+                                                                 src="/assets/images/product/product-01.jpg"
+                                                                 width="100px"
+                                                                 height="100px"></a>
+                                            </td>
+                                            <td class="text-left"><a href="#">lorem ippsum dolor dummy</a></td>
+                                            <td class="text-right">x 1</td>
+                                            <td class="text-right">$254.00</td>
+                                            <td class="text-center">
+                                                <button class="btn btn-danger btn-xs"
+                                                        title="Remove" type="button"><i
+                                                        class="fa fa-times"></i></button>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <p class="text-right"> <span class="btn-viewcart"><a href="cart.html"><strong><i
-                                            class="fa fa-shopping-cart"></i> View
+                                </li>
+                                <li>
+                                    <div>
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-right"><strong>Tổng</strong></td>
+                                                <td class="text-right">210.000Đ</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><strong>Thuế (-2.00)</strong></td>
+                                                <td class="text-right">2%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><strong>VAT (20%)</strong></td>
+                                                <td class="text-right">4%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><strong>Tạm tính</strong></td>
+                                                <td class="text-right">254.000Đ</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="text-right"> <span class="btn-viewcart"><a href="cart.html"><strong><i
+                                                class="fa fa-shopping-cart"></i> View
                                                         Cart</strong></a></span> <span class="btn-checkout"><a
-                                            href="checkout.html"><strong><i class="fa fa-share"></i>
+                                                href="checkout.html"><strong><i class="fa fa-share"></i>
                                                         Checkout</strong></a></span></p>
-                                </div>
-                            </li>
-                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+
                     </div>
 
 
+                    <button type="button" class="bt-nav-collapse hidden-lg hidden-md"><i
+                            class="fa fa-bars"></i></button>
+
                 </div>
 
-
-                <button type="button" class="bt-nav-collapse hidden-lg hidden-md"><i
-                        class="fa fa-bars"></i></button>
-
             </div>
-
         </div>
-    </div>
-    <nav id="menu-navigation" class="navbar" style="width: 100%;">
-        <!--function displayMenuNavigation() in khanh-js.js-->
-    </nav>
+        <nav id="menu-navigation" class="navbar" style="width: 100%;">
+            <!--function displayMenuNavigation() in khanh-js.js-->
+        </nav>
 </header>
 <div class="container">
 
@@ -214,10 +219,10 @@
         <div class="col-sm-3 mg-t">
             <div class="contain-nav-customer bg-item bd-rd">
                 <div class="contain-name-img-customer">
-                    <img th:src="@{/assets/images/1.jpg}" class="img-customer" src="/assets/images/1.jpg">
-                    <p class="name-customer">hungphan0501</p>
+                    <img th:src="@{'/assets/images/avatar/' + ${user.avatar}}" class="img-customer" src="/assets/images/1.jpg">
+                    <p class="name-customer" th:text="${user.name}">hungphan0501</p>
 
-                    <a class="" style="margin: 35px 0 0 -135px;cursor: pointer;"><i class="fas fa-pen"></i> Sửa Hồ
+                    <a class="" style="margin: 35px 0 0 -97px;cursor: pointer;"><i class="fas fa-pen"></i> Sửa Hồ
                         Sơ</a>
                 </div>
                 <div class="pane-group">
@@ -254,26 +259,34 @@
                     <hr>
                     <form th:action="@{/user/infor/update}" id="infor-form" method="post">
                         <div class="info col-half-sub">
-                            <p class="name-login col-half-info" >Tên Đăng Nhập</p>
+                            <p class="name-login col-half-info">Tên Đăng Nhập</p>
                             <p id="id-customer " class=" id-customer name col-half-picture" th:text="${user.email}"></p>
                             <p class="Ten col-half-info">Tên</p>
                             <input id="name" name="name" type="text" class="col-half-picture" th:value="${user.name}">
                             <input id="id" name="id" type="hidden" class="col-half-picture" th:value="${user.id}">
                             <p class="email col-half-info">Email</p>
-                            <input id="email" name="email" type="text"  th:value="${user.email}" class="col-half-picture" style="background-color: rgba(220, 220, 220, 0.28)"  readonly>
+                            <input id="email" name="email" type="text" th:value="${user.email}" class="col-half-picture"
+                                   style="background-color: rgba(220, 220, 220, 0.28)" readonly>
                             <p class="phone col-half-info">Số Điện Thoại</p>
-                            <input id="phone" name="phone" type="text" class="col-half-picture" th:value="${user.phone}">
+                            <input id="phone" name="phone" type="text" class="col-half-picture"
+                                   th:value="${user.phone}">
                             <p class="sex col-half-info">Giới Tính</p>
                             <ul id="sex" class="col-half-picture" th:if="${user.gender=='Nam'}">
-                                <li class="men" ><input type="radio" id="genderMale" name="gender" value="Nam" checked/> Nam</li>
-                                <li class="woman" ><input type="radio" id="genderFemale" name="gender" value="Nữ" /> Nữ</li>
+                                <li class="men"><input type="radio" id="genderMale" name="gender" value="Nam" checked/>
+                                    Nam
+                                </li>
+                                <li class="woman"><input type="radio" id="genderFemale" name="gender" value="Nữ"/> Nữ
+                                </li>
                             </ul>
                             <ul class="col-half-picture" th:if="${user.gender=='Nữ'}">
-                                <li class="men" ><input type="radio"  name="gender" value="Nam" /> Nam</li>
-                                <li class="woman" style="margin-left: 10px;"><input type="radio"  name="gender" value="Nữ" checked/> Nữ</li>
+                                <li class="men"><input type="radio" name="gender" value="Nam"/> Nam</li>
+                                <li class="woman" style="margin-left: 10px;"><input type="radio" name="gender"
+                                                                                    value="Nữ" checked/> Nữ
+                                </li>
                             </ul>
                             <p class="birthday col-half-info">Ngày Sinh</p>
-                            <input id="dateOfBirth" name="dateOfBirth" type="text" class="col-half-picture" th:value="${user.dateOfBirth}">
+                            <input id="dateOfBirth" name="dateOfBirth" type="text" class="col-half-picture"
+                                   th:value="${user.dateOfBirth}">
 
                             <button class="save" type="submit">Lưu</button>
                         </div>
@@ -306,41 +319,50 @@
                             <p style="color: black;margin: 10px 0;"><span style="color: rgb(70, 67, 67);">
                                 Họ và tên: <span th:text="${addresse.userName}"></span></span></p>
                             <p style="color: black;margin: 10px 0;"><span style="color: rgb(70, 67, 67);">
-                                Địa chỉ: <span th:text="${addresse.specificAddress}"></span></span> </p>
+                                Địa chỉ: <span th:text="${addresse.specificAddress}"></span></span></p>
                             <p style="color: black;margin: 10px 0;"><span style="color: rgb(73, 72, 72);">
                                 Điện thoại: <span th:text="${addresse.phone}"></span></span></p>
                         </div>
 
-                        <form id="infor-form-address" class="contain-form-adjust-address" th:action="@{'/user/infor/update-address/' + ${addresse.id}}" method="post">
+                        <form id="infor-form-address" class="contain-form-adjust-address"
+                              th:action="@{'/user/infor/update-address/' + ${addresse.id}}" method="post">
                             <div class="contain-adjust-address">
                                 <span class="label-address">Tỉnh/ Thành phố:</span>
-                                <input id="contain-option-city" name="city" class="input-address" th:value="${addresse.city}">
+                                <input id="contain-option-city" name="city" class="input-address"
+                                       th:value="${addresse.city}">
 
                                 <span class="label-address">Quận/ Huyện:</span>
-                                <input id="contain-option-district" name="district" class="input-address" th:value="${addresse.district}">
+                                <input id="contain-option-district" name="district" class="input-address"
+                                       th:value="${addresse.district}">
 
                                 <span class="label-address">Phường/ Xã:</span>
-                                <input id="contain-option-ward" name="ward" class="input-address" th:value="${addresse.ward}">
+                                <input id="contain-option-ward" name="ward" class="input-address"
+                                       th:value="${addresse.ward}">
 
                                 <span class="label-address">Số điện thoại:</span>
-                                <input id="contain-option-phone" name="phone" class="input-address" th:value="${addresse.phone}">
+                                <input id="contain-option-phone" name="phone" class="input-address"
+                                       th:value="${addresse.phone}">
 
                                 <span class="label-address">Họ và tên:</span>
-                                <input id="contain-option-name" name="userName" class="input-address" th:value="${addresse.userName}">
+                                <input id="contain-option-name" name="userName" class="input-address"
+                                       th:value="${addresse.userName}">
 
                                 <span class="label-address">Địa chỉ</span>
-                                <textarea rows="4" cols="50" name="specificAddress" style="border-radius: 10px;" th:value="${addresse.getSpecificAddress()}"></textarea>
+                                <textarea rows="4" cols="50" name="specificAddress" style="border-radius: 10px;"
+                                          th:value="${addresse.getSpecificAddress()}"></textarea>
                             </div>
                             <div class="contain-default-address-customer" name="isDefault" style="margin: 10px 0">
                                 <input type="checkbox" id="default-address-customer">
-                                <label for="default-address-customer" style="font-size: 17px">Đặt làm địa chỉ mặc định</label>
+                                <label for="default-address-customer" style="font-size: 17px">Đặt làm địa chỉ mặc
+                                    định</label>
                             </div>
                             <input type="submit" id="submit-adjust-address-customer" value="Chỉnh sửa">
 
                         </form>
                     </div>
                     <div class="add-contain-available-address">
-                        <form id="add-address-form" class="add-contain-form-adjust-address" th:action="@{/user/infor/address/add}" method="post">
+                        <form id="add-address-form" class="add-contain-form-adjust-address"
+                              th:action="@{/user/infor/address/add}" method="post">
                             <div class="contain-adjust-address">
                                 <span class="label-address">Tỉnh/ Thành phố:</span>
                                 <input name="city" class="input-address">
@@ -358,11 +380,13 @@
                                 <input name="userName" class="input-address">
 
                                 <span class="label-address">Địa chỉ</span>
-                                <textarea rows="4" cols="50" name="specificAddress" style="border-radius: 10px;" ></textarea>
+                                <textarea rows="4" cols="50" name="specificAddress"
+                                          style="border-radius: 10px;"></textarea>
                             </div>
                             <div class="contain-default-address-customer" name="isDefault" style="margin: 10px 0">
                                 <input type="checkbox">
-                                <label for="default-address-customer" style="font-size: 17px">Đặt làm địa chỉ mặc định</label>
+                                <label for="default-address-customer" style="font-size: 17px">Đặt làm địa chỉ mặc
+                                    định</label>
                             </div>
                             <input type="submit" class="submit-adjust-address-customer" value="Thêm">
 
@@ -372,7 +396,7 @@
                 <div id="password-customer">
                     <div>
                         <label for="username">Mật Khẩu Hiện Tại:</label>
-                        <input type="password" id="username" name="username"  style="width: 25%;">
+                        <input type="password" id="username" name="username" style="width: 25%;">
                     </div>
 
                     <div>
@@ -655,86 +679,80 @@
 
 
                 </div>
-                <div id="history-customer">
-                    <div class=contain-history>
-                        <table>
-                            <thead>
-                            <th>Id order</th>
-                            <th>Name product</th>
-                            <th>Image</th>
-                            <th>Count</th>
-                            <th>Trạng thái</th>
-                            <th>Total cost</th>
+                <div id="history-customer" class="list-order-history">
+                    <div class="col-sm-12">
 
-                            </thead>
-                            <tr>
-                                <td>
-                                    <p><a href="#">357Y</a></p>
-                                </td>
-                                <td>
-                                    <p>Nike Air Force 1</p>
-                                </td>
-                                <td>
-                                    <img th:src="@{/assets/images/product/product-01.jpg}" src="/assets/images/product/product-01.jpg" alt="">
-                                </td>
-                                <td>
-                                    <p>1</p>
-                                </td>
-                                <td>
-                                    <p>Đã giao</p>
-                                </td>
-                                <td>
-                                    <p>100.00</p>
-                                </td>
+                        <div>
+                            <h5 style="font-weight: bold;float: left;width: 37.5%;margin-top: 20px;font-size: 20px">Danh
+                                sách các đơn
+                                hàng</h5>
+                        </div>
+                        <form style="margin: 20px 0;display: flex; border-bottom: 3px solid #bdd4ff;width: 62%; "
+                              method="POST">
+                            <select name="type" id="type"
+                                    style="padding: 0px 5px;height: 30px; border-radius: 7px;font-weight: bold;">
+                                <option value="id">ID hóa đơn</option>
+                                <option value="brand">Ngày đặt</option>
+                                <option value="name">Trạng thái</option>
+                            </select>
 
-                            </tr>
+                            <input type="text"
+                                   style="margin: 0 10px;width: 155px;height: 30px;padding: 0px 5px;border-radius: 7px"
+                                   name="value" id="value" placeholder="Nhập dữ liệu" required>
+                            <div style="background: #c5c5c5; padding: 5px 10px;height: 30px; border-radius: 7px;width: 137px;display: flex;">
+                                <input type="radio" name="sort" id="up-radio" style=";cursor: pointer" value="0"
+                                       checked>
+                                <label for="up-radio"
+                                       style="cursor: pointer;font-weight: bold;margin: 4px 0 0 4px">Tăng</label>
+                                <input type="radio" name="sort" id="down-radio"
+                                       style="margin-left: 5px;cursor: pointer;" value="1">
+                                <label for="down-radio" style="cursor: pointer;font-weight: bold;margin: 4px 0 0 4px">Giảm</label>
+                            </div>
+                            <button type="submit"
+                                    style="border: none; font-size: 25px; color: rgb(83, 83, 204);background-color: inherit;margin: -3px 0 0 8px;">
+                                <i class="fas fa-arrow-alt-circle-right" style="font-size: 30px"></i></button>
 
-                            <tr>
-                                <td>
-                                    <p><a href="#">1235X</a></p>
-                                </td>
-                                <td>
-                                    <p>Nike Air Max Dawn</p>
-                                </td>
-                                <td>
-                                    <img th:src="@{/assets/images/product/product-02.jpg}" src="/assets/images/product/product-02.jpg" alt="">
-                                </td>
-                                <td>
-                                    <p>1</p>
-                                </td>
-                                <td>
-                                    <p>Đã giao</p>
-                                </td>
-                                <td>
-                                    <p>100.00</p>
-                                </td>
+                        </form>
 
-                            </tr>
 
-                            <tr>
-                                <td>
-                                    <p><a href="#">4568Z</a></p>
-                                </td>
-                                <td>
-                                    <p>Under Armour white</p>
-                                </td>
-                                <td>
-                                    <img th:src="@{/assets/images/product/product-06.jpg}" src="/assets/images/product/product-06.jpg" alt="">
-                                </td>
-                                <td>
-                                    <p>1</p>
-                                </td>
-                                <td>
-                                    <p>Đã giao</p>
-                                </td>
-                                <td>
-                                    <p>100.00</p>
-                                </td>
-
-                            </tr>
-                        </table>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <table id="myProjectTable" class="table table-hover align-middle mb-0"
+                                       style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th>ID hóa đơn</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thanh toán</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="order : ${orders}">
+                                        <td><a><strong th:text="${'#'}+ ${order.id}">#CS-00002</strong></a></td>
+                                        <td th:text="${order.createAt}">20/10/2020</td>
+                                        <td th:text="${order.totalPrice} + '$'">100$</td>
+                                        <td style="color: #5cb85c" th:text="${order.status}">Hoàn tất</td>
+                                        <td th:text="${order.statusPayment}">Đã thanh toán</td>
+                                        <td style="text-align: right;">
+                                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                <a th:href="@{/user/history/{orderId}(orderId= ${order.id})}"
+                                                   class="btn-show-order-detail btn btn-primary btn-set-task w-sm-100 btn-view-details"
+                                                   data-bs-target="#expadd"><i class="fa-solid fa-eye"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!--            start order detail-->
+
+                <!--            end-->
             </div>
         </div>
 
@@ -829,109 +847,6 @@
     <a id="scrollup">Scroll</a>
 </footer>
 
-<!--Begin: login-registe-->
-<div class="login-modal js-modal">
-    <!-- Begin: modal login -->
-    <div class="modal-container js-modal-container">
-
-
-        <header class="modal-header">
-            Tài Khoản Của Bạn!
-        </header>
-
-        <div class="modal-close js-modal-close">
-            <i class="ti-close icon-close"></i>
-        </div>
-
-        <div class="modal-body">
-            <div class="modal-body-login">
-                <div class="modal-login sub col-half">Đăng Nhập</div>
-                <div class="modal-rgister js-register-modal sub col-half">Đăng Ký</div>
-            </div>
-
-            <div class="sub-login">
-                <p class="login-another">_____________ Đăng Nhập Bằng Cách Khác ____________</p>
-            </div>
-
-            <div class="modal-login-another">
-                <img src="./image/icon_fb.png" alt="FaceBook" class="icon-login-another">
-                <img src="./image/icon_gg.png" alt="Google" class="icon-login-another">
-                <img src="./image/icon_apple.png" alt="Apple" class="icon-login-another">
-            </div>
-
-            <div class="modal-input-section">
-                <input type="email" placeholder="Địa chỉ email..." class="email">
-                <input type="password" placeholder="Nhập mật khẩu..." class="email password">
-                <a href="" class="forgot-password">Quên mật khẩu của bạn?</a>
-            </div>
-
-            <div class="modal-bnt-login">
-                <a href="" class="bnt-login">Đăng Nhập</a>
-            </div>
-
-            <div class="modal-title">
-                <p class="title-content">Bây giờ bạn cần một tài khoản để gửi / xem các yêu cầu dịch vụ khách hàng,
-                    xem các đăng ký các sản phẩm của bạn, thanh toán hoặc sửa đổi thông tin cá nhân của bạn. Thật
-                    nhanh chóng và dễ dàng để 'Đăng ký'. Vui lòng đảm bảo địa chỉ
-                    email của bạn là địa chỉ bạn đã cung cấp tại thời điểm đặt hàng, điều này sẽ cho phép bạn truy
-                    cập tất cả các dịch vụ bạn cần. </p>
-            </div>
-
-
-        </div>
-    </div>
-    <!-- End: modal login -->
-</div>
-<!--Begin: modal register--->
-<div class="modal-register js-modal-register">
-    <div class="modal-container-register js-modal-container-register">
-
-        <header class="modal-header">
-            Tài Khoản Của Bạn!
-        </header>
-
-        <div class="modal-close-register js-modal-close-register">
-            <i class="ti-close icon-close-register"></i>
-        </div>
-
-        <div class="modal-body2">
-            <div class="modal-body-register">
-                <div class="modal-login sub js-login-modal col-half">Đăng Nhập</div>
-                <div class="modal-sub-register sub col-half">Đăng Ký</div>
-            </div>
-
-            <div class="sub-login">
-                <p class="login-another">______________ Đăng Ký Bằng Cách Khác _____________</p>
-            </div>
-
-            <div class="modal-register-another">
-                <img src="./image/icon_fb.png" alt="FaceBook" class="icon-login-another">
-                <img src="./image/icon_gg.png" alt="Google" class="icon-login-another">
-                <img src="./image/icon_apple.png" alt="Apple" class="icon-login-another">
-            </div>
-
-            <div class="modal-input-section">
-                <input type="email" placeholder="Địa chỉ email..." class="email">
-                <input type="password" placeholder="Nhập mật khẩu..." class="email password">
-                <input type="password" placeholder="Xác nhận mật khẩu..." class="email password">
-                <input type="checkbox" name="" class="modal-checkbox">
-                <p class="checkbox">
-                    Vui lòng gửi email cho tôi với các ưu đãi mới nhất</p>
-            </div>
-
-            <div class="modal-bnt-register">
-                <a href="" class="bnt-login">Đăng Ký</a>
-            </div>
-
-            <div class="modal-title">
-                <p class="title-content">Vui lòng đảm bảo địa chỉ email của bạn là địa chỉ bạn đã cung cấp tại thời
-                    điểm đăng ký, điều này sẽ cho phép bạn truy cập tất cả các dịch vụ bạn cần.</p>
-            </div>
-        </div>
-    </div>
-    <!-- End: modal register -->
-</div>
-<!-- End: login register -->
 
 <!-- Begin: modal message -->
 <div class="icon-message">
@@ -965,6 +880,8 @@
 <!-- End: modal message -->
 
 <script th:src="@{/assets/javascript/hung-js.js}" src="/assets/javascript/hung-js.js"></script>
+
+
 </body>
 
 </html>

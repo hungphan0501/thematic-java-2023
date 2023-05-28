@@ -8,6 +8,8 @@ $(function () {
     });
 });
 
+
+
 $(function () {
     $(".bt-nav-collapse").click(() => {
         $(".navbar-collapse").slideToggle("slow");
