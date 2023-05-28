@@ -154,10 +154,20 @@ public class ProductController {
                 Collections.reverse(list);
             }
         }
-
+        List<Cart> cartList = getCartsOfUser();
+        double totalPrice = 0;
+        if(cartList!= null){
+            for (Cart cart : cartList) {
+                totalPrice += cart.getTotalPrice();
+            }
+        }
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("carts",cartList);
         model.addAttribute("products", list);
         return "user/category";
     }
+
+
 
 
 }

@@ -79,6 +79,15 @@ public class UserController {
             User user = userRepository.findByEmail(username);
             if (user != null) {
                 List<OrderDetail> orderDetails = orderDetailRepository.getAllByIdOrder(idOrder);
+                double totalPrice = 0;
+                List<Cart> carts = cartRepository.getAllProductInCartOfCustomer(user.getId());
+                if(carts!= null){
+                    for (Cart cart : carts) {
+                        totalPrice += cart.getTotalPrice();
+                    }
+                }
+                model.addAttribute("totalPrice", totalPrice);
+                model.addAttribute("carts", carts);
                 model.addAttribute("orderDetails", orderDetails);
                 model.addAttribute("user", user);
             } else {
@@ -104,7 +113,7 @@ public class UserController {
             model.addAttribute("message", "Cập nhật thông tin không thành công!");
 
         }
-        return "user/customer";
+        return "redirect:/user/infor";
     }
 
     @PostMapping("/infor/update-address/{idAddress}")
@@ -246,29 +255,6 @@ public class UserController {
         return redirectView;
     }
 
-//    @GetMapping("/infor/order-history")
-//    public String getUserDetailPage( Model model) {
-//        int idUser = 0;
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication != null && authentication.isAuthenticated()) {
-//            String username = authentication.getName();
-//            User user = userRepository.findByEmail(username);
-//            idUser = user.getId();
-//        }
-//
-//        User user = userRepository.getUserById(idUser);
-//        List<Orders> ordersList = ordersRepository.getAllByIdUser(idUser);
-//        System.out.println(ordersList);
-//        int total = 0;
-//        for (Orders orders : ordersList) {
-//            total += orders.getTotalPrice();
-//        }
-//
-//        model.addAttribute("user", user);
-//        model.addAttribute("orders", ordersList);
-//        model.addAttribute("total", total);
-//        return "user/customer";
-//    }
 
     @PostMapping("/infor/order-history/details")
     public String getOrderDetails(@RequestParam("orderId") int orderId, Model model) {

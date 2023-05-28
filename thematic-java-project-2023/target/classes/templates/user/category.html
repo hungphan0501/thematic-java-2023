@@ -107,7 +107,7 @@
                     <div>
                         <div class="header-middle-top">
                             <div id="logo" class="color-header" style="margin: 0; padding: 0;">
-                                <a th:href="@{/}"><img th:src="@{assets/images/logo.png}" src="/assets/images/logo.png"
+                                <a th:href="@{/}"><img th:src="@{/assets/images/logo.png}" src="/assets/images/logo.png"
                                                        title="E-Commerce" alt="E-Commerce"
                                                        class="logo-header"/></a>
                             </div>
@@ -141,7 +141,7 @@
                             <span class="cart-title color-header" style="float: left;margin: 9px;">Giỏ hàng - </span>
                             <span id="cart-total" class="color-header"  sec:authorize="isAuthenticated()"  th:text="${totalPrice} + '$'">254.000 Đ</span>
                             <span class="value-header-product" style="margin-bottom: 10px"
-                                  sec:authorize="isAuthenticated()"  th:text="${carts.size()}">1</span>
+                                  sec:authorize="isAuthenticated()" th:if="${carts }!= null" th:text="${carts.size()}">1</span>
                             <i class="fas fa-shopping-cart cart-icon-nav"></i>
                         </button>
 
@@ -253,7 +253,7 @@
                             </div>
                             <a class="list-group-item">Kích thước</a>
                             <div class="list-group-item">
-                                <div class=" filter-search">
+                                <div class="contain-dropdown-item filter-search">
                                     <label class="checkbox-filter-search">
                                         <input name="size" type="checkbox" value="36"/>
                                         SIZE 36</label>
@@ -313,10 +313,10 @@
                                     <form class="price-search-highest-lowest">
                                         <input type="radio" id="price-search-highest" name="price-sort" value="1" checked
                                                style="margin-top: 10px;">
-                                        <label for="price-search-highest">Từ cao đến thấp</label>
+                                        <label for="price-search-highest" style="    margin-top: -17px;">Từ cao đến thấp</label>
                                         <input type="radio" id="price-search-lowest" name="price-sort" value="0"
                                                style="margin-top: 10px;">
-                                        <label for="price-search-lowest" >Từ thấp đến cao</label>
+                                        <label for="price-search-lowest" style="    margin-top: -17px;" >Từ thấp đến cao</label>
                                     </form>
 
                                 </div>
