@@ -1,10 +1,7 @@
 package net.javaguides.springboot.controller;
 
 import net.javaguides.springboot.model.*;
-import net.javaguides.springboot.repository.AddressRepository;
-import net.javaguides.springboot.repository.OrderDetailRepository;
-import net.javaguides.springboot.repository.OrdersRepository;
-import net.javaguides.springboot.repository.UserRepository;
+import net.javaguides.springboot.repository.*;
 import net.javaguides.springboot.web.dto.ChangeUserInforDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,7 +40,8 @@ public class UserController {
     OrdersRepository ordersRepository;
     @Autowired
     OrderDetailRepository orderDetailRepository;
-
+    @Autowired
+    CartRepository cartRepository;
     @GetMapping("/infor")
     public String getInForUser(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -53,9 +51,19 @@ public class UserController {
             if (user != null) {
                 List<Orders> ordersList = ordersRepository.getAllByIdUser(user.getId());
                 List<Address> addresses = addressRepository.getAddressByIdUser(user.getId());
+                double totalPrice = 0;
+                List<Cart> carts = cartRepository.getAllProductInCartOfCustomer(user.getId());
+                if(carts!= null){
+                    for (Cart cart : carts) {
+                        totalPrice += cart.getTotalPrice();
+                    }
+                }
+                model.addAttribute("totalPrice", totalPrice);
+                model.addAttribute("carts", carts);
                 model.addAttribute("addresses", addresses);
                 model.addAttribute("user", user);
                 model.addAttribute("orders", ordersList);
+
             } else {
                 return "redirect:/login";
             }

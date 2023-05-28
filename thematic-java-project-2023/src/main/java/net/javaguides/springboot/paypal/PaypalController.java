@@ -48,6 +48,15 @@ public class PaypalController {
     @PostMapping("/pay")
     public RedirectView pay(@RequestParam("cartIds") String cartIds,@RequestParam("idAddress") int idAddress,HttpServletRequest request) {
         RedirectView redirectView = new RedirectView();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            User user = userRepository.findByEmail(username);
+            if (user == null) {
+                 redirectView.setUrl("/login");
+                return redirectView;
+            }
+        }
         String[] listCartId = cartIds.split("/");
         List<Cart> cartList = new ArrayList<>();
         for (String id : listCartId) {
@@ -77,36 +86,6 @@ public class PaypalController {
         redirectView.setUrl("/payment/paypal/cancel");
         return redirectView;
     }
-//    @GetMapping("/pay")
-//    public RedirectView payTest(HttpServletRequest request,@RequestParam("idAddress") int idAddress) {
-//        RedirectView redirectView = new RedirectView();
-//        try {
-//            Cart c1 = new Cart(28, 3, 3, 180.0);
-//            Cart c2 = new Cart(28, 10, 12, 720.0);
-//            Cart c3 = new Cart(28, 20, 2, 180.0);
-//            List<Cart> cartList = new ArrayList<>();
-//            cartList.add(c1);
-//            cartList.add(c2);
-//            cartList.add(c3);
-//            String cancelUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-//                    + request.getContextPath() + "/paypal/cancel";
-//            String successUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-//                    + request.getContextPath() + "/paypal/success";
-//
-//            // create payment
-//            Payment payment = paypalService.createPayment(cartList, idAddress,"USD", cancelUrl, successUrl);
-//            for (Links link : payment.getLinks()) {
-//                if (link.getRel().equals("approval_url")) {
-//                    redirectView.setUrl(link.getHref());
-//                    return redirectView;
-//                }
-//            }
-//        } catch (PayPalRESTException e) {
-//            // handle exception
-//        }
-//        redirectView.setUrl("/paypal/error");
-//        return redirectView;
-//    }
 
     @GetMapping("/success")
     public RedirectView success(@RequestParam("paymentId") String paymentId,

@@ -48,62 +48,80 @@
     </head>
 
 <body class="checkout col-2 left-col">
-    <header>
-        <div class="contain-header-inner">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 contain-header">
-                        <div class="contain-nav-info">
-                            <div id="top-links" class="nav pull-left">
-                                <ul class="list-inline">
-                                    <li class="account"><a href="/admin/pixelwibes.com/template/ebazar/html/dist/index.html" class="notify"><i
-                                                class="fas fa-bell color-header" style="margin-right: 10px"></i><sp
-                                                style="margin: 0 5px;" class="color-header">Thông
-                                                báo</sp><span style="margin-right: 10px;"
-                                                class="color-header">(0)</span></a>
-                                    </li>
-                                    <li class="account"><a href="customer.html" id="wishlist-total"
-                                            title="Wish List (0)"><i class="fa fa-heart color-header"></i><span
-                                                class="color-header">Danh sách
+<header>
+    <div class="contain-header-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 contain-header">
+                    <div class="contain-nav-info">
+                        <div id="top-links" class="nav pull-left">
+                            <ul class="list-inline">
+                                <li class="account"><a href="/admin/pixelwibes.com/template/ebazar/html/dist/index.html"
+                                                       class="notify"><i
+                                        class="fas fa-bell color-header" style="margin-right: 10px"></i>
+                                    <sp
+                                            style="margin: 0 5px;" class="color-header">Thông
+                                        báo
+                                    </sp>
+                                    <span style="margin-right: 10px;"
+                                          class="color-header">(0)</span></a>
+                                </li>
+                                <li class="account"><a href="customer.html" id="wishlist-total"
+                                                       title="Wish List (0)"><i
+                                        class="fa fa-heart color-header"></i><span
+                                        class="color-header">Danh sách
                                                 yêu thích</span><span style="margin-right: 10px;"
-                                                class="color-header">(0)</span></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="fa fa-user color-header"></i><span class="color-header">Tài
+                                                                      class="color-header">(0)</span></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"
+                                       sec:authorize="!isAuthenticated()">
+                                        <i class="fa fa-user color-header"></i><span class="color-header">Tài
                                                 khoản</span> <span style=" font-size: 15px;"
-                                                class="caret color-header"></span></a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="#" class="js-login">Đăng Nhập</a></li>
-                                            <li><a href="#" class="js_register">Đăng Ký</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                                                                   class="caret color-header"></span></a>
+                                    <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"
+                                       sec:authorize="isAuthenticated()">
+                                        <i class="fa fa-user color-header"></i><span class="color-header"
+                                                                                     th:text="'Hi! '+${@userController.nameByEmail()}">
+                                                </span> <span style=" font-size: 15px;"
+                                                              class="caret color-header"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right" sec:authorize="!isAuthenticated()">
+                                        <li><a th:href="@{/login}" class="js-login">Đăng Nhập</a></li>
+                                        <li><a th:href="@{/registration}" class="js_register">Đăng Ký</a></li>
+                                    </ul>
+                                    <ul class="dropdown-menu dropdown-menu-right" sec:authorize="isAuthenticated()">
+                                        <li><a th:href="@{/user/infor}" class="js-login">Hồ sơ</a></li>
+                                        <li><a th:href="@{/logout}" class="js_register">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
-
                     </div>
+
                 </div>
             </div>
+        </div>
 
-            <div class="container">
-                <div class="header-inner">
+        <div class="container">
+            <div class="header-inner">
 
-                    <div class="header-top">
-                        <div>
-                            <div class="header-middle-top">
-                                <div id="logo" class="color-header" style="margin: 0; padding: 0;">
-                                    <a href="home.html"><img src="image/logo.png" title="E-Commerce" alt="E-Commerce"
-                                                             class="logo-header" /></a>
-                                </div>
+                <div class="header-top">
+                    <div>
+                        <div class="header-middle-top">
+                            <div id="logo" class="color-header" style="margin: 0; padding: 0;">
+                                <a th:href="@{/}"><img th:src="@{assets/images/logo.png}" src="/assets/images/logo.png"
+                                                       title="E-Commerce" alt="E-Commerce"
+                                                       class="logo-header"/></a>
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <form th:action="@{/search}" method="GET">
                     <div class="text-center contain-search">
                         <div class="contain-search-product-popular">
                             <div class="search-product">
-                                <input class="input-text-search-top" placeholder="Tìm kiếm" type="text">
+                                <input class="input-text-search-top" placeholder="Tìm kiếm" type="text" name="content">
                                 <button class="search-product-top"><i class="fa fa-search"></i></button>
                             </div>
                             <div class="contain-search-popular">
@@ -115,87 +133,84 @@
                             </div>
                         </div>
                     </div>
+                </form>
 
-                    <div class="col-sm-4 col-xs-12 header-right header-nav-right">
+                <div class="col-sm-4 col-xs-12 header-right header-nav-right">
 
-                        <div id="cart" class="btn-group btn-block" style="margin: 0; padding: 0;">
-                            <button type="button"
-                            class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button cart-nav"> 
-                            <span
-                                id="cart-total" class="color-header"><span class="cart-title color-header">Giỏ hàng - </span>254.000 Đ</span>
-                                <span class="value-header-product" style="margin-bottom: 10px">1</span>
+                    <div id="cart" class="btn-group btn-block" style="margin: 0; padding: 0;">
+                        <button type="button"
+                                class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button cart-nav">
+                            <span class="cart-title color-header" style="float: left;margin: 9px;">Giỏ hàng - </span>
+                            <span id="cart-total" class="color-header"  sec:authorize="isAuthenticated()"  th:text="${totalPrice} + '$'">254.000 Đ</span>
+                            <span class="value-header-product" style="margin-bottom: 10px"
+                                  sec:authorize="isAuthenticated()"  th:text="${carts.size()}">1</span>
                             <i class="fas fa-shopping-cart cart-icon-nav"></i>
                         </button>
 
 
-                            <ul class="dropdown-menu pull-right cart-dropdown-menu">
-                                <li>
-                                    <table class="table table-striped">
+                        <ul class="dropdown-menu pull-right cart-dropdown-menu">
+                            <li style="display: grid;
+                                max-height: 300px;
+                                overflow-y: scroll;
+                                overflow-x: hidden;
+                             " class=" filter-search">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr  sec:authorize="isAuthenticated()" th:if="${carts}!=null" th:each="cart : ${carts}">
+                                        <td class="text-center">
+                                            <a href="#"><img
+                                                    th:src="@{/assets/images/product/{img}(img=${@cartController.getProductByIdDetail(cart.idProductDetail).img})}"
+                                                    src="/assets/images/product/product-01.jpg" width="100px"
+                                                    height="100px"></a>
+                                        </td>
+                                        <td class="text-left"><a href="#"
+                                                                 th:text="${@cartController.getProductByIdDetail(cart.idProductDetail).name}">lorem
+                                            ippsum dolor dummy</a></td>
+                                        <td class="text-right"
+                                            th:text="(${@cartController.getProductByIdDetail(cart.idProductDetail).price} * (100 -${@cartController.getProductByIdDetail(cart.idProductDetail).saleRate}) /100) *${cart.quantity} +'$'">
+                                            $254.00
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-danger btn-xs"
+                                                    title="Remove" type="button"><i
+                                                    class="fa fa-times"></i></button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </li>
+                            <li>
+                                <div>
+                                    <table class="table table-bordered">
                                         <tbody>
-                                            <tr>
-                                                <td class="text-center">
-                                                    <a href="#"><img src="image/product/product-01.jpg" width="100px"
-                                                            height="100px"></a>
-                                                </td>
-                                                <td class="text-left"><a href="#">lorem ippsum dolor dummy</a></td>
-                                                <td class="text-right">x 1</td>
-                                                <td class="text-right">$254.00</td>
-                                                <td class="text-center"><button class="btn btn-danger btn-xs"
-                                                        title="Remove" type="button"><i
-                                                            class="fa fa-times"></i></button></td>
-                                            </tr>
+
+                                        <tr>
+                                            <td class="text-right"><strong>Tạm tính</strong></td>
+                                            <td class="text-right" th:text="${totalPrice} +'$'">254.000Đ</td>
+                                        </tr>
                                         </tbody>
                                     </table>
-                                </li>
-                                <li>
-                                    <div>
-                                        <table class="table table-bordered">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-right"><strong>Tổng</strong></td>
-                                                    <td class="text-right">210.000Đ</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-right"><strong>Thuế (-2.00)</strong></td>
-                                                    <td class="text-right">2%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-right"><strong>VAT (20%)</strong></td>
-                                                    <td class="text-right">4%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-right"><strong>Tạm tính</strong></td>
-                                                    <td class="text-right">254.000Đ</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <p class="text-right"> <span class="btn-viewcart"><a href="cart.html"><strong><i
-                                                            class="fa fa-shopping-cart"></i> View
+                                    <p class="text-right"> <span class="btn-viewcart"><a th:href="@{/cart}"><strong><i
+                                            class="fa fa-shopping-cart"></i> View
                                                         Cart</strong></a></span> <span class="btn-checkout"><a
-                                                    href="checkout.html"><strong><i class="fa fa-share"></i>
-                                                        Checkout</strong></a></span> </p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-
-
-
+                                            th:href="@{/cart}"><strong><i class="fa fa-share"></i>
+                                                        Checkout</strong></a></span></p>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-
-
-                    <button type="button" class="bt-nav-collapse hidden-lg hidden-md"><i
-                            class="fa fa-bars"></i></button>
-
                 </div>
-
+                <button type="button" class="bt-nav-collapse hidden-lg hidden-md"><i
+                        class="fa fa-bars"></i></button>
             </div>
+
         </div>
-        <nav id="menu-navigation" class="navbar" style="width: 100%;">
-            <!--function displayMenuNavigation() in khanh-js.js-->
-        </nav>
-    </header>
+    </div>
+    <nav id="menu-navigation" class="navbar" style="width: 100%;">
+        <!--function displayMenuNavigation() in khanh-js.js-->
+    </nav>
+</header>
 <div class="container">
    
     <div class="row">
@@ -325,7 +340,7 @@
             <!-- thanh toán -->
             <h2>Chọn hình thức thanh toán cho đơn hàng này.</h2>
             <form th:action="@{/payment/paypal/pay}" id="formCheckOut" class="contain-form-payment"  method="POST">
-                <input type="text" name="cartIds"  th:value="${cartIds}" />
+                <input type="hidden" name="cartIds"  th:value="${cartIds}" />
                 <div class="payment-input payment-input-active"  id="contain-payment-cod">
                     <input type="hidden" name="idAddress" value="9">
                     <input type="radio" name="payment" value="onDelivery" id="payment-cod" checked>
@@ -373,11 +388,11 @@
                     </form>
                     <ul>
                         <li>Tạm tính</li>
-                        <li>$428</li>
+                        <li th:text="${totalPrice}+'$'">$428</li>
                     </ul>
                     <ul>
                         <li>Mã giảm giá</li>
-                        <li class="pay-all-item-money">0đ</li>
+                        <li class="pay-all-item-money">0$</li>
                     </ul>
                     <ul>
                         <li>Phí giao hàng</li>
@@ -385,7 +400,7 @@
                     </ul>
                     <ul>
                         <li>Tổng cộng</li>
-                        <li style="color: rgb(187, 60, 60); font-weight: bold">498.000đ</li>
+                        <li style="color: rgb(187, 60, 60); font-weight: bold" th:text="${totalPrice}+ 5+'$'">498.000đ</li>
                     </ul>
                     <div class="buttons">
                         <div class="pull-right">
@@ -486,107 +501,6 @@
     </div>
     <a id="scrollup">Scroll</a>
 </footer>
-
-
- <!--Begin: login-registe-->
- <div class="login-modal js-modal">
-    <!-- Begin: modal login -->
-    <div class="modal-container js-modal-container">
-
-
-        <header class="modal-header">
-            Tài Khoản Của Bạn!
-        </header>
-
-        <div class="modal-close js-modal-close">
-            <i class="ti-close icon-close"></i>
-        </div>
-
-        <div class="modal-body">
-            <div class="modal-body-login">
-                <div class="modal-login sub col-half">Đăng Nhập</div>
-                <div class="modal-rgister js-register-modal sub col-half">Đăng Ký</div>
-            </div>
-
-            <div class="sub-login">
-                <p class="login-another">_____________ Đăng Nhập Bằng Cách Khác ____________</p>
-            </div>
-
-            <div class="modal-login-another">
-                <img src="./image/icon_fb.png" alt="FaceBook" class="icon-login-another">
-                <img src="./image/icon_gg.png" alt="Google" class="icon-login-another">
-                <img src="./image/icon_apple.png" alt="Apple" class="icon-login-another">
-            </div>
-
-            <div class="modal-input-section">
-                <input type="email" placeholder="Địa chỉ email..." class="email">
-                <input type="password" placeholder="Nhập mật khẩu..." class="email password">
-                <a href="" class="forgot-password">Quên mật khẩu của bạn?</a>
-            </div>
-
-            <div class="modal-bnt-login">
-                <a href="" class="bnt-login">Đăng Nhập</a>
-            </div>
-
-            <div class="modal-title">
-                <p class="title-content">Bây giờ bạn cần một tài khoản để gửi / xem các yêu cầu dịch vụ khách hàng, xem các đăng ký các sản phẩm của bạn, thanh toán hoặc sửa đổi thông tin cá nhân của bạn. Thật nhanh chóng và dễ dàng để 'Đăng ký'. Vui lòng đảm bảo địa chỉ
-                    email của bạn là địa chỉ bạn đã cung cấp tại thời điểm đặt hàng, điều này sẽ cho phép bạn truy cập tất cả các dịch vụ bạn cần. </p>
-            </div>
-
-
-        </div>
-    </div>
-    <!-- End: modal login -->
-</div>
-<!--Begin: modal register--->
-<div class="modal-register js-modal-register">
-    <div class="modal-container-register js-modal-container-register">
-
-        <header class="modal-header">
-            Tài Khoản Của Bạn!
-        </header>
-
-        <div class="modal-close-register js-modal-close-register">
-            <i class="ti-close icon-close-register"></i>
-        </div>
-
-        <div class="modal-body2">
-            <div class="modal-body-register">
-                <div class="modal-login sub js-login-modal col-half">Đăng Nhập</div>
-                <div class="modal-sub-register sub col-half">Đăng Ký</div>
-            </div>
-
-            <div class="sub-login">
-                <p class="login-another">______________ Đăng Ký Bằng Cách Khác _____________</p>
-            </div>
-
-            <div class="modal-register-another">
-                <img src="./image/icon_fb.png" alt="FaceBook" class="icon-login-another">
-                <img src="./image/icon_gg.png" alt="Google" class="icon-login-another">
-                <img src="./image/icon_apple.png" alt="Apple" class="icon-login-another">
-            </div>
-
-            <div class="modal-input-section">
-                <input type="email" placeholder="Địa chỉ email..." class="email">
-                <input type="password" placeholder="Nhập mật khẩu..." class="email password">
-                <input type="password" placeholder="Xác nhận mật khẩu..." class="email password">
-                <input type="checkbox" name="" class="modal-checkbox">
-                <p class="checkbox">
-                    Vui lòng gửi email cho tôi với các ưu đãi mới nhất</p>
-            </div>
-
-            <div class="modal-bnt-register">
-                <a href="" class="bnt-login">Đăng Ký</a>
-            </div>
-
-            <div class="modal-title">
-                <p class="title-content">Vui lòng đảm bảo địa chỉ email của bạn là địa chỉ bạn đã cung cấp tại thời điểm đăng ký, điều này sẽ cho phép bạn truy cập tất cả các dịch vụ bạn cần.</p>
-            </div>
-        </div>
-    </div>
-    <!-- End: modal register -->
-</div>
-<!-- End: login register -->
 
     <!-- Begin: modal message -->
     <div class="icon-message">

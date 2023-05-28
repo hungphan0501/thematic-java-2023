@@ -47,8 +47,8 @@ public class HomePageController {
             }
         }
         model.addAttribute("totalPrice", totalPrice);
-        model.addAttribute("productsNew", productsNew);
         model.addAttribute("carts", carts);
+        model.addAttribute("productsNew", productsNew);
         model.addAttribute("productsDiscount", productsDiscount);
         model.addAttribute("productsBestSeller", productsBestSeller);
         return "user/home";

@@ -1,11 +1,17 @@
 package net.javaguides.springboot.controller;
 
+import net.javaguides.springboot.model.Cart;
 import net.javaguides.springboot.model.Product;
+import net.javaguides.springboot.model.User;
 import net.javaguides.springboot.repository.BrandRepository;
+import net.javaguides.springboot.repository.CartRepository;
+import net.javaguides.springboot.repository.UserRepository;
 import net.javaguides.springboot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +27,12 @@ public class ProductController {
     ProductService productService;
     @Autowired
     BrandRepository brandRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CartRepository cartRepository;
 
 
     @GetMapping("/")
@@ -40,9 +52,31 @@ public class ProductController {
         for (Product p : list) {
             System.out.println(p.toString());
         }
+        double totalPrice = 0;
+        List<Cart> carts = getCartsOfUser();
+        if(carts!= null){
+            for (Cart cart : carts) {
+                totalPrice += cart.getTotalPrice();
+            }
+        }
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("carts", carts);
         model.addAttribute("brandName", nameBrand);
         model.addAttribute("products", list);
         return "user/category";
+    }
+    public List<Cart> getCartsOfUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();
+            User user = userRepository.findByEmail(username);
+            if(user != null){
+                return cartRepository.getAllProductInCartOfCustomer(user.getId());
+            }
+            return null;
+
+        } else return null;
+
     }
 
     public String findBrandById(int idBrand){
@@ -55,6 +89,15 @@ public class ProductController {
         for (Product p : list) {
             System.out.println(p.toString());
         }
+        double totalPrice = 0;
+        List<Cart> carts = getCartsOfUser();
+        if(carts!= null){
+            for (Cart cart : carts) {
+                totalPrice += cart.getTotalPrice();
+            }
+        }
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("carts", carts);
         model.addAttribute("products",list);
         return "user/category";
     }

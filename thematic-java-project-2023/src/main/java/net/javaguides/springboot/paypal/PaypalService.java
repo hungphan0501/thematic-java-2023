@@ -32,7 +32,7 @@ public class PaypalService {
 					.mapToDouble(item -> item.getTotalPrice())
 					.sum();
 
-			Double total = subTotal; // adding shipping cost of $10
+			Double total = subTotal +5; // adding shipping cost of $10
 
 			Amount amount = new Amount();
 			amount.setCurrency(currency);
