@@ -102,7 +102,7 @@
                     <div>
                         <div class="header-middle-top">
                             <div id="logo" class="color-header" style="margin: 0; padding: 0;">
-                                <a th:href="@{/}"><img th:src="@{assets/images/logo.png}" src="/assets/images/logo.png"
+                                <a th:href="@{/}"><img th:src="@{/assets/images/logo.png}" src="/assets/images/logo.png"
                                                        title="E-Commerce" alt="E-Commerce"
                                                        class="logo-header"/></a>
                             </div>
@@ -136,7 +136,7 @@
                             <span class="cart-title color-header" style="float: left;margin: 9px;">Giỏ hàng - </span>
                             <span id="cart-total" class="color-header"  sec:authorize="isAuthenticated()"  th:text="${totalPrice} + '$'">254.000 Đ</span>
                             <span class="value-header-product" style="margin-bottom: 10px"
-                                  sec:authorize="isAuthenticated()"  th:text="${carts.size()}">1</span>
+                                  sec:authorize="isAuthenticated()" th:if="${carts }!= null" th:text="${carts.size()}">1</span>
                             <i class="fas fa-shopping-cart cart-icon-nav"></i>
                         </button>
 
@@ -256,7 +256,7 @@
                                                 <button class="btn btn-primary" title="" data-toggle="tooltip"
                                                         type="submit" data-original-title="Cập nhật"><i
                                                         class="fa fa-refresh"></i></button>
-                                                <a onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')" th:href="@{/cart/remove/{idCart} (idCart=${cart.id})}" class="btn btn-danger" title="" data-toggle="tooltip"
+                                                <a style="    padding: 7.6px 17px;" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')" th:href="@{/cart/remove/{idCart} (idCart=${cart.id})}" class="btn btn-danger" title="" data-toggle="tooltip"
                                                         type="button" data-original-title="Xóa"><i
                                                         class="fa fa-times-circle"></i></a>
                                             </span>

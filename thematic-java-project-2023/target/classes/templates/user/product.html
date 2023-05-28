@@ -536,7 +536,7 @@
                     <div>
                         <div class="header-middle-top">
                             <div id="logo" class="color-header" style="margin: 0; padding: 0;">
-                                <a th:href="@{/}"><img th:src="@{assets/images/logo.png}" src="/assets/images/logo.png"
+                                <a th:href="@{/}"><img th:src="@{/assets/images/logo.png}" src="/assets/images/logo.png"
                                                        title="E-Commerce" alt="E-Commerce"
                                                        class="logo-header"/></a>
                             </div>
@@ -569,7 +569,7 @@
                                 class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button cart-nav">
                             <span class="cart-title color-header" style="float: left;margin: 9px;">Giỏ hàng - </span>
                             <span id="cart-total" class="color-header"  sec:authorize="isAuthenticated()"  th:text="${totalPrice} + '$'">254.000 Đ</span>
-                            <span class="value-header-product" style="margin-bottom: 10px"
+                            <span class="value-header-product" style="    width: 25px !important;height: 25px !important;padding: 3px 9px;"
                                   sec:authorize="isAuthenticated()"  th:text="${carts.size()}">1</span>
                             <i class="fas fa-shopping-cart cart-icon-nav"></i>
                         </button>

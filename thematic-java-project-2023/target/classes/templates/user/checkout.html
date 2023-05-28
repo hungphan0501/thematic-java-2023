@@ -109,7 +109,7 @@
                     <div>
                         <div class="header-middle-top">
                             <div id="logo" class="color-header" style="margin: 0; padding: 0;">
-                                <a th:href="@{/}"><img th:src="@{assets/images/logo.png}" src="/assets/images/logo.png"
+                                <a th:href="@{/}"><img th:src="@{/assets/images/logo.png}" src="/assets/images/logo.png"
                                                        title="E-Commerce" alt="E-Commerce"
                                                        class="logo-header"/></a>
                             </div>
@@ -340,7 +340,7 @@
             <!-- thanh toán -->
             <h2>Chọn hình thức thanh toán cho đơn hàng này.</h2>
             <form th:action="@{/payment/paypal/pay}" id="formCheckOut" class="contain-form-payment"  method="POST">
-                <input type="text" name="cartIds"  th:value="${cartIds}" />
+                <input type="hidden" name="cartIds"  th:value="${cartIds}" />
                 <div class="payment-input payment-input-active"  id="contain-payment-cod">
                     <input type="hidden" name="idAddress" value="9">
                     <input type="radio" name="payment" value="onDelivery" id="payment-cod" checked>

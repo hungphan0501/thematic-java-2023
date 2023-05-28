@@ -166,46 +166,6 @@ public class ProductDetailController {
         return result;
     }
 
-    /**
-     * XỬ LÝ CỦA FRONTEND
-     * Trong page cart có danh sách các sản phẩm trong giỏ hàng
-     * người dùng muốn mua 1 số sản phẩm trong danh sách đó thì cần phải chọn vào check box
-     * FrontEnd xử dụng cách dưới để gửi danh sách được chọn xuống để BackEnd xử lý và tiếp tục thanh toán
-     * <p>
-     * const selectedCarts = [
-     * {
-     * id: 1,
-     * idProduct: 1,
-     * size: 'M',
-     * color: 'Black',
-     * quantity: 2,
-     * totalPrice: 200000
-     * },
-     * {
-     * id: 2,
-     * idProduct: 2,
-     * size: 'L',
-     * color: 'White',
-     * quantity: 1,
-     * totalPrice: 100000
-     * }
-     * ];
-     * <p>
-     * $.ajax({
-     * url: '/carts/checkout',
-     * type: 'POST',
-     * data: JSON.stringify(selectedCarts),
-     * contentType: 'application/json',
-     * success: function(response) {
-     * console.log(response);
-     * // Xử lý kết quả trả về từ server (nếu có)
-     * },
-     * error: function(error) {
-     * console.error(error);
-     * // Xử lý lỗi (nếu có)
-     * }
-     * });
-     **/
     public List<LinkImg> getAllImgByIdProduct(int idProduct) {
         try {
             List<LinkImg> list = linkImgRepository.getAllByIdProduct(idProduct);

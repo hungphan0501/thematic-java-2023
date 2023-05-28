@@ -50,67 +50,76 @@
     <div class="contain-header-inner">
         <div class="container">
             <div class="row">
-                <div class="row">
-                    <div class="col-sm-12 contain-header">
-                        <div class="contain-nav-info">
-                            <div id="top-links" class="nav pull-left">
-                                <ul class="list-inline">
-                                    <li class="account"><a
-                                            href="/admin/pixelwibes.com/template/ebazar/html/dist/index.html"
-                                            class="notify"><i
-                                            class="fas fa-bell color-header" style="margin-right: 10px"></i>
-                                        <sp
-                                                style="margin: 0 5px;" class="color-header">Thông
-                                            báo
-                                        </sp>
-                                        <span style="margin-right: 10px;"
-                                              class="color-header">(0)</span></a>
-                                    </li>
-                                    <li class="account"><a href="customer.html" id="wishlist-total"
-                                                           title="Wish List (0)"><i
-                                            class="fa fa-heart color-header"></i><span
-                                            class="color-header">Danh sách
+                <div class="col-sm-12 contain-header">
+                    <div class="contain-nav-info">
+                        <div id="top-links" class="nav pull-left">
+                            <ul class="list-inline">
+                                <li class="account"><a href="/admin/pixelwibes.com/template/ebazar/html/dist/index.html"
+                                                       class="notify"><i
+                                        class="fas fa-bell color-header" style="margin-right: 10px"></i>
+                                    <sp
+                                            style="margin: 0 5px;" class="color-header">Thông
+                                        báo
+                                    </sp>
+                                    <span style="margin-right: 10px;"
+                                          class="color-header">(0)</span></a>
+                                </li>
+                                <li class="account"><a href="customer.html" id="wishlist-total"
+                                                       title="Wish List (0)"><i
+                                        class="fa fa-heart color-header"></i><span
+                                        class="color-header">Danh sách
                                                 yêu thích</span><span style="margin-right: 10px;"
                                                                       class="color-header">(0)</span></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="fa fa-user color-header"></i><span class="color-header">Tài
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"
+                                       sec:authorize="!isAuthenticated()">
+                                        <i class="fa fa-user color-header"></i><span class="color-header">Tài
                                                 khoản</span> <span style=" font-size: 15px;"
                                                                    class="caret color-header"></span></a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="#" class="js-login">Đăng Nhập</a></li>
-                                            <li><a href="#" class="js_register">Đăng Ký</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                                    <a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"
+                                       sec:authorize="isAuthenticated()">
+                                        <i class="fa fa-user color-header"></i><span class="color-header"
+                                                                                     th:text="'Hi! '+${@userController.nameByEmail()}">
+                                                </span> <span style=" font-size: 15px;"
+                                                              class="caret color-header"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right" sec:authorize="!isAuthenticated()">
+                                        <li><a th:href="@{/login}" class="js-login">Đăng Nhập</a></li>
+                                        <li><a th:href="@{/registration}" class="js_register">Đăng Ký</a></li>
+                                    </ul>
+                                    <ul class="dropdown-menu dropdown-menu-right" sec:authorize="isAuthenticated()">
+                                        <li><a th:href="@{/user/infor}" class="js-login">Hồ sơ</a></li>
+                                        <li><a th:href="@{/logout}" class="js_register">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
-
                     </div>
+
                 </div>
             </div>
+        </div>
 
-            <div class="container">
-                <div class="header-inner">
+        <div class="container">
+            <div class="header-inner">
 
-                    <div class="header-top">
-                        <div>
-                            <div class="header-middle-top">
-                                <div id="logo" class="color-header" style="margin: 0; padding: 0;">
-                                    <a th:href="@{/}"><img th:href="@{/assets/images/logo.png}"
-                                                           src="/assets/images/logo.png" title="E-Commerce"
-                                                           alt="E-Commerce"
-                                                           class="logo-header"/></a>
-                                </div>
+                <div class="header-top">
+                    <div>
+                        <div class="header-middle-top">
+                            <div id="logo" class="color-header" style="margin: 0; padding: 0;">
+                                <a th:href="@{/}"><img th:src="@{/assets/images/logo.png}" src="/assets/images/logo.png"
+                                                       title="E-Commerce" alt="E-Commerce"
+                                                       class="logo-header"/></a>
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <form th:action="@{/search}" method="GET">
                     <div class="text-center contain-search">
                         <div class="contain-search-product-popular">
                             <div class="search-product">
-                                <input class="input-text-search-top" placeholder="Tìm kiếm" type="text">
+                                <input class="input-text-search-top" placeholder="Tìm kiếm" type="text" name="content">
                                 <button class="search-product-top"><i class="fa fa-search"></i></button>
                             </div>
                             <div class="contain-search-popular">
@@ -122,88 +131,83 @@
                             </div>
                         </div>
                     </div>
+                </form>
 
-                    <div class="col-sm-4 col-xs-12 header-right header-nav-right">
+                <div class="col-sm-4 col-xs-12 header-right header-nav-right">
 
-                        <div id="cart" class="btn-group btn-block" style="margin: 0; padding: 0;">
-                            <button type="button"
-                                    class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button cart-nav">
-                            <span
-                                    id="cart-total" class="color-header"><span class="cart-title color-header">Giỏ hàng - </span>254.000 Đ</span>
-                                <span class="value-header-product" style="margin-bottom: 10px">1</span>
-                                <i class="fas fa-shopping-cart cart-icon-nav"></i>
-                            </button>
+                    <div id="cart" class="btn-group btn-block" style="margin: 0; padding: 0;">
+                        <button type="button"
+                                class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button cart-nav">
+                            <span class="cart-title color-header" style="float: left;margin: 9px;">Giỏ hàng - </span>
+                            <span id="cart-total" class="color-header"  sec:authorize="isAuthenticated()"  th:text="${totalPrice} + '$'">254.000 Đ</span>
+                            <span class="value-header-product" style="margin-bottom: 10px"
+                                  sec:authorize="isAuthenticated()" th:if="${carts }!= null" th:text="${carts.size()}">1</span>
+                            <i class="fas fa-shopping-cart cart-icon-nav"></i>
+                        </button>
 
 
-                            <ul class="dropdown-menu pull-right cart-dropdown-menu">
-                                <li>
-                                    <table class="table table-striped">
+                        <ul class="dropdown-menu pull-right cart-dropdown-menu">
+                            <li style="display: grid;
+                                max-height: 300px;
+                                overflow-y: scroll;
+                                overflow-x: hidden;
+                             " class=" filter-search">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr  sec:authorize="isAuthenticated()" th:if="${carts}!=null" th:each="cart : ${carts}">
+                                        <td class="text-center">
+                                            <a href="#"><img
+                                                    th:src="@{/assets/images/product/{img}(img=${@cartController.getProductByIdDetail(cart.idProductDetail).img})}"
+                                                    src="/assets/images/product/product-01.jpg" width="100px"
+                                                    height="100px"></a>
+                                        </td>
+                                        <td class="text-left"><a href="#"
+                                                                 th:text="${@cartController.getProductByIdDetail(cart.idProductDetail).name}">lorem
+                                            ippsum dolor dummy</a></td>
+                                        <td class="text-right"
+                                            th:text="(${@cartController.getProductByIdDetail(cart.idProductDetail).price} * (100 -${@cartController.getProductByIdDetail(cart.idProductDetail).saleRate}) /100) *${cart.quantity} +'$'">
+                                            $254.00
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-danger btn-xs"
+                                                    title="Remove" type="button"><i
+                                                    class="fa fa-times"></i></button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </li>
+                            <li>
+                                <div>
+                                    <table class="table table-bordered">
                                         <tbody>
+
                                         <tr>
-                                            <td class="text-center">
-                                                <a href="#"><img th:href="@{/assets/images/product/product-01.jpg}"
-                                                                 src="/assets/images/product/product-01.jpg"
-                                                                 width="100px"
-                                                                 height="100px"></a>
-                                            </td>
-                                            <td class="text-left"><a href="#">lorem ippsum dolor dummy</a></td>
-                                            <td class="text-right">x 1</td>
-                                            <td class="text-right">$254.00</td>
-                                            <td class="text-center">
-                                                <button class="btn btn-danger btn-xs"
-                                                        title="Remove" type="button"><i
-                                                        class="fa fa-times"></i></button>
-                                            </td>
+                                            <td class="text-right"><strong>Tạm tính</strong></td>
+                                            <td class="text-right" th:text="${totalPrice} +'$'">254.000Đ</td>
                                         </tr>
                                         </tbody>
                                     </table>
-                                </li>
-                                <li>
-                                    <div>
-                                        <table class="table table-bordered">
-                                            <tbody>
-                                            <tr>
-                                                <td class="text-right"><strong>Tổng</strong></td>
-                                                <td class="text-right">210.000Đ</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>Thuế (-2.00)</strong></td>
-                                                <td class="text-right">2%</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>VAT (20%)</strong></td>
-                                                <td class="text-right">4%</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>Tạm tính</strong></td>
-                                                <td class="text-right">254.000Đ</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <p class="text-right"> <span class="btn-viewcart"><a href="cart.html"><strong><i
-                                                class="fa fa-shopping-cart"></i> View
+                                    <p class="text-right"> <span class="btn-viewcart"><a th:href="@{/cart}"><strong><i
+                                            class="fa fa-shopping-cart"></i> View
                                                         Cart</strong></a></span> <span class="btn-checkout"><a
-                                                href="checkout.html"><strong><i class="fa fa-share"></i>
+                                            th:href="@{/cart}"><strong><i class="fa fa-share"></i>
                                                         Checkout</strong></a></span></p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-
-
-                    <button type="button" class="bt-nav-collapse hidden-lg hidden-md"><i
-                            class="fa fa-bars"></i></button>
-
                 </div>
-
+                <button type="button" class="bt-nav-collapse hidden-lg hidden-md"><i
+                        class="fa fa-bars"></i></button>
             </div>
+
         </div>
-        <nav id="menu-navigation" class="navbar" style="width: 100%;">
-            <!--function displayMenuNavigation() in khanh-js.js-->
-        </nav>
+    </div>
+    <nav id="menu-navigation" class="navbar" style="width: 100%;">
+        <!--function displayMenuNavigation() in khanh-js.js-->
+    </nav>
 </header>
 <div class="container">
 
@@ -249,12 +253,12 @@
                     <div class="col-sm-12">
 
                         <div style="display: flex;float:left;width: 86%;">
-                            <h5 style="font-weight: bold;margin-right: 20px">Chi tiết đơn
+                            <h5 style="font-weight: bold;font-size: 25px;margin-right: 20px">Chi tiết đơn
                                 hàng</h5>
-                            <h5 style="font-weight: bold; color: #0d6efd; cursor: pointer" th:text="'#' +${orderId}">#123456</h5>
+                            <h5 style="font-weight: bold; color: #0d6efd; cursor: pointer;margin-top: 14px;font-size: 20px;" th:text="'#' +${orderId}">#123456</h5>
 
                         </div>
-                        <a th:href="@{/user/infor}" type="submit" class="btn btn-primary btn-set-task w-sm-100 py-2 px-5 text-uppercase"  style="padding: 5px 10px!important; width: 14%;;" >Quay lại
+                        <a th:href="@{/user/infor}" type="submit" class="btn btn-primary btn-set-task w-sm-100 py-2 px-5 text-uppercase"  style="position: absolute;border-radius: 5px;margin-top: 10px;padding: 5px 18px!important;;" >Quay lại
                         </a>
 
                         <div class="card mb-3" style="margin-top: 10px;">

@@ -64,7 +64,6 @@ public class PaypalController {
             Optional<Cart> cart = cartRepository.findById(idC);
             cartList.add(cart.get());
         }
-        System.out.println("-id-cart---------------" + listCartId[1]);
         try {
             String cancelUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
                     + request.getContextPath() + "/payment/paypal/cancel";
@@ -113,7 +112,7 @@ public class PaypalController {
                 Date date = Date.valueOf(createAt);
                 System.out.println("createAt : " + createAt + "\tdate: " +date);
 
-                Orders orders = new Orders(idUser, totalPrice, date, getIdAddress(), "Đã đặt hàng", "Paypal", "Da thanh toan");
+                Orders orders = new Orders(idUser, totalPrice, date, getIdAddress(), "Chờ xác nhận", "Paypal", "Đã thanh toán");
                 ordersRepository.save(orders);
                 for (Cart cart : cartList) {
                     cartRepository.delete(cart);
@@ -121,13 +120,15 @@ public class PaypalController {
                     orderDetailRepository.save(orderDetail);
 
                 }
-                String url = "/user/history/detail/" + orders.getId();
+                String url = "/user/history/" + orders.getId();
                 redirectView.setUrl(url);
+                return redirectView;
+
             }
         } catch (PayPalRESTException e) {
             // handle exception
         }
-
+        redirectView.setUrl("/user/infor");
         return redirectView;
     }
 
@@ -145,5 +146,6 @@ public class PaypalController {
     public int getIdAddress() {
         return paypalService.getIdAddress();
     }
+
 }
 
