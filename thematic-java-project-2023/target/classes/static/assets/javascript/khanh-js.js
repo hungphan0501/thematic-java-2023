@@ -60,12 +60,12 @@ function displayMenuNavigation() {
                                      </a>
                                     
                                     <ul class="man-category" style="background-color: #0f6cb2; border:none; position:absolute; top: 35px;left:-15px;">
-                                    <li id="hitops-man" class="category-product category-product-man" style="color: white">HiTops</li>
-                                    <li id="running-man"  class="category-product category-product-man" style="color: white">Running</li>
-                                    <li id="slides-man"  class="category-product category-product-man" style="color: white">Slides</li>
-                                    <li id="sneakers-man"  class="category-product category-product-man" style="color: white">Sneakers</li>
-                                    <li id="skateboard-man"  class="category-product category-product-man" style="color: white">SkateBoard</li>
-                                    <li id="football-man"  class="category-product category-product-man" style="color: white">Football</li>
+                                    <li id="hitops-man" onclick="location.href='/products/category/1'" class="category-product category-product-man" style="color: white">HiTops</li>
+                                    <li id="running-man" onclick="location.href='/products/category/2'"  class="category-product category-product-man" style="color: white">Running</li>
+                                    <li id="slides-man" onclick="location.href='/products/category/4'"  class="category-product category-product-man" style="color: white">Trainer</li>
+                                    <li id="sneakers-man"  onclick="location.href='/products/category/5'" class="category-product category-product-man" style="color: white">Sneakers</li>
+                                    <li id="skateboard-man" onclick="location.href='/products/category/11'"  class="category-product category-product-man" style="color: white">SkateBoard</li>
+                                    <li id="football-man"  onclick="location.href='/products/category/12'" class="category-product category-product-man" style="color: white">Football</li>
 
                                 </ul>
                             
@@ -73,12 +73,12 @@ function displayMenuNavigation() {
                                     <li style="position: relative"><a href="category.html" style="color: white" class="parent category-item" id="category-woman">NỮ <i class="fas fa-caret-down"></i></a>
                                     
                                     <ul class="woman-category" style="background-color: #0f6cb2; border:none; position:absolute; top: 35px;left: -15px">
-                                    <li id="hitops-woman" class="category-product category-product-woman" style="color: white">HiTops</li>
-                                    <li id="running-woman"  class="category-product category-product-woman" style="color: white">Running</li>
-                                    <li id="slides-woman"  class="category-product category-product-woman" style="color: white">Slides</li>
-                                    <li id="sneakers-woman"  class="category-product category-product-woman" style="color: white">Sneakers</li>
-                                    <li id="skateboard-woman"  class="category-product category-product-woman"style="color: white" >SkateBoard</li>
-                                    <li id="football-woman"  class="category-product category-product-woman" style="color: white">Football</li>
+                                    <li id="hitops-woman" onclick="location.href='/products/category/7'" class="category-product category-product-woman" style="color: white">HiTops</li>
+                                    <li id="running-woman" onclick="location.href='/products/category/8'" class="category-product category-product-woman" style="color: white">Running</li>
+                                    <li id="slides-woman" onclick="location.href='/products/category/9'"  class="category-product category-product-woman" style="color: white">Trainer</li>
+                                    <li id="sneakers-woman" onclick="location.href='/products/category/10'"  class="category-product category-product-woman" style="color: white">Sneakers</li>
+                                    <li id="skateboard-woman" onclick="location.href='/products/category/6'"  class="category-product category-product-woman"style="color: white" >SkateBoard</li>
+                                    <li id="football-woman"  onclick="location.href='/products/category/6'" class="category-product category-product-woman" style="color: white">Climbing</li>
 
                                 </ul>
 
@@ -92,14 +92,14 @@ function displayMenuNavigation() {
     
                                     <div class="item-nav-detail-info" id="item-category-brand">
                                         <div class="contain-brand" >
-                                            <img onclick="location.href='/products/brand/1'" th:src="@{/assets/images/brand/logo-brand-01.svg}" src="/assets/images/brand/logo-brand-01.svg">
-                                            <img onclick="location.href='/products/brand/2'" th:src="@{/assets/images/brand/logo-brand-02.svg}" src="/assets/images/brand/logo-brand-02.svg">
-                                            <img onclick="location.href='/products/brand/3'" th:src="@{/assets/images/brand/logo-brand-03.svg}" src="/assets/images/brand/logo-brand-03.svg">
-                                            <img onclick="location.href='/products/brand/4'" th:src="@{/assets/images/brand/logo-brand-04.svg}" src="/assets/images/brand/logo-brand-04.svg">
-                                            <img onclick="location.href='/products/brand/5'" th:src="@{/assets/images/brand/logo-brand-05.svg}" src="/assets/images/brand/logo-brand-05.svg">
-                                            <img onclick="location.href='/products/brand/6'" th:src="@{/assets/images/brand/logo-brand-06.svg}" src="/assets/images/brand/logo-brand-06.svg">
-                                            <img onclick="location.href='/products/brand/7'" th:src="@{/assets/images/brand/logo-brand-07.svg}" src="/assets/images/brand/logo-brand-07.svg">
-                                            <img onclick="location.href='/products/brand/8'" th:src="@{/assets/images/brand/logo-brand-08.svg}" src="/assets/images/brand/logo-brand-08.svg">
+                                            <img onclick="location.href='/products/brand/10'" th:src="@{/assets/images/brand/logo-brand-01.svg}" src="/assets/images/brand/logo-brand-01.svg">
+                                            <img onclick="location.href='/products/brand/1'" th:src="@{/assets/images/brand/logo-brand-02.svg}" src="/assets/images/brand/logo-brand-02.svg">
+                                            <img onclick="location.href='/products/brand/3'" th:src="@{/assets/images/brand/logo-brand-09.svg}" src="/assets/images/brand/logo-brand-09.svg">
+                                            <img onclick="location.href='/products/brand/17'" th:src="@{/assets/images/brand/logo-brand-04.svg}" src="/assets/images/brand/logo-brand-04.svg">
+                                            <img onclick="location.href='/products/brand/4'" th:src="@{/assets/images/brand/logo-brand-05.svg}" src="/assets/images/brand/logo-brand-05.svg">
+                                            <img onclick="location.href='/products/brand/16'" th:src="@{/assets/images/brand/logo-brand-06.svg}" src="/assets/images/brand/logo-brand-06.svg">
+                                            <img onclick="location.href='/products/brand/9'" th:src="@{/assets/images/brand/logo-brand-10.svg}" src="/assets/images/brand/logo-brand-10.svg">
+                                            <img onclick="location.href='/products/brand/7'" th:src="@{/assets/images/brand/logo-brand-08.svg}" src="/assets/images/brand/logo-brand-08.svg">
                                         </div>
                                    </div>
         

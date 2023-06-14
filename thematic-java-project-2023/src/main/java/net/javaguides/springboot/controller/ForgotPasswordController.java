@@ -85,38 +85,5 @@ public class ForgotPasswordController {
         return ResponseEntity.ok().body("successfully");
     }
 
-    @GetMapping("/checkPass")
-    public boolean check(@RequestParam("pass") String pass) {
-        String email = null;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated()) {
-            email = authentication.getName();
-        }
-        String oldPass = userRepository.getPass(email);
-        boolean isMatch = passwordEncoder.matches(pass, oldPass);
-        return ((isMatch) ? true : false);
-    }
-
-
-    @GetMapping("/changePass")
-    public String changPassModal(@RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass,@RequestParam("otp") String otp) throws MessagingException {
-        boolean checkPass = check(oldPass);
-        if (checkPass) {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if (authentication != null && authentication.isAuthenticated()) {
-                String email = authentication.getName();
-                User user = userRepository.findByEmail(email);
-                String otpCode = generateOtpCode();
-                userService.saveOtpCode(email, otpCode);
-                sendOtpCodeByEmail(email, otpCode);
-                if (confirmOtp(email, otp).equals("forgotPassword")) {
-                    user.setPassword(passwordEncoder.encode(newPass));
-                    userRepository.save(user);
-                    return "Change pass successfully";
-                }
-            }
-        }
-        return "Change pass failed";
-    }
 }
 

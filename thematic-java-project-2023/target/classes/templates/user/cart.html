@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Cart | Dragon Sport</title>
@@ -248,6 +248,7 @@
                                     <td class="text-left" th:text="${@cartController.getCategory(@cartController.getProductByIdDetail(cart.idProductDetail).category).name}">Sản phẩm 11</td>
                                     <td class="text-left">
                                         <form th:action="@{/cart/update}" method="POST">
+
                                             <div style="max-width: 200px;" class="input-group btn-block">
                                                 <input type="hidden" name="idCart" th:value="${cart.id}">
                                                 <input type="text" class="form-control quantity" size="1" value="1"
@@ -256,7 +257,7 @@
                                                 <button class="btn btn-primary" title="" data-toggle="tooltip"
                                                         type="submit" data-original-title="Cập nhật"><i
                                                         class="fa fa-refresh"></i></button>
-                                                <a style="    padding: 7.6px 17px;" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')" th:href="@{/cart/remove/{idCart} (idCart=${cart.id})}" class="btn btn-danger" title="" data-toggle="tooltip"
+                                                <a style="padding: 7.6px 17px;" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')" th:href="@{/cart/remove/{idCart} (idCart=${cart.id})}" class="btn btn-danger" title="" data-toggle="tooltip"
                                                         type="button" data-original-title="Xóa"><i
                                                         class="fa fa-times-circle"></i></a>
                                             </span>
