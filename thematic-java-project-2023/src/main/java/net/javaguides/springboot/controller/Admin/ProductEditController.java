@@ -67,24 +67,4 @@ public class ProductEditController {
         return "admin/views/dist/product-edit";
     }
 
-//    @GetMapping("/products-manage/add/productDetail/{idProduct}")
-//    public String getAddProductDetail(@PathVariable("idProduct") int idProduct, Model model) {
-//        model.addAttribute("idProduct", idProduct);
-//        return "admin/views/dist/product-add-detail";
-//    }
-//
-//    @PostMapping("/products-manage/add/productDetail/{idProduct}")
-//    public String addDetailsProduct(ProductDetail productDetail) {
-//        LocalDateTime now = LocalDateTime.now();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
-//        String updateAt = now.format(formatter);
-//        ProductDetail productDetailSave = new ProductDetail(productDetail.getIdProduct(), productDetail.getSize(), productDetail.getQuantity(), productDetail.getCreateAt(), updateAt, 1, productDetail.getColor());
-//
-//        productDetailRepository.save(productDetailSave);
-//        Optional<Product> optProduct = productRepository.findById(productDetail.getIdProduct());
-//        Product product = optProduct.get();
-//        product.setTotalValue(product.getTotalValue() + productDetail.getQuantity());
-//        productRepository.save(product);
-//        return "redirect:/products-manage/edit/id/" + productDetailSave.getIdProduct();
-//    }
 }

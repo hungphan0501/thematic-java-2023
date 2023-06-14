@@ -53,7 +53,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(
 						"/registration**",
 						"/product/**",
-						"/addToCart/**",
 						"/api/linkImg/**",
 						"/forgotPassword/**",
 						"/forgotPasswordPage/**",
@@ -74,7 +73,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and()
 				.formLogin()
 				.loginPage("/login")
-				.successHandler(customAuthenticationSuccessHandler)
 				.permitAll()
 				.and()
 				.logout()
